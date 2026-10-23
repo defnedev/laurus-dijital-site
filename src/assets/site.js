@@ -188,3 +188,32 @@ addEventListener("resize", () => { sizeWorks(); req(); });
 if (track) track.addEventListener("scroll", req, { passive: true });
 addEventListener("load", () => { sizeWorks(); req(); });
 sizeWorks(); onScroll();
+
+/* v10 app showcase */
+(function(){
+  var s=document.querySelector('[data-appshow]'); if(!s) return;
+  var sc=[].slice.call(s.querySelectorAll('.as-scene')), tabs=[].slice.call(s.querySelectorAll('[data-as-tab]')), bar=s.querySelector('[data-as-bar]');
+  var mq=window.matchMedia('(min-width: 901px)'), cur=-1, n=sc.length;
+  function set(i){ if(i===cur) return; cur=i; sc.forEach(function(e,k){e.classList.toggle('on',k===i)}); tabs.forEach(function(t,k){t.setAttribute('aria-selected',k===i?'true':'false')}); }
+  function tick(){
+    if(!mq.matches) return;
+    var r=s.getBoundingClientRect(), total=s.offsetHeight-window.innerHeight; if(total<=0) return;
+    var p=Math.min(1,Math.max(0,-r.top/total)), i=Math.min(n-1,Math.floor(p*n));
+    set(i); sc[i].style.setProperty('--sp',Math.min(1,p*n-i).toFixed(3));
+    if(bar) bar.style.transform='scaleX('+p.toFixed(3)+')';
+  }
+  var raf=0; function onS(){ if(!raf){ raf=requestAnimationFrame(function(){raf=0;tick();}); } }
+  tabs.forEach(function(t,k){ t.addEventListener('click',function(){
+    var total=s.offsetHeight-window.innerHeight, top=s.getBoundingClientRect().top+window.pageYOffset;
+    window.scrollTo({top:top+total*(k+0.35)/n,behavior:'smooth'});
+  });});
+  var io=null;
+  function mode(){
+    if(mq.matches){ if(io){io.disconnect();io=null;} cur=-1; tick(); if(cur<0) set(0); }
+    else { sc.forEach(function(e){e.classList.remove('on')}); cur=-1;
+      if('IntersectionObserver' in window){ io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('on'); io.unobserve(e.target);} })},{threshold:.22}); sc.forEach(function(e){io.observe(e)}); }
+      else sc.forEach(function(e){e.classList.add('on')}); }
+  }
+  window.addEventListener('scroll',onS,{passive:true}); window.addEventListener('resize',onS);
+  if(mq.addEventListener) mq.addEventListener('change',mode); mode();
+})();
