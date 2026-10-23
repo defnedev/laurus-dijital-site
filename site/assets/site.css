@@ -1144,3 +1144,8 @@ html,body{overflow-x:clip}
   .app-foot .btn{width:100%;justify-content:center}
   .stage.solo .phone{width:38%}
 }
+.stage.solo.duo .phone{width:27%;top:6%}
+.stage.solo.duo .phone:first-child{left:36%;transform:translateX(-50%) rotate(-5deg);z-index:2}
+.stage.solo.duo .phone.p2{left:64%;transform:translateX(-50%) rotate(5deg);top:10%}
+.pscr img.shot[src*="sekiz"]{object-position:center 30%}
+@media (max-width:560px){.stage.solo.duo .phone{width:34%}}

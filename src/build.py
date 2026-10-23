@@ -440,18 +440,20 @@ APPS = [
        desc="Doğum tarihini yazıyorsun, doğduğun anın gökyüzünü ve haritanın kaç kişide bir görüldüğünü saniyeler içinde görüyorsun. Arkasında 1,3 milyondan fazla gök anını sayan kendi hesap motorumuz var.",
        did=["Swiss Ephemeris ile test edilmiş hesap motoru","Üyelik: Google ve e-posta ile giriş","Paylaşılabilir kartlar, günlük gökyüzü ve dersler"],
        tech=["Web platformu","Hesap motoru","Üyelik","SEO"]),
-  dict(id="sekiz", name="Sekiz", kind="Mobil uygulama", status="iOS ve Android için",
-       url=None, cta=None, lap=None, ph="sekiz-m",
-       desc="Aklındaki soruyu tut, telefonu salla, cevabın ekranda belirsin. Tek ekran, tek hareket; sade ama özenli bir mobil deneyim.",
-       did=["Telefonu sallamayı algılayan hareket sensörü","Titreşimli geri bildirim ve akıcı animasyonlar","Türkçe ve İngilizce"],
-       tech=["iOS","Android","React Native"]),
+  dict(id="sekiz", name="Sekiz8", kind="iOS uygulaması", status="App Store'da yayında",
+       url="https://apps.apple.com/tr/app/sekiz8/id6758377312", cta="App Store'da gör", lap=None, ph="sekiz-m", ph2="sekiz-sec",
+       desc="Karar veremediğinde salla. Aklındaki soruyu tut, telefonu salla ya da dokun; cevap topun içinde belirsin. Evet/hayır, kendi seçeneklerin arasından seçim ya da rastgele sayı için de aynı hareket.",
+       did=["Dört mod: Sekiz, Evet/Hayır, Seç ve Sayı","Telefonu sallamayı algılayan hareket sensörü ve titreşim","Kendi seçeneklerini yazıp aralarından seçtirme, temalar"],
+       tech=["iOS","App Store","React Native"]),
 ]
 AMAP = {a["id"]: a for a in APPS}
 
 def app_stage(a, cls=""):
     ph = f'<div class="phone"><div class="pscr"><img class="shot" src="img/app/{a["ph"]}.webp" alt="{a["name"]} telefon ekranı" loading="lazy"></div></div>'
     if not a["lap"]:
-        return f'<div class="stage solo {cls}">{ph}</div>'
+        if a.get("ph2"):
+            ph += f'<div class="phone p2"><div class="pscr"><img class="shot" src="img/app/{a["ph2"]}.webp" alt="{a["name"]} seçim modu ekranı" loading="lazy"></div></div>'
+        return f'<div class="stage solo{" duo" if a.get("ph2") else ""} {cls}">{ph}</div>'
     lap = f'<div class="laptop"><div class="lid"><div class="scr"><img class="shot" src="img/app/{a["lap"]}.webp" alt="{a["name"]} bilgisayar görünümü" loading="lazy"></div></div><div class="base"></div></div>'
     return f'<div class="stage {cls}">{lap}{ph}</div>'
 
@@ -469,7 +471,7 @@ def app_case(a):
     chips = "".join(f"<span>{t}</span>" for t in a["tech"])
     link = f'<a class="btn btn-line" href="{a["url"]}" target="_blank" rel="noopener">{a["cta"]}</a>' if a["url"] else ""
     return (f'<div class="bcase"><div class="bcase-vis bg-{a["id"]}">{app_stage(a, "in-case")}</div><div class="bcase-tx">'
-            f'<div class="bcase-id"><div><b>{a["name"]}</b><small>Kendi ürünümüz, {a["kind"].lower()}</small></div></div>'
+            f'<div class="bcase-id"><div><b>{a["name"]}</b><small>Kendi ürünümüz, {a["kind"] if a["kind"].startswith("iOS") else a["kind"].lower()}</small></div></div>'
             f'<div class="chips">{chips}</div><h3>Ne yaptık</h3><p>{a["desc"]}</p><h3>Neler var</h3>{checks(a["did"])}'
             f'<p class="app-st"><i></i>{a["status"]}</p>'
             f'<div class="wf-act"><a class="btn btn-gold" href="#iletisim">Uygulamamı konuşalım</a>{link}</div></div></div>')
@@ -515,7 +517,7 @@ def page_apps():
 {contact(title="Uygulama fikrini anlat, taslağını gör.", need="Mobil uygulama")}
 '''
     return ("Mobil Uygulama Geliştirme ve Web Uygulaması · İstanbul | Laurus Dijital",
-            "iOS, Android ve web uygulaması geliştirme: üyelik, abonelik, canlı veri ve mağaza yayını dahil. oh same., Sorbi ve Sekiz uygulamalarını kendi ekibimiz geliştirdi.", body)
+            "iOS, Android ve web uygulaması geliştirme: üyelik, abonelik, canlı veri ve mağaza yayını dahil. oh same., Sorbi ve Sekiz8 uygulamalarını kendi ekibimiz geliştirdi.", body)
 
 
 # ---------- pages ----------
@@ -765,13 +767,13 @@ def page_cases():
 <section class="phero" aria-labelledby="h-page" style="padding-bottom:40px"><div class="wrap" style="grid-template-columns:1fr">
 <div><nav class="crumbs" aria-label="Konum"><a href="index.html">Ana sayfa</a> / Çalışmalar</nav>
 <h1 id="h-page">Ne yaptığımızı gör.</h1>
-<p class="lead">Her işletmeye önce bir taslak hazırlarız. Gerçek müşteri işlerimiz (Nil Pet Kuaför, @astrodefnee), kendi geliştirdiğimiz uygulamalar (oh same., Sorbi, Sekiz) ve farklı sektörler için hazırladığımız örnek tasarımlar.</p>
+<p class="lead">Her işletmeye önce bir taslak hazırlarız. Gerçek müşteri işlerimiz (Nil Pet Kuaför, @astrodefnee), kendi geliştirdiğimiz uygulamalar (oh same., Sorbi, Sekiz8) ve farklı sektörler için hazırladığımız örnek tasarımlar.</p>
 <p class="muted" style="font-size:14px">“Örnek tasarım” etiketli işletme adları örnektir. Gerçek işler müşteri onayıyla yayınlanır.</p></div>
 </div></section>
 <section class="ksec" aria-label="Örnek çalışmalar" style="padding-top:24px"><div class="wrap">{T}</div></section>
 {contact()}
 '''
-    return ("Çalışmalar ve Örnek Tasarımlar | Laurus Dijital","Nil Pet Kuaför ve @astrodefnee gerçek işlerimiz; oh same., Sorbi ve Sekiz uygulamalarımız; kuaför, klinik, otel, avukat, emlak ve butik için örnek web sitesi, Instagram, reklam ve SEO çalışmaları.", body)
+    return ("Çalışmalar ve Örnek Tasarımlar | Laurus Dijital","Nil Pet Kuaför ve @astrodefnee gerçek işlerimiz; oh same., Sorbi ve Sekiz8 uygulamalarımız; kuaför, klinik, otel, avukat, emlak ve butik için örnek web sitesi, Instagram, reklam ve SEO çalışmaları.", body)
 
 def page_prices():
     rows = [
@@ -1064,7 +1066,7 @@ def page_about():
 <div data-rv><span class="eyebrow">Biz kimiz</span><h2 id="h-biz">8 yılı aşkın deneyim, tek ekip.</h2></div>
 <div class="ab-tx" data-rv>
 <p>Laurus Dijital, yazılım, bankacılık teknolojileri ve dijital projelerde <b>8 yılı aşkın deneyime</b> sahip bir ekip tarafından kuruldu. Büyük kurumların dijital projelerinde öğrendiğimiz disiplini, küçük ve orta ölçekli işletmelerin anlayacağı sade bir dille ve açık fiyatlarla sunuyoruz.</p>
-<p>Yazılım geçmişimiz sayesinde işimiz web sitesiyle sınırlı değil: <b>mobil uygulama</b> ve <b>web uygulaması</b> da geliştiriyoruz. oh same., Sorbi ve Sekiz bu ekibin tasarlayıp kodladığı, kendi ürünlerimiz.</p>
+<p>Yazılım geçmişimiz sayesinde işimiz web sitesiyle sınırlı değil: <b>mobil uygulama</b> ve <b>web uygulaması</b> da geliştiriyoruz. oh same., Sorbi ve Sekiz8 bu ekibin tasarlayıp kodladığı, kendi ürünlerimiz.</p>
 <p>Ekibimizde tasarım, yazılım, içerik ve reklam yönetimi tarafları birlikte çalışır. Bir işletmenin <b>web sitesini</b>, <b>Instagram ve sosyal medya hesaplarını</b>, <b>Google Ads ve Meta reklamlarını</b> ve <b>Google İşletme Profili ile SEO çalışmasını</b> aynı masada planlarız. Böylece sitedeki mesaj, Instagram'daki görsel dil ve Google'daki reklam birbirini tamamlar.</p>
 <p>İstanbul'dan Türkiye genelinde online hizmet veriyoruz. Kuaförden otele, klinikten hukuk bürosuna kadar müşterisini internetten bulan her işletmeyle çalışıyoruz.</p>
 </div></div></section>
