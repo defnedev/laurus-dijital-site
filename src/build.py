@@ -1215,7 +1215,12 @@ def build():
     css = os.path.join(OUT,"assets","site.css")
     c = open(css).read().replace("url(../fonts/","url(/fonts/")
     open(css,"w").write(c)
-    open(os.path.join(OUT,"_headers"),"w").write("/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: DENY\n/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n/img/*\n  Cache-Control: public, max-age=2592000\n/assets/*\n  Cache-Control: public, max-age=86400\n")
+    import hashlib
+    ver = hashlib.md5((c + open(os.path.join(OUT,"assets","site.js")).read()).encode()).hexdigest()[:10]
+    for f in glob.glob(os.path.join(OUT,"*.html")):
+        t = open(f).read().replace('href="/assets/site.css"', f'href="/assets/site.css?v={ver}"').replace('src="/assets/site.js"', f'src="/assets/site.js?v={ver}"')
+        open(f,"w").write(t)
+    open(os.path.join(OUT,"_headers"),"w").write("/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: DENY\n/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n/img/*\n  Cache-Control: public, max-age=2592000\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n")
     print("built", len(PAGES), "pages ->", OUT)
 
 if __name__ == "__main__":
