@@ -1149,3 +1149,5 @@ html,body{overflow-x:clip}
 .stage.solo.duo .phone.p2{left:64%;transform:translateX(-50%) rotate(5deg);top:10%}
 .pscr img.shot[src*="sekiz"]{object-position:center 30%}
 @media (max-width:560px){.stage.solo.duo .phone{width:34%}}
+.bg-feronya{background:linear-gradient(140deg,#EBD9BC,#B98A55)}
+.wc-in > img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}

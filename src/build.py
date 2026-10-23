@@ -230,7 +230,7 @@ HOME_FAQ = [
 ]
 
 # ---------- works: real + sample designs ----------
-HOTEL_NAME = "Ege Termal Otel"   # örnek; müşteri onayıyla gerçek adla değişir
+HOTEL_NAME = "Seven For Life Thermal Hotel"
 
 BRANDS = [
   dict(id="moda", name="Moda Salon", sector="Kuaför ve güzellik", cat="guzellik", city="Kadıköy, Moda",
@@ -317,11 +317,14 @@ WORKS = [
        svcs=["Instagram yönetimi","İçerik tasarımı","Hesap düzeni"], url="https://www.instagram.com/astrodefnee/", cta="Profili gör",
        note="@astrodefnee Instagram hesabı: haftalık burç yorumu serisi, “Astro İnceleme” ünlü harita serisi ve tutarlı bir görsel dil. İçerik planı, tasarım ve hesap yönetimi bizde.",
        did=["Haftalık burç yorumu şablon serisi","“Astro İnceleme” ve tema gönderileri","Profil düzeni, öne çıkanlar ve düzenli paylaşım takvimi"]),
-  dict(id="otel", name=HOTEL_NAME, sector="Otel ve turizm", cat="turizm", kind="ornek", city="Kuşadası",
-       svcs=["Google reklamı","SEO","Dönüşüm takibi"],
-       note="Kuşadası'nda termal otel için Google arama reklamı ve SEO kurgusu.",
-       did=["“kuşadası termal otel” gibi aramalar için reklam grupları","Oda, havuz ve paket sayfaları için SEO","Rezervasyon ve arama tıklamalarının takibi"],
-       case="Rezervasyonların çoğu komisyonlu sitelerden geliyor; otelin kendi sitesi aramalarda arka sıralarda."),
+  dict(id="otel", name="Seven For Life Thermal Hotel", sector="Termal otel", cat="turizm", kind="real", city="Kuşadası",
+       svcs=["Web sitesi","Google reklamı","SEO","Instagram"], url="https://sevenforlife.com",
+       note="Kuşadası'nın termal oteli için web sitesi, Google reklamları, SEO ve Instagram yönetimi. Amaç: rezervasyonu komisyonlu sitelerden otelin kendi sitesine ve WhatsApp hattına çekmek.",
+       did=["Rezervasyon ve bilgi talebi odaklı web sitesi","“Kuşadası termal otel” gibi aramalar için Google reklamları ve SEO","Instagram içerik planı ve hesap yönetimi"]),
+  dict(id="feronya", name="Feronya Restaurant", sector="Restoran", cat="yemek", kind="real", city="Kuşadası",
+       svcs=["Web sitesi","Google reklamı","SEO","Instagram"], url="https://feronyarestaurant.com",
+       note="Kuşadası'nda deniz ürünleri ve Ege mutfağı sunan Feronya için web sitesi, menü sayfası, Google reklamları, SEO ve Instagram yönetimi.",
+       did=["Menü, hakkımızda ve iletişim sayfalarıyla web sitesi","Restoran aramaları için Google reklamları ve yerel SEO","Instagram içerik planı ve hesap yönetimi"]),
 ] + [dict(id=b["id"], name=b["name"], sector=b["sector"], cat=b["cat"], kind="ornek", city=b["city"], svcs=b["svcs"], did=b["did"], case=b["case"]) for b in BRANDS]
 WMAP = {w["id"]: w for w in WORKS}
 CATS = [("hepsi","Tümü"),("guzellik","Güzellik"),("pet","Pet"),("icerik","İçerik ve kişisel marka"),("yemek","Yeme-içme"),("saglik","Sağlık"),("hizmet","Hukuk ve emlak"),("perakende","Perakende"),("turizm","Turizm")]
@@ -366,8 +369,10 @@ def w_stage(w, cls=""):
     if w["id"] == "nil":
         lap = f'<img class="shot" src="img/real/nil-site.webp" alt="Nil Pet Kuaför web sitesi ana sayfası" loading="lazy">'
         ph = f'<img class="shot" src="img/real/nil-ig.webp" alt="Nil Pet Kuaför Instagram profili" loading="lazy">'
-    elif w["id"] == "otel":
-        lap, ph = serp(), otel_mobile()
+    elif w["id"] in ("otel","feronya"):
+        k = "seven" if w["id"]=="otel" else "feronya"
+        lap = f'<img class="shot" src="img/app/{k}-d.webp" alt="{w["name"]} web sitesi" loading="lazy">'
+        ph = f'<img class="shot" src="img/app/{k}-m.webp" alt="{w["name"]} mobil site" loading="lazy">'
     elif w["id"] == "astro":
         lap = '<img class="shot" src="img/app/astro-d.webp" alt="@astrodefnee Instagram profili, bilgisayar görünümü" loading="lazy">'
         ph = '<img class="shot" src="img/app/astro-m.webp" alt="@astrodefnee Instagram profili, telefon görünümü" loading="lazy">'
@@ -393,7 +398,7 @@ def work_card(w, featured=False):
         return f'''<article class="wfeat{' rev' if w['id']=='otel' else ''}" data-cat="{w["cat"]}"><div class="wf-vis">{w_stage(w)}</div>
 <div class="wf-tx">{kind_tag(w)}<h3>{w["name"]}</h3><p class="muted">{w["sector"]}, {w["city"]}</p><p>{w.get("note") or w.get("case")}</p>{checks(w["did"])}<div class="chips">{chips}</div>
 <div class="wf-act">{f'<a class="btn btn-gold" href="{w["url"]}" target="_blank" rel="noopener">{w.get("cta","Siteyi ziyaret et")}</a>' if w.get("url") else '<a class="btn btn-gold" href="#iletisim">Benim için de kur</a>'}<a class="btn btn-line" href="{href}">Detaylar</a></div></div></article>'''
-    if w["id"] == "otel": prev = serp()
+    if w["id"] in ("otel","feronya"): prev = f'<img src="img/app/{"seven" if w["id"]=="otel" else "feronya"}-d.webp" alt="" loading="lazy">'
     else: prev = b_site(BMAP[w["id"]])
     return f'''<a class="wcard" href="{href}" data-cat="{w["cat"]}"><div class="wc-scr"><div class="wc-in">{prev}</div></div>
 <div class="wc-tx">{kind_tag(w)}<h3>{w["name"]}</h3><p>{w["sector"]}, {w["city"]}</p><div class="chips">{chips}</div></div></a>'''
@@ -402,7 +407,7 @@ def works_block():
     chips = "".join(f'<button type="button" data-filter="{k}" aria-pressed="{"true" if k=="hepsi" else "false"}">{t}</button>' for k,t in CATS)
     feat = work_card(WMAP["nil"], featured=True)
     feat2 = work_card(WMAP["otel"], featured=True)
-    cards = "".join(work_card(w) for w in WORKS if w["id"] not in ("nil","otel"))
+    cards = "".join(work_card(w) for w in WORKS if w["id"] not in ("nil","otel") and w["id"] in BMAP)
     return f'''<div class="works" data-works><div class="filters" role="group" aria-label="Sektöre göre süz">{chips}</div>{feat}{feat2}<div class="wgrid">{cards}</div><p class="knote wempty" hidden>Bu sektörde henüz yayınlanmış bir çalışma yok. Senin işin ilk olsun: aşağıdan yaz.</p></div>'''
 
 def brand_case(w):
@@ -547,10 +552,10 @@ def mimg(name, alt=""):
 REEL_COLS = [
   ["site-moda","ig-nil","site-otel","ig-dis"],
   ["ig-kose","site-nil","ig-butik","site-emlak"],
-  ["site-dis","ig-moda","site-hukuk","ig-otel"],
+  ["site-feronya","ig-moda","site-hukuk","ig-otel"],
   ["ig-emlak","site-butik","ig-hukuk","site-kose"],
   ["site-nil","ig-butik","site-moda","ig-kose"],
-  ["ig-dis","site-otel","ig-nil","site-hukuk"],
+  ["ig-dis","site-otel","ig-feronya","site-hukuk"],
 ]
 
 def reel():
@@ -602,7 +607,7 @@ def page_index():
 </div></section>
 
 <section id="calismalar" class="works3" aria-labelledby="h-works">
-<div class="w3-pin"><div class="wrap w3-head" data-rv><div><span class="eyebrow">Çalışmalarımız</span><h2 id="h-works">Yaptığımız işler.</h2></div><p>Gerçek müşteri işlerimiz (Nil Pet Kuaför, @astrodefnee) ve farklı sektörler için hazırladığımız örnek tasarımlar. <a class="link" href="calismalar.html">Hepsini incele</a></p></div>
+<div class="w3-pin"><div class="wrap w3-head" data-rv><div><span class="eyebrow">Çalışmalarımız</span><h2 id="h-works">Yaptığımız işler.</h2></div><p>Gerçek müşteri işlerimiz (Seven For Life, Feronya, Nil Pet Kuaför, @astrodefnee) ve farklı sektörler için hazırladığımız örnek tasarımlar. <a class="link" href="calismalar.html">Hepsini incele</a></p></div>
 <div class="w3-track snap" data-hscroll>{slides}</div>
 <div class="wrap w3-prog" aria-hidden="true"><i data-hprog></i></div></div>
 </section>
@@ -767,13 +772,13 @@ def page_cases():
 <section class="phero" aria-labelledby="h-page" style="padding-bottom:40px"><div class="wrap" style="grid-template-columns:1fr">
 <div><nav class="crumbs" aria-label="Konum"><a href="index.html">Ana sayfa</a> / Çalışmalar</nav>
 <h1 id="h-page">Ne yaptığımızı gör.</h1>
-<p class="lead">Her işletmeye önce bir taslak hazırlarız. Gerçek müşteri işlerimiz (Nil Pet Kuaför, @astrodefnee), kendi geliştirdiğimiz uygulamalar (oh same., Sorbi, Sekiz8) ve farklı sektörler için hazırladığımız örnek tasarımlar.</p>
+<p class="lead">Her işletmeye önce bir taslak hazırlarız. Gerçek müşteri işlerimiz (Seven For Life, Feronya, Nil Pet Kuaför, @astrodefnee), kendi geliştirdiğimiz uygulamalar (oh same., Sorbi, Sekiz8) ve farklı sektörler için hazırladığımız örnek tasarımlar.</p>
 <p class="muted" style="font-size:14px">“Örnek tasarım” etiketli işletme adları örnektir. Gerçek işler müşteri onayıyla yayınlanır.</p></div>
 </div></section>
 <section class="ksec" aria-label="Örnek çalışmalar" style="padding-top:24px"><div class="wrap">{T}</div></section>
 {contact()}
 '''
-    return ("Çalışmalar ve Örnek Tasarımlar | Laurus Dijital","Nil Pet Kuaför ve @astrodefnee gerçek işlerimiz; oh same., Sorbi ve Sekiz8 uygulamalarımız; kuaför, klinik, otel, avukat, emlak ve butik için örnek web sitesi, Instagram, reklam ve SEO çalışmaları.", body)
+    return ("Çalışmalar ve Örnek Tasarımlar | Laurus Dijital","Seven For Life, Feronya, Nil Pet Kuaför ve @astrodefnee gerçek işlerimiz; oh same., Sorbi ve Sekiz8 uygulamalarımız; kuaför, klinik, avukat, emlak ve butik için örnek web sitesi, Instagram, reklam ve SEO çalışmaları.", body)
 
 def page_prices():
     rows = [
@@ -839,7 +844,7 @@ SECTORS = [
              ("Menü güncel değil","Fiyatlar ve ürünler değişiyor, internette eski kalıyor.","Siteye ve profile bağlı, kolay güncellenen menü sayfası."),
              ("Hafta içi sakin","Yoğunluk sadece hafta sonu.","Hafta içi saatlerine özel kampanya paylaşımları ve reklamlar."),
              ("Fotoğraflar zayıf","Ürünler telefonda iştah açmıyor.","Basit çekim rehberi ve düzenlenmiş ürün görselleri.")],
-      plan="Vitrin paketi + Reklam", case="kose", kw="kafe sosyal medya yönetimi, restoran Google reklam, kafe web sitesi"),
+      plan="Vitrin paketi + Reklam", case="feronya", kw="kafe sosyal medya yönetimi, restoran Google reklam, kafe web sitesi"),
  dict(slug="klinik-dijital-pazarlama.html", short="Sağlık ve klinik", name="klinik", photo="dis-klinik", photo_alt="Aydınlık bir diş kliniği muayene odası",
       h1="Klinikler ve muayenehaneler için web sitesi, SEO ve Google profili.",
       lead="Hastaların çoğu önce Google'a sorar. Tedavilerini anlatan, güven veren bir site ve doğru aramalarda görünen bir profil kuruyoruz.",
@@ -897,7 +902,7 @@ def sector_page(sec):
 <section class="phero" aria-labelledby="h-page"><div class="wrap">
 <div><nav class="crumbs" aria-label="Konum"><a href="index.html">Ana sayfa</a> / Sektörler / {sec['short']}</nav>
 <h1 id="h-page">{sec['h1']}</h1><p class="lead">{sec['lead']}</p>
-<div class="actions"><a class="btn btn-gold" href="#iletisim">Ücretsiz ön görüşme al</a><a class="btn btn-line" href="calismalar.html#{sec['case']}">Örnek çalışmayı gör</a></div></div>
+<div class="actions"><a class="btn btn-gold" href="#iletisim">Ücretsiz ön görüşme al</a><a class="btn btn-line" href="calismalar.html#{sec['case']}">{"Gerçek çalışmayı gör" if WMAP[sec['case']]["kind"]=="real" else "Örnek çalışmayı gör"}</a></div></div>
 <div class="ph">{img(sec['photo'], sec['photo_alt'], eager=True)}</div>
 </div></section>
 <section class="light ksec" aria-labelledby="h-pains"><div class="wrap">
