@@ -45,6 +45,7 @@ SERVICES = [
   ("sosyal-medya.html", "ig", "Sosyal medya ve içerik", "Instagram, TikTok, Reels ve aylık plan"),
   ("reklam-yonetimi.html", "ads", "Google ve Meta reklamları", "Semtindeki doğru kişilere görün"),
   ("google-isletme.html", "pin", "Google İşletme ve yerel SEO", "Haritalarda bul, yorum topla"),
+  ("mobil-uygulama.html", "phone", "Mobil uygulama ve yazılım", "iOS, Android ve web uygulamaları"),
 ]
 
 # ---------- layout ----------
@@ -71,7 +72,7 @@ def header(active):
 </div></header>'''
 
 def contact(title="İşletmeni anlat, taslağını gör.", need="Web sitesi"):
-    needs = ["Web sitesi","Sosyal medya yönetimi","Google / Meta reklamı","SEO ve Google profili","Hepsi","Emin değilim, öneri istiyorum"]
+    needs = ["Web sitesi","Sosyal medya yönetimi","Google / Meta reklamı","SEO ve Google profili","Mobil uygulama","Hepsi","Emin değilim, öneri istiyorum"]
     opts = "".join(f'<option{" selected" if n==need else ""}>{n}</option>' for n in needs)
     return f'''<section id="iletisim" class="contact" aria-labelledby="h-contact"><div class="wrap cbox">
 <div><span class="eyebrow">İletişim</span><h2 id="h-contact">{title}</h2>
@@ -95,7 +96,7 @@ def footer():
     svc = "".join(f'<li><a href="{h}">{t}</a></li>' for h,_,t,_ in SERVICES)
     return f'''<footer><div class="wrap"><div class="fgrid">
 <div><a class="brand" href="index.html" aria-label="Laurus Dijital"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#logo"/></svg><span><b>Laurus</b><small>DİJİTAL AJANS</small></span></a>
-<p class="about">İstanbul merkezli dijital ajans. Web tasarım, kurumsal web sitesi, e-ticaret, sosyal medya yönetimi, Google Ads ve SEO hizmetleri; Türkiye geneline online.</p></div>
+<p class="about">İstanbul merkezli dijital ajans. Web tasarım, kurumsal web sitesi, e-ticaret, mobil uygulama, sosyal medya yönetimi, Google Ads ve SEO hizmetleri; Türkiye geneline online.</p></div>
 <div><h4>Hizmetler</h4><ul>{svc}</ul></div>
 <div><h4>Sektörler</h4><ul>{"".join(f'<li><a href="{x["slug"]}">{x["short"]}</a></li>' for x in SECTORS)}</ul></div>
 <div><h4>Laurus</h4><ul><li><a href="hakkimizda.html">Hakkımızda</a></li><li><a href="calismalar.html">Çalışmalar</a></li><li><a href="index.html#nasil">Nasıl çalışıyoruz</a></li><li><a href="fiyatlar.html">Fiyatlar</a></li><li><a href="index.html#sss">Sık sorulanlar</a></li><li><a href="rehber.html">Rehber</a></li><li><a href="web-sitesi-yaptirmak.html">Web sitesi yaptırmak</a></li><li><a href="sosyal-medya-yonetimi-fiyatlari.html">Sosyal medya fiyatları</a></li></ul></div>
@@ -111,7 +112,7 @@ def schemas(slug, url, title, desc):
            "email":EMAIL,"telephone":PHONE_TEL,"priceRange":"₺₺","address":{"@type":"PostalAddress","addressLocality":"İstanbul","addressRegion":"İstanbul","addressCountry":"TR"},
            "areaServed":[{"@type":"City","name":"İstanbul"},{"@type":"Country","name":"Türkiye"}],
            "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"19:00"}],
-           "knowsAbout":["web tasarım","web sitesi yapımı","kurumsal web sitesi","e-ticaret sitesi","sosyal medya yönetimi","Instagram hesap yönetimi","Google Ads","Meta reklamları","SEO","yerel SEO","Google İşletme Profili"],"description":"İstanbul merkezli dijital ajans: web tasarım, sosyal medya yönetimi, Google Ads ve SEO hizmetleri.","slogan":"İşletmeni internete taşıyoruz.","url":BASE,
+           "knowsAbout":["web tasarım","web sitesi yapımı","kurumsal web sitesi","e-ticaret sitesi","sosyal medya yönetimi","Instagram hesap yönetimi","Google Ads","Meta reklamları","SEO","yerel SEO","Google İşletme Profili","mobil uygulama geliştirme","iOS uygulama","web uygulaması","yazılım geliştirme"],"description":"İstanbul merkezli dijital ajans: web tasarım, mobil uygulama, sosyal medya yönetimi, Google Ads ve SEO hizmetleri.","slogan":"İşletmeni internete taşıyoruz.","url":BASE,
            "hasOfferCatalog":{"@type":"OfferCatalog","name":"Hizmetler","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":t,"url":BASE+"/"+h.replace(".html","")}} for h,_,t,_ in SERVICES]}}
     graph=[org,{"@type":"WebSite","@id":BASE+"/#site","url":BASE,"name":"Laurus Dijital","inLanguage":"tr-TR","publisher":{"@id":BASE+"/#org"}},
            {"@type":("AboutPage" if slug=="hakkimizda.html" else "WebPage"),"@id":url+"#page","url":url,"name":title,"description":desc,"inLanguage":"tr-TR","isPartOf":{"@id":BASE+"/#site"}}]
@@ -312,6 +313,10 @@ WORKS = [
        svcs=["Web sitesi","Instagram tasarımı"], url="https://nilpetkuafor.com",
        note="Kadıköy'de pet kuaför. Web sitesini ve Instagram tasarımlarını biz hazırladık.",
        did=["Tek sayfa site: hizmetler, öncesi-sonrası galeri, randevu formu","Fiyat listesi ve vizyon gönderileri dahil Instagram tasarımları","WhatsApp, arama ve yol tarifi düğmeleri"]),
+  dict(id="astro", name="Astrolog Defne", sector="Astroloji içerik hesabı", cat="icerik", kind="real", city="Instagram · @astrodefnee",
+       svcs=["Instagram yönetimi","İçerik tasarımı","Hesap düzeni"], url="https://www.instagram.com/astrodefnee/", cta="Profili gör",
+       note="@astrodefnee Instagram hesabı: haftalık burç yorumu serisi, “Astro İnceleme” ünlü harita serisi ve tutarlı bir görsel dil. İçerik planı, tasarım ve hesap yönetimi bizde.",
+       did=["Haftalık burç yorumu şablon serisi","“Astro İnceleme” ve tema gönderileri","Profil düzeni, öne çıkanlar ve düzenli paylaşım takvimi"]),
   dict(id="otel", name=HOTEL_NAME, sector="Otel ve turizm", cat="turizm", kind="ornek", city="Kuşadası",
        svcs=["Google reklamı","SEO","Dönüşüm takibi"],
        note="Kuşadası'nda termal otel için Google arama reklamı ve SEO kurgusu.",
@@ -319,7 +324,7 @@ WORKS = [
        case="Rezervasyonların çoğu komisyonlu sitelerden geliyor; otelin kendi sitesi aramalarda arka sıralarda."),
 ] + [dict(id=b["id"], name=b["name"], sector=b["sector"], cat=b["cat"], kind="ornek", city=b["city"], svcs=b["svcs"], did=b["did"], case=b["case"]) for b in BRANDS]
 WMAP = {w["id"]: w for w in WORKS}
-CATS = [("hepsi","Tümü"),("guzellik","Güzellik"),("pet","Pet"),("yemek","Yeme-içme"),("saglik","Sağlık"),("hizmet","Hukuk ve emlak"),("perakende","Perakende"),("turizm","Turizm")]
+CATS = [("hepsi","Tümü"),("guzellik","Güzellik"),("pet","Pet"),("icerik","İçerik ve kişisel marka"),("yemek","Yeme-içme"),("saglik","Sağlık"),("hizmet","Hukuk ve emlak"),("perakende","Perakende"),("turizm","Turizm")]
 
 def b_site(b):
     nav = "".join(f"<span>{x}</span>" for x in b["nav"])
@@ -363,6 +368,9 @@ def w_stage(w, cls=""):
         ph = f'<img class="shot" src="img/real/nil-ig.webp" alt="Nil Pet Kuaför Instagram profili" loading="lazy">'
     elif w["id"] == "otel":
         lap, ph = serp(), otel_mobile()
+    elif w["id"] == "astro":
+        lap = '<img class="shot" src="img/app/astro-d.webp" alt="@astrodefnee Instagram profili, bilgisayar görünümü" loading="lazy">'
+        ph = '<img class="shot" src="img/app/astro-m.webp" alt="@astrodefnee Instagram profili, telefon görünümü" loading="lazy">'
     else:
         b = BMAP[w["id"]]; lap, ph = b_site(b), b_ig(b)
     return f'''<div class="stage {cls}"><div class="laptop"><div class="lid"><div class="scr">{lap}</div></div><div class="base"></div></div>
@@ -384,7 +392,7 @@ def work_card(w, featured=False):
     if featured:
         return f'''<article class="wfeat{' rev' if w['id']=='otel' else ''}" data-cat="{w["cat"]}"><div class="wf-vis">{w_stage(w)}</div>
 <div class="wf-tx">{kind_tag(w)}<h3>{w["name"]}</h3><p class="muted">{w["sector"]}, {w["city"]}</p><p>{w.get("note") or w.get("case")}</p>{checks(w["did"])}<div class="chips">{chips}</div>
-<div class="wf-act">{f'<a class="btn btn-gold" href="{w["url"]}" target="_blank" rel="noopener">Siteyi ziyaret et</a>' if w.get("url") else '<a class="btn btn-gold" href="#iletisim">Benim için de kur</a>'}<a class="btn btn-line" href="{href}">Detaylar</a></div></div></article>'''
+<div class="wf-act">{f'<a class="btn btn-gold" href="{w["url"]}" target="_blank" rel="noopener">{w.get("cta","Siteyi ziyaret et")}</a>' if w.get("url") else '<a class="btn btn-gold" href="#iletisim">Benim için de kur</a>'}<a class="btn btn-line" href="{href}">Detaylar</a></div></div></article>'''
     if w["id"] == "otel": prev = serp()
     else: prev = b_site(BMAP[w["id"]])
     return f'''<a class="wcard" href="{href}" data-cat="{w["cat"]}"><div class="wc-scr"><div class="wc-in">{prev}</div></div>
@@ -406,7 +414,7 @@ def brand_case(w):
         sw = "".join(f'<span><i style="background:{c}"></i>{n}</span>' for c,n in b["pal"])
         extra = f'<h3>Marka dili</h3><div class="swatches">{sw}</div><p class="fonts">{b["fonts"]}</p>'
     durum = w.get("case") or w.get("note")
-    link = f'<a class="btn btn-line" href="{w["url"]}" target="_blank" rel="noopener">Siteyi ziyaret et</a>' if w.get("url") else ""
+    link = f'<a class="btn btn-line" href="{w["url"]}" target="_blank" rel="noopener">{w.get("cta","Siteyi ziyaret et")}</a>' if w.get("url") else ""
     sub = "Gerçek müşteri çalışması" if w["kind"]=="real" else "Örnek çalışma"
     return f'''<div class="bcase">
 <div class="bcase-vis bg-{w["id"]}">{stage}</div>
@@ -418,6 +426,97 @@ def brand_case(w):
 {extra}
 <div class="wf-act"><a class="btn btn-gold" href="#iletisim">Benim için de hazırla</a>{link}</div>
 </div></div>'''
+
+
+# ---------- own apps ----------
+APPS = [
+  dict(id="ohsame", name="oh same.", kind="Mobil + web uygulaması", status="Web'de yayında · iOS sürümü yolda",
+       url="https://ohsame.app", cta="oh same.'i aç", lap="ohsame-d", ph="ohsame-app",
+       desc="Nasıl hissettiğini seçiyorsun; dünyada aynı anda aynı şeyi hisseden insanları canlı bir küre üzerinde görüyorsun. “Ah, benim gibi biri daha var” dedirten bir uygulama.",
+       did=["Canlı dünya küresi ve anlık sayaçlar","Apple, Google ve e-posta ile giriş; isteyen anonim kullanır","Türkçe ve İngilizce, iOS ve web aynı üründe"],
+       tech=["iOS","Web uygulaması","Canlı veri","Üyelik sistemi"]),
+  dict(id="sorbi", name="Sorbi", kind="Web platformu", status="sorbiapp.com'da yayında",
+       url="https://sorbiapp.com", cta="Sorbi'yi aç", lap="sorbi-d", ph="sorbi-m",
+       desc="Doğum tarihini yazıyorsun, doğduğun anın gökyüzünü ve haritanın kaç kişide bir görüldüğünü saniyeler içinde görüyorsun. Arkasında 1,3 milyondan fazla gök anını sayan kendi hesap motorumuz var.",
+       did=["Swiss Ephemeris ile test edilmiş hesap motoru","Üyelik: Google ve e-posta ile giriş","Paylaşılabilir kartlar, günlük gökyüzü ve dersler"],
+       tech=["Web platformu","Hesap motoru","Üyelik","SEO"]),
+  dict(id="sekiz", name="Sekiz", kind="Mobil uygulama", status="iOS ve Android için",
+       url=None, cta=None, lap=None, ph="sekiz-m",
+       desc="Aklındaki soruyu tut, telefonu salla, cevabın ekranda belirsin. Tek ekran, tek hareket; sade ama özenli bir mobil deneyim.",
+       did=["Telefonu sallamayı algılayan hareket sensörü","Titreşimli geri bildirim ve akıcı animasyonlar","Türkçe ve İngilizce"],
+       tech=["iOS","Android","React Native"]),
+]
+AMAP = {a["id"]: a for a in APPS}
+
+def app_stage(a, cls=""):
+    ph = f'<div class="phone"><div class="pscr"><img class="shot" src="img/app/{a["ph"]}.webp" alt="{a["name"]} telefon ekranı" loading="lazy"></div></div>'
+    if not a["lap"]:
+        return f'<div class="stage solo {cls}">{ph}</div>'
+    lap = f'<div class="laptop"><div class="lid"><div class="scr"><img class="shot" src="img/app/{a["lap"]}.webp" alt="{a["name"]} bilgisayar görünümü" loading="lazy"></div></div><div class="base"></div></div>'
+    return f'<div class="stage {cls}">{lap}{ph}</div>'
+
+def app_card(a, i=0, big=False):
+    chips = "".join(f"<span>{t}</span>" for t in a["tech"])
+    act = f'<a class="btn btn-gold" href="{a["url"]}" target="_blank" rel="noopener">{a["cta"]}</a>' if a["url"] else '<a class="btn btn-gold" href="#iletisim">Benzerini konuşalım</a>'
+    return (f'<article class="appc{" appc-big" if big else ""}" id="app-{a["id"]}" data-rv style="--d:{i*90}ms"><div class="app-vis bg-{a["id"]}">{app_stage(a)}</div>'
+            f'<div class="app-tx"><span class="app-kind">{a["kind"]}</span><h3>{a["name"]}</h3><p>{a["desc"]}</p>{checks(a["did"])}<div class="chips">{chips}</div>'
+            f'<div class="app-foot"><span class="app-st"><i></i>{a["status"]}</span>{act}</div></div></article>')
+
+def apps_block():
+    return '<div class="apps">' + app_card(APPS[0], 0, True) + app_card(APPS[1], 1) + app_card(APPS[2], 2) + '</div>'
+
+def app_case(a):
+    chips = "".join(f"<span>{t}</span>" for t in a["tech"])
+    link = f'<a class="btn btn-line" href="{a["url"]}" target="_blank" rel="noopener">{a["cta"]}</a>' if a["url"] else ""
+    return (f'<div class="bcase"><div class="bcase-vis bg-{a["id"]}">{app_stage(a, "in-case")}</div><div class="bcase-tx">'
+            f'<div class="bcase-id"><div><b>{a["name"]}</b><small>Kendi ürünümüz, {a["kind"].lower()}</small></div></div>'
+            f'<div class="chips">{chips}</div><h3>Ne yaptık</h3><p>{a["desc"]}</p><h3>Neler var</h3>{checks(a["did"])}'
+            f'<p class="app-st"><i></i>{a["status"]}</p>'
+            f'<div class="wf-act"><a class="btn btn-gold" href="#iletisim">Uygulamamı konuşalım</a>{link}</div></div></div>')
+
+def page_apps():
+    does = [("phone","iOS ve Android","Tek kod tabanıyla iki platformda çalışan, mağaza kurallarına uygun uygulamalar."),
+            ("web","Web uygulaması","Tarayıcıda uygulama gibi çalışan, telefona eklenebilen web uygulamaları."),
+            ("lock","Üyelik ve giriş","Apple, Google ve e-posta ile giriş; anonim kullanım ve güvenli veri saklama."),
+            ("star","Abonelik ve ödeme","Uygulama içi satın alma, abonelik ve ücretli katmanlar."),
+            ("bolt","Mağaza yayını","App Store ve Google Play hesapları, ekran görüntüleri, açıklamalar ve inceleme süreci."),
+            ("chart","Ölçüm ve bakım","Kullanım verisi, hata takibi ve sürüm güncellemeleri.")]
+    dg = "".join(f'<div class="do"><span class="ic">{I[ic]}</span><h3>{t}</h3><p>{d}</p></div>' for ic,t,d in does)
+    steps = [("1. hafta","Kapsam","Uygulamanın tek cümlelik vaadini ve ilk sürümde olacakları birlikte netleştiririz."),
+             ("2. hafta","Tıklanabilir taslak","Ekranları telefonunda deneyebileceğin bir taslak olarak görürsün."),
+             ("3–6. hafta","Geliştirme","Haftalık sürümlerle ilerleriz; her hafta yeni hali elinde olur."),
+             ("Yayın","Mağaza ve web","App Store, Google Play ve web sürümü yayına alınır; sonrası bakım.")]
+    month = '<div class="month">' + "".join(f"<div><b>{w}</b><h4>{t}</h4><p>{d}</p></div>" for w,t,d in steps) + '</div>'
+    faq = [("Uygulama yaptırmak ne kadar tutar?","Kapsama göre değişir: tek ekranlı bir uygulamayla üyelik, ödeme ve canlı veri içeren bir ürün aynı fiyatta olmaz. Ücretsiz ön görüşmede kapsamı çıkarır, sabit fiyat ve teslim tarihi veririz."),
+           ("Önce web sitesiyle mi başlamalıyım?","Çoğu fikir için evet. Önce web uygulaması olarak deneyip kullanıcı geldikçe mobil uygulamaya geçmek hem daha hızlı hem daha ucuzdur. oh same.'i de bu yolla büyüttük."),
+           ("Uygulama mağazaya kimin adına yüklenir?","Senin adına. App Store ve Google Play geliştirici hesapları senin olur; kaynak kod da teslim edilir."),
+           ("Yayından sonra ne oluyor?","Aylık bakım paketiyle güncellemeleri, mağaza değişikliklerini ve küçük geliştirmeleri biz yaparız.")]
+    body = f'''
+<section class="phero" aria-labelledby="h-page"><div class="wrap">
+<div><nav class="crumbs" aria-label="Konum"><a href="index.html">Ana sayfa</a> / <a href="index.html#hizmetler">Hizmetler</a> / Mobil uygulama</nav>
+<h1 id="h-page">Mobil uygulama ve web uygulaması geliştirme.</h1>
+<p class="lead">Fikrini iOS, Android ve web'de çalışan bir ürüne çeviriyoruz. Aşağıdaki uygulamaları kendi ekibimiz tasarladı ve kodladı.</p>
+<div class="actions"><a class="btn btn-gold" href="#iletisim">Ücretsiz ön görüşme al</a><a class="btn btn-line" href="#uygulamalar">Uygulamalarımızı gör</a></div></div>
+<div class="ph app-ph">{img("app/ohsame-d","oh same. uygulamasının web sitesi ve telefon ekranı", eager=True)}</div>
+</div></section>
+<section id="uygulamalar" class="ksec apps-sec" aria-labelledby="h-apps"><div class="wrap">
+<div class="khead" data-rv><div><span class="eyebrow">Kendi ürünlerimiz</span><h2 id="h-apps">Yaptığımız uygulamalar.</h2></div><p>Tasarımı, yazılımı ve yayını tamamen bizde olan üç ürün.</p></div>
+{apps_block()}
+</div></section>
+<section class="light ksec" aria-labelledby="h-do"><div class="wrap">
+<div class="khead" data-rv><div><span class="eyebrow">Neler yapıyoruz</span><h2 id="h-do">Fikirden mağazaya, tek ekip.</h2></div></div>
+<div class="do-grid">{dg}</div>
+<h3 class="kh3" style="margin:48px 0 18px">Süreç nasıl işliyor</h3>{month}
+</div></section>
+<section class="light ksec" aria-labelledby="h-afaq" style="padding-top:0"><div class="wrap kfaq">
+<div data-rv><span class="eyebrow">Sık sorulanlar</span><h2 id="h-afaq">Uygulama hakkında sorular.</h2></div>
+{faq_list(faq)}
+</div></section>
+{contact(title="Uygulama fikrini anlat, taslağını gör.", need="Mobil uygulama")}
+'''
+    return ("Mobil Uygulama Geliştirme ve Web Uygulaması · İstanbul | Laurus Dijital",
+            "iOS, Android ve web uygulaması geliştirme: üyelik, abonelik, canlı veri ve mağaza yayını dahil. oh same., Sorbi ve Sekiz uygulamalarını kendi ekibimiz geliştirdi.", body)
+
 
 # ---------- pages ----------
 def tabs(items, label):
@@ -461,7 +560,7 @@ def reel():
 
 def slide(w, i):
     chips = "".join(f"<span>{s}</span>" for s in w["svcs"])
-    link = f'<a class="btn btn-gold" href="{w["url"]}" target="_blank" rel="noopener">Siteyi ziyaret et</a>' if w.get("url") else f'<a class="btn btn-gold" href="calismalar.html#{w["id"]}">Taslağı incele</a>'
+    link = f'<a class="btn btn-gold" href="{w["url"]}" target="_blank" rel="noopener">{w.get("cta","Siteyi ziyaret et")}</a>' if w.get("url") else f'<a class="btn btn-gold" href="calismalar.html#{w["id"]}">Taslağı incele</a>'
     desc = w.get("note") or w.get("case")
     return f'''<article class="slide" style="--i:{i}"><div class="sl-vis bg-{w["id"]}"><div class="stage"><div class="laptop"><div class="lid"><div class="scr">{mimg("site-"+w["id"], w["name"]+" web sitesi")}</div></div><div class="base"></div></div><div class="phone"><div class="pscr">{mimg("ig-"+w["id"], w["name"]+" mobil görünüm")}</div></div></div></div>
 <div class="sl-tx">{kind_tag(w)}<h3>{w["name"]}</h3><p class="sl-sub">{w["sector"]}, {w["city"]}</p><p class="sl-d">{desc}</p><div class="chips">{chips}</div><div class="sl-act">{link}</div></div></article>'''
@@ -487,7 +586,7 @@ def page_index():
 <div class="h3-shade" aria-hidden="true"></div>
 <div class="wrap h3-in">
 <h1 id="h-hero"><span class="ln"><span>İşletmeni</span></span> <span class="ln"><span>internete</span></span> <span class="ln"><span>taşıyoruz.</span></span></h1>
-<p class="lead">İstanbul merkezli dijital ajans: web tasarım, sosyal medya yönetimi, Google reklamı ve SEO. Kuaförden otele, kliniğe kadar her işletme için tek ekip.</p>
+<p class="lead">İstanbul merkezli dijital ajans: web tasarım, mobil uygulama, sosyal medya yönetimi, Google reklamı ve SEO. Kuaförden otele, kliniğe kadar her işletme için tek ekip.</p>
 <div class="actions"><a class="btn btn-gold" href="#iletisim">Ücretsiz ön görüşme al</a><a class="btn btn-line" href="#calismalar">İşlerimizi gör</a></div>
 </div>
 <a class="h3-scroll" href="#manifesto" aria-label="Aşağı kaydır"><i></i></a>
@@ -501,10 +600,15 @@ def page_index():
 </div></section>
 
 <section id="calismalar" class="works3" aria-labelledby="h-works">
-<div class="w3-pin"><div class="wrap w3-head" data-rv><div><span class="eyebrow">Çalışmalarımız</span><h2 id="h-works">Yaptığımız işler.</h2></div><p>Gerçek bir müşteri işimiz (Nil Pet Kuaför) ve farklı sektörler için hazırladığımız örnek tasarımlar. <a class="link" href="calismalar.html">Hepsini incele</a></p></div>
+<div class="w3-pin"><div class="wrap w3-head" data-rv><div><span class="eyebrow">Çalışmalarımız</span><h2 id="h-works">Yaptığımız işler.</h2></div><p>Gerçek müşteri işlerimiz (Nil Pet Kuaför, @astrodefnee) ve farklı sektörler için hazırladığımız örnek tasarımlar. <a class="link" href="calismalar.html">Hepsini incele</a></p></div>
 <div class="w3-track snap" data-hscroll>{slides}</div>
 <div class="wrap w3-prog" aria-hidden="true"><i data-hprog></i></div></div>
 </section>
+
+<section id="uygulamalar" class="ksec apps-sec" aria-labelledby="h-apps"><div class="wrap">
+<div class="khead" data-rv><div><span class="eyebrow">Uygulamalarımız</span><h2 id="h-apps">Sadece site değil, uygulama da yapıyoruz.</h2></div><p>Kendi ekibimizin tasarlayıp kodladığı ürünler. <a class="link" href="mobil-uygulama.html">Mobil uygulama hizmeti</a></p></div>
+{apps_block()}
+</div></section>
 
 <section id="nasil" class="light ksec" aria-labelledby="h-proc"><div class="wrap">
 <div class="khead" data-rv><div><span class="eyebrow">Nasıl çalışıyoruz</span><h2 id="h-proc">İlk görüşmeden yayına 7 gün.</h2></div><p>Önce taslağı görürsün, sonra karar verirsin. Ödemenin yarısı taslağı beğendiğinde.</p></div>
@@ -523,7 +627,7 @@ def page_index():
 {contact()}
 '''
     return ("Laurus Dijital | Web Tasarım, Sosyal Medya Yönetimi ve SEO Ajansı · İstanbul",
-            "Web sitesi yaptırmak, Instagram ve sosyal medya yönetimi, Google reklamı ve SEO için İstanbul merkezli dijital ajans. Fiyatlar açık, ilk site 7 günde yayında.", body)
+            "Web sitesi yaptırmak, mobil uygulama, Instagram ve sosyal medya yönetimi, Google reklamı ve SEO için İstanbul merkezli dijital ajans. Fiyatlar açık, ilk site 7 günde yayında.", body)
 
 GUIDE_FOR = {"web-tasarim.html":'Piyasa fiyatlarını merak ediyorsan: <a class="link" href="web-sitesi-yaptirmak.html">Web sitesi yaptırmak rehberi</a>.',"sosyal-medya.html":'Piyasa karşılaştırması: <a class="link" href="sosyal-medya-yonetimi-fiyatlari.html">Sosyal medya yönetimi fiyatları 2026</a>.',"reklam-yonetimi.html":'Bütçe rehberi: <a class="link" href="google-reklam-yonetimi.html">Google reklam yönetimi 2026</a>.',"google-isletme.html":'Detaylı rehber: <a class="link" href="seo-hizmeti.html">SEO hizmeti rehberi</a>.'}
 
@@ -656,18 +760,18 @@ def page_gbp():
     return ("Yerel SEO ve Google İşletme Profili Hizmeti | Laurus Dijital","Google Haritalar'da öne çıkın: profil kurulumu, fotoğraflar, saatler, yorum akışı ve yerel arama ayarları.", body)
 
 def page_cases():
-    T = tabs([(w["id"], w["name"], brand_case(w)) for w in WORKS], "Çalışmalar")
+    T = tabs([(w["id"], w["name"], brand_case(w)) for w in WORKS] + [(a["id"], a["name"], app_case(a)) for a in APPS], "Çalışmalar")
     body = f'''
 <section class="phero" aria-labelledby="h-page" style="padding-bottom:40px"><div class="wrap" style="grid-template-columns:1fr">
 <div><nav class="crumbs" aria-label="Konum"><a href="index.html">Ana sayfa</a> / Çalışmalar</nav>
 <h1 id="h-page">Ne yaptığımızı gör.</h1>
-<p class="lead">Her işletmeye önce bir taslak hazırlarız. Gerçek bir müşteri işimiz (Nil Pet Kuaför) ve farklı sektörler için hazırladığımız örnek tasarımlar: site, Instagram, Google reklamı ve SEO.</p>
+<p class="lead">Her işletmeye önce bir taslak hazırlarız. Gerçek müşteri işlerimiz (Nil Pet Kuaför, @astrodefnee), kendi geliştirdiğimiz uygulamalar (oh same., Sorbi, Sekiz) ve farklı sektörler için hazırladığımız örnek tasarımlar.</p>
 <p class="muted" style="font-size:14px">“Örnek tasarım” etiketli işletme adları örnektir. Gerçek işler müşteri onayıyla yayınlanır.</p></div>
 </div></section>
 <section class="ksec" aria-label="Örnek çalışmalar" style="padding-top:24px"><div class="wrap">{T}</div></section>
 {contact()}
 '''
-    return ("Çalışmalar ve Örnek Tasarımlar | Laurus Dijital","Gerçek müşteri işimiz Nil Pet Kuaför ve kuaför, klinik, otel, avukat, emlak, butik için hazırladığımız örnek web sitesi, Instagram, Google reklam ve SEO çalışmaları.", body)
+    return ("Çalışmalar ve Örnek Tasarımlar | Laurus Dijital","Nil Pet Kuaför ve @astrodefnee gerçek işlerimiz; oh same., Sorbi ve Sekiz uygulamalarımız; kuaför, klinik, otel, avukat, emlak ve butik için örnek web sitesi, Instagram, reklam ve SEO çalışmaları.", body)
 
 def page_prices():
     rows = [
@@ -960,6 +1064,7 @@ def page_about():
 <div data-rv><span class="eyebrow">Biz kimiz</span><h2 id="h-biz">8 yılı aşkın deneyim, tek ekip.</h2></div>
 <div class="ab-tx" data-rv>
 <p>Laurus Dijital, yazılım, bankacılık teknolojileri ve dijital projelerde <b>8 yılı aşkın deneyime</b> sahip bir ekip tarafından kuruldu. Büyük kurumların dijital projelerinde öğrendiğimiz disiplini, küçük ve orta ölçekli işletmelerin anlayacağı sade bir dille ve açık fiyatlarla sunuyoruz.</p>
+<p>Yazılım geçmişimiz sayesinde işimiz web sitesiyle sınırlı değil: <b>mobil uygulama</b> ve <b>web uygulaması</b> da geliştiriyoruz. oh same., Sorbi ve Sekiz bu ekibin tasarlayıp kodladığı, kendi ürünlerimiz.</p>
 <p>Ekibimizde tasarım, yazılım, içerik ve reklam yönetimi tarafları birlikte çalışır. Bir işletmenin <b>web sitesini</b>, <b>Instagram ve sosyal medya hesaplarını</b>, <b>Google Ads ve Meta reklamlarını</b> ve <b>Google İşletme Profili ile SEO çalışmasını</b> aynı masada planlarız. Böylece sitedeki mesaj, Instagram'daki görsel dil ve Google'daki reklam birbirini tamamlar.</p>
 <p>İstanbul'dan Türkiye genelinde online hizmet veriyoruz. Kuaförden otele, klinikten hukuk bürosuna kadar müşterisini internetten bulan her işletmeyle çalışıyoruz.</p>
 </div></div></section>
@@ -969,16 +1074,21 @@ def page_about():
 <div class="ab-vals">{vh}</div>
 </div></section>
 
+<section class="ksec apps-sec" aria-labelledby="h-apps"><div class="wrap">
+<div class="khead" data-rv><div><span class="eyebrow">Kendi ürünlerimiz</span><h2 id="h-apps">Yetkinliğimizi kendi uygulamalarımızla gösteriyoruz.</h2></div><p><a class="link" href="mobil-uygulama.html">Mobil uygulama hizmeti</a></p></div>
+{apps_block()}
+</div></section>
+
 <section class="light ksec" aria-labelledby="h-ne"><div class="wrap ab-grid">
 <div data-rv><span class="eyebrow">Hizmetlerimiz</span><h2 id="h-ne">Dijital ajans hizmetleri, tek yerden.</h2></div>
 <div class="ab-tx" data-rv>
-<p>Kurumsal web sitesi ve e-ticaret sitesi tasarımı, sosyal medya yönetimi ve Instagram hesap yönetimi, Google Ads ve Instagram reklam yönetimi, yerel SEO ve Google İşletme Profili kurulumu. İhtiyacın olan tek bir hizmetle başlayabilir, işin büyüdükçe diğerlerini ekleyebilirsin.</p>
+<p>Kurumsal web sitesi ve e-ticaret sitesi tasarımı, mobil uygulama ve web uygulaması geliştirme, sosyal medya yönetimi ve Instagram hesap yönetimi, Google Ads ve Instagram reklam yönetimi, yerel SEO ve Google İşletme Profili kurulumu. İhtiyacın olan tek bir hizmetle başlayabilir, işin büyüdükçe diğerlerini ekleyebilirsin.</p>
 <div class="ab-links"><div><b>Hizmetler</b><ul>{svc_links}</ul></div><div><b>Sektörler</b><ul>{sec_links}</ul></div></div>
 </div></div></section>
 {contact()}
 '''
     return ("Hakkımızda | Laurus Dijital, İstanbul Dijital Ajans",
-            "Laurus Dijital, 8 yılı aşkın dijital ve teknoloji deneyimine sahip ekibiyle web tasarım, sosyal medya yönetimi, Google Ads ve SEO hizmeti veren İstanbul merkezli dijital ajans.", body)
+            "Laurus Dijital, 8 yılı aşkın yazılım ve dijital deneyime sahip ekibiyle web tasarım, mobil uygulama, sosyal medya yönetimi, Google Ads ve SEO hizmeti veren İstanbul merkezli dijital ajans.", body)
 
 
 PAGES = {
@@ -987,6 +1097,7 @@ PAGES = {
   "sosyal-medya.html": (page_social, "svc"),
   "reklam-yonetimi.html": (page_ads, "svc"),
   "google-isletme.html": (page_gbp, "svc"),
+  "mobil-uygulama.html": (page_apps, "svc"),
   "calismalar.html": (page_cases, "calismalar"),
   "fiyatlar.html": (page_prices, "fiyatlar"),
   "rehber.html": (page_rehber, "rehber"),
@@ -1002,6 +1113,7 @@ PAGE_META.update({
   "sosyal-medya.html": dict(crumb=[("Sosyal medya ve içerik","/sosyal-medya")], service=("Sosyal medya yönetimi","12000","Instagram ve TikTok yönetimi, aylık içerik planı ve Reels.")),
   "reklam-yonetimi.html": dict(crumb=[("Google ve Meta reklamları","/reklam-yonetimi")], service=("Google Ads ve Meta reklam yönetimi","9000","Google arama, harita ve Instagram reklamları.")),
   "google-isletme.html": dict(crumb=[("Google İşletme ve yerel SEO","/google-isletme")], service=("Google İşletme Profili ve yerel SEO",None,"Google Haritalar profil kurulumu, fotoğraflar ve yorum akışı.")),
+  "mobil-uygulama.html": dict(crumb=[("Mobil uygulama","/mobil-uygulama")], service=("Mobil uygulama ve web uygulaması geliştirme",None,"iOS, Android ve web uygulaması geliştirme; üyelik, abonelik ve mağaza yayını.")),
   "calismalar.html": dict(crumb=[("Çalışmalar","/calismalar")]),
   "fiyatlar.html": dict(crumb=[("Fiyatlar","/fiyatlar")]),
 })
@@ -1024,7 +1136,7 @@ def build():
     for slug,(fn,active) in PAGES.items():
         title, desc, body = fn()
         open(os.path.join(OUT,slug),"w").write(layout(slug,title,desc,body,active))
-    urls = "".join(f"<url><loc>{BASE}{'/' if s=='index.html' else '/'+s.replace('.html','')}</loc><lastmod>{GUIDE_DATE}</lastmod><changefreq>{'weekly' if s=='index.html' else 'monthly'}</changefreq><priority>{'1.0' if s=='index.html' else ('0.9' if s in GMAP or s in ('web-tasarim.html','sosyal-medya.html') else '0.7')}</priority></url>" for s in PAGES)
+    urls = "".join(f"<url><loc>{BASE}{'/' if s=='index.html' else '/'+s.replace('.html','')}</loc><lastmod>{GUIDE_DATE}</lastmod><changefreq>{'weekly' if s=='index.html' else 'monthly'}</changefreq><priority>{'1.0' if s=='index.html' else ('0.9' if s in GMAP or s in ('web-tasarim.html','sosyal-medya.html','mobil-uygulama.html') else '0.7')}</priority></url>" for s in PAGES)
     open(os.path.join(OUT,"sitemap.xml"),"w").write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
     PREV = os.path.join(os.path.dirname(SRC),"site-preview")
     # 404 page
