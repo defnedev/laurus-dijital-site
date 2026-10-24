@@ -93,15 +93,27 @@ def contact(title="İşletmeni anlat, taslağını gör.", need="Web sitesi"):
 </form></div></section>'''
 
 def footer():
-    svc = "".join(f'<li><a href="{h}">{t}</a></li>' for h,_,t,_ in SERVICES)
-    return f'''<footer><div class="wrap"><div class="fgrid">
-<div><a class="brand" href="index.html" aria-label="Laurus Dijital"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#logo"/></svg><span><b>Laurus</b><small>DİJİTAL AJANS</small></span></a>
-<p class="about">İstanbul merkezli dijital ajans. Web tasarım, kurumsal web sitesi, e-ticaret, mobil uygulama, sosyal medya yönetimi, Google Ads ve SEO hizmetleri; Türkiye geneline online.</p></div>
+    FSHORT = {"Sosyal medya ve içerik":"Sosyal medya","Google ve Meta reklamları":"Google ve Meta reklamı","Google İşletme ve yerel SEO":"Google profili ve SEO","Mobil uygulama ve yazılım":"Mobil uygulama","Güzellik salonu ve nail bar":"Güzellik ve nail bar","Avukat ve danışmanlık":"Avukat ve danışman"}
+    svc = "".join(f'<li><a href="{h}">{FSHORT.get(t,t)}</a></li>' for h,_,t,_ in SERVICES)
+    sec = "".join(f'<li><a href="{x["slug"]}">{FSHORT.get(x["short"],x["short"])}</a></li>' for x in SECTORS)
+    pin = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>'
+    up = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>'
+    return f'''<footer><div class="wrap">
+<div class="ftop">
+<div class="fbrand"><a class="brand" href="index.html" aria-label="Laurus Dijital"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#logo"/></svg><span><b>Laurus</b><small>DİJİTAL AJANS</small></span></a>
+<p class="about">İstanbul merkezli dijital ajans. Web tasarım, mobil uygulama, sosyal medya yönetimi, Google Ads ve SEO; Türkiye geneline online hizmet.</p></div>
+<div class="fcontact" aria-label="İletişim">
+<a class="fc fc-wa js-wa" href="https://wa.me/905434309702"><span class="fc-ic">{I['wa']}</span><span class="fc-tx"><small>WhatsApp</small><b>{PHONE_TXT}</b></span><span class="fc-go" aria-hidden="true">→</span></a>
+<a class="fc" href="mailto:{EMAIL}"><span class="fc-ic">{I['mail']}</span><span class="fc-tx"><small>E-posta</small><b>{EMAIL}</b></span><span class="fc-go" aria-hidden="true">→</span></a>
+<div class="fc fc-static"><span class="fc-ic">{pin}</span><span class="fc-tx"><small>Konum</small><b>İstanbul · Türkiye geneli online</b></span></div>
+</div></div>
+<div class="flinks">
 <div><h4>Hizmetler</h4><ul>{svc}</ul></div>
-<div><h4>Sektörler</h4><ul>{"".join(f'<li><a href="{x["slug"]}">{x["short"]}</a></li>' for x in SECTORS)}</ul></div>
-<div><h4>Laurus</h4><ul><li><a href="hakkimizda.html">Hakkımızda</a></li><li><a href="calismalar.html">Çalışmalar</a></li><li><a href="index.html#nasil">Nasıl çalışıyoruz</a></li><li><a href="fiyatlar.html">Fiyatlar</a></li><li><a href="index.html#sss">Sık sorulanlar</a></li><li><a href="rehber.html">Rehber</a></li><li><a href="web-sitesi-yaptirmak.html">Web sitesi yaptırmak</a></li><li><a href="sosyal-medya-yonetimi-fiyatlari.html">Sosyal medya fiyatları</a></li></ul></div>
-<div><h4>İletişim</h4><ul><li><a class="js-wa" href="https://wa.me/905434309702">WhatsApp: {PHONE_TXT}</a></li><li><a href="mailto:{EMAIL}">{EMAIL}</a></li><li>İstanbul, Türkiye</li></ul></div>
-</div><div class="fbot"><span>© 2026 Laurus Dijital</span><span>Bu site çerez kullanmaz. Fotoğraflar: Unsplash.</span></div></div></footer>
+<div><h4>Sektörler</h4><ul>{sec}</ul></div>
+<div><h4>Laurus</h4><ul><li><a href="hakkimizda.html">Hakkımızda</a></li><li><a href="calismalar.html">Çalışmalar</a></li><li><a href="fiyatlar.html">Fiyatlar</a></li><li><a href="index.html#sss">Sık sorulanlar</a></li><li><a href="rehber.html">Rehber</a></li><li><a href="web-sitesi-yaptirmak.html">Web sitesi yaptırmak</a></li><li><a href="sosyal-medya-yonetimi-fiyatlari.html">Sosyal medya fiyatları</a></li></ul></div>
+</div>
+<div class="fbot"><span>© 2026 Laurus Dijital · Tüm hakları saklıdır.</span><span class="fbot-r"><span>Bu site çerez kullanmaz.</span><a class="ftop-btn" href="#main" aria-label="Sayfanın başına dön">{up}<span>Başa dön</span></a></span></div>
+</div></footer>
 <a class="wa-float js-wa" href="https://wa.me/905434309702" aria-label="WhatsApp'tan yaz">{I['wa']}</a>'''
 
 import json, re
