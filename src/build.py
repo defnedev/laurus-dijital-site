@@ -144,7 +144,28 @@ def schemas(slug, url, title, desc):
         graph.append({"@type":"FAQPage","mainEntity":[{"@type":"Question","name":_strip(q),"acceptedAnswer":{"@type":"Answer","text":_strip(a)}} for q,a in FAQ_SINK]})
     return json.dumps({"@context":"https://schema.org","@graph":graph},ensure_ascii=False)
 
+
+META_FIX = {
+ "index.html": ("Laurus Dijital | Web Tasarım, Sosyal Medya ve SEO Ajansı","Web sitesi, mobil uygulama, Instagram yönetimi, Google reklamı ve SEO. İstanbul merkezli dijital ajans; açık fiyatlar, ilk site 7 günde yayında."),
+ "mobil-uygulama.html": ("Mobil Uygulama Geliştirme · İstanbul | Laurus Dijital","iOS, Android ve web uygulaması geliştirme; üyelik, abonelik ve mağaza yayını dahil. oh same., Sorbi ve Sekiz8'i kendi ekibimiz geliştirdi."),
+ "calismalar.html": ("Çalışmalarımız: Web, Sosyal Medya, Uygulama | Laurus Dijital","Seven For Life, Feronya, Nil Pet Kuaför ve @astrodefnee için yaptığımız işler; oh same., Sorbi ve Sekiz8 uygulamalarımız."),
+ "rehber.html": ("Rehber: Web Sitesi, Sosyal Medya, Reklam, SEO | Laurus Dijital","Web sitesi yaptırmak, sosyal medya fiyatları, Google reklam bütçesi ve SEO hakkında 2026 rehberleri; açık fiyatlar ve kontrol listeleri."),
+ "hakkimizda.html": ("Hakkımızda | Laurus Dijital, İstanbul Dijital Ajans","8 yılı aşkın yazılım ve dijital deneyimle web tasarım, mobil uygulama, sosyal medya, Google Ads ve SEO hizmeti veren İstanbul merkezli ajans."),
+ "web-sitesi-yaptirmak.html": ("Web Sitesi Yaptırmak 2026: Fiyatlar ve Süreç | Laurus Dijital","Web sitesi yaptırmak ne kadar tutar, kaç günde biter? Site türlerine göre 2026 fiyat tablosu, gizli maliyetler ve teklif kontrol listesi."),
+ "sosyal-medya-yonetimi-fiyatlari.html": ("Sosyal Medya Yönetimi Fiyatları 2026 | Laurus Dijital","Instagram hesap yönetimi 2026 fiyatları: freelancer ve ajans farkı, pakete neler dahil, reklam bütçesi ayrı mı? Açık fiyat tablosu."),
+ "seo-hizmeti.html": ("SEO Hizmeti: Google'da Üst Sıralara Çıkma | Laurus Dijital","Küçük işletmeler için SEO ve yerel SEO: Google'da ve haritada öne çıkmak için ne yapılır, ne kadar sürer, ne kadar tutar?"),
+ "google-reklam-yonetimi.html": ("Google Reklam Yönetimi 2026: Bütçe ve Ücret | Laurus Dijital","Google Ads 2026: küçük işletme için ne kadar bütçe gerekir, ajans ücreti ne kadar, reklam nasıl kurulur? Semte özel reklam rehberi."),
+ "kuafor-dijital-pazarlama.html": ("Kuaför ve Berber için Web Sitesi ve Instagram | Laurus","Kuaför ve berberler için web sitesi, Instagram yönetimi, Google profili ve yerel reklam. WhatsApp'tan randevu, açık fiyatlar."),
+ "guzellik-salonu-dijital-pazarlama.html": ("Güzellik Salonu için Sosyal Medya ve Reklam | Laurus","Güzellik salonu ve nail bar için Instagram yönetimi, web sitesi, Google profili ve Meta reklamları. Açık fiyatlar."),
+ "kafe-restoran-dijital-pazarlama.html": ("Kafe ve Restoran için Web Sitesi ve Reklam | Laurus","Kafe ve restoranlar için web sitesi, menü sayfası, Instagram yönetimi, Google profili ve yerel reklam. Açık fiyatlar."),
+ "klinik-dijital-pazarlama.html": ("Klinik için Web Sitesi, SEO ve Google Profili | Laurus","Klinik ve muayenehaneler için güven veren web sitesi, SEO ve Google İşletme Profili; sağlık tanıtım kurallarına uygun dil."),
+ "avukat-dijital-pazarlama.html": ("Avukat için Web Sitesi ve SEO | Laurus Dijital","Avukat ve danışmanlık firmaları için web sitesi, SEO ve bilgilendirici içerik; mesleki kurallara uygun sade dil. Açık fiyatlar."),
+ "emlak-dijital-pazarlama.html": ("Emlak Ofisi için Web Sitesi ve Reklam | Laurus Dijital","Emlak ofisleri için ilan sitesi, Instagram yönetimi, Google profili ve Meta reklamları; kendi markanla müşteri topla."),
+ "butik-e-ticaret-dijital-pazarlama.html": ("Butik için E-ticaret Sitesi ve Instagram | Laurus","Butik ve mağazalar için satış sitesi, online ödeme, Instagram yönetimi ve Meta reklamları. Açık fiyatlar."),
+ "otel-turizm-dijital-pazarlama.html": ("Otel için Google Reklamı ve SEO | Laurus Dijital","Oteller ve turizm işletmeleri için Google reklamı ve SEO; rezervasyonu kendi sitene çeken arama reklamları. Reklamlar ilk hafta yayında."),
+}
 def layout(slug, title, desc, body, active=""):
+    title, desc = META_FIX.get(slug, (title, desc))
     url = BASE + ("/" if slug == "index.html" else "/" + slug.replace(".html",""))
     sch = schemas(slug, url, title, desc); FAQ_SINK.clear()
     return f'''<!doctype html>
