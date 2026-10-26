@@ -14,8 +14,11 @@ for (const [vw,vh,tag,mob] of [[390,844,'m',true],[1440,900,'d',false]]){
   const res=await p.goto(u,{waitUntil:'networkidle',timeout:45000});
   // scroll through to trigger lazy/reveal
   const H=await p.evaluate(()=>document.body.scrollHeight);
+  await p.evaluate(()=>{document.documentElement.style.scrollBehavior='auto'});
   for(let y=0;y<H;y+=vh*0.8){await p.evaluate(y=>scrollTo(0,y),y);await p.waitForTimeout(120);}
-  await p.waitForTimeout(600);
+  // finish any reveal animations the fast scroll skipped, then let transitions settle
+  await p.evaluate(()=>document.querySelectorAll('[data-rv]').forEach(e=>e.classList.add('in')));
+  await p.waitForTimeout(1800);
   const info=await p.evaluate(()=>{
     const out={};
     out.sw=document.documentElement.scrollWidth-innerWidth;
