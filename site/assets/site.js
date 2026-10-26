@@ -222,7 +222,7 @@ sizeWorks(); onScroll();
 (function(){
   var s=document.querySelector('[data-appshow]'); if(!s) return;
   var done=false;
-  function go(){ if(done) return; done=true; var sc=document.createElement('script'); sc.src='/assets/live.js?v=da305adeb4'; sc.async=true; document.head.appendChild(sc); }
+  function go(){ if(done) return; done=true; var sc=document.createElement('script'); sc.src='/assets/live.js?v=23d66ccb1f'; sc.async=true; document.head.appendChild(sc); }
   if('IntersectionObserver' in window){ var o=new IntersectionObserver(function(es){ if(es.some(function(e){return e.isIntersecting})){ o.disconnect(); go(); } },{rootMargin:'600px 0px'}); o.observe(s); } else go();
 })();
 

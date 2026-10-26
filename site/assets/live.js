@@ -160,16 +160,30 @@ window.LAUR_LAND={"type":"MultiPolygon","coordinates":[[[[-59.6,-80],[-59.9,-80.
     setInterval(function () { if (!v.paused && (!vis.has(ph) || !active(ph) || document.hidden)) v.pause(); }, 700);
   }
 
-  // ---------- Nefes: sun glows, light travels along the day arc ----------
+  // ---------- Nefes: live countdown, tasbih counter, glowing sun ----------
   function nefes(ph, img) {
     var sv = svgOver(img);
     sv.innerHTML =
-      '<defs><radialGradient id="lvSun"><stop offset="0" stop-color="#FBE3A2" stop-opacity=".95"/><stop offset=".45" stop-color="#DDB866" stop-opacity=".45"/><stop offset="1" stop-color="#DDB866" stop-opacity="0"/></radialGradient></defs>' +
-      '<path id="lvArc" d="M116,407 C150,370 175,350 240,300 S360,226 398,230 S462,240 480,250" fill="none" stroke="none"/>' +
-      '<circle class="lv-halo" cx="480" cy="250" r="34" fill="url(#lvSun)"/>' +
-      '<circle class="lv-ring" cx="480" cy="250" r="16" fill="none" stroke="#E9C47A" stroke-width="2"/>' +
-      '<g class="lv-spark"><circle r="14" fill="url(#lvSun)"/><circle r="3.4" fill="#FFF3CC"/>' +
-      (RM ? '' : '<animateMotion dur="4.2s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#lvArc"/></animateMotion>') + '</g>';
+      '<defs><radialGradient id="lvSun"><stop offset="0" stop-color="#FBE3A2" stop-opacity=".9"/><stop offset=".45" stop-color="#DDB866" stop-opacity=".35"/><stop offset="1" stop-color="#DDB866" stop-opacity="0"/></radialGradient></defs>' +
+      '<circle class="lv-halo" cx="456" cy="241" r="40" fill="url(#lvSun)"/>' +
+      '<circle class="lv-ring" cx="456" cy="241" r="17" fill="none" stroke="#E9C47A" stroke-width="2"/>' +
+      '<text class="lv-cd" x="388" y="511" text-anchor="middle" dominant-baseline="central">1:26:00</text>' +
+      '<text class="lv-zk" x="179.5" y="774" dominant-baseline="central">286</text>';
+    var cd = sv.querySelector('.lv-cd'), zk = sv.querySelector('.lv-zk');
+    var start = 1 * 3600 + 26 * 60, t0 = Date.now(), n = 286;
+    function pad(x) { return (x < 10 ? '0' : '') + x; }
+    function tick() {
+      var left = start - Math.floor((Date.now() - t0) / 1000);
+      if (left < 0) { t0 = Date.now(); left = start; }
+      cd.textContent = Math.floor(left / 3600) + ':' + pad(Math.floor(left / 60) % 60) + ':' + pad(left % 60);
+    }
+    tick(); setInterval(tick, 1000);
+    if (RM) return;
+    setInterval(function () {
+      if (!active(ph) || document.hidden) return;
+      n = n >= 333 ? 286 : n + 1; zk.textContent = n;
+      zk.classList.remove('lv-bump'); void zk.getBBox(); zk.classList.add('lv-bump');
+    }, 1600);
   }
 
   var MAP = { globe: globe, chart: chart, eight: eight, tree: tree, nefes: nefes };
