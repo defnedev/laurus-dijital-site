@@ -691,7 +691,7 @@ def slide(w, i):
     chips = "".join(f"<span>{s}</span>" for s in w["svcs"])
     link = f'<a class="btn btn-gold" href="{w["url"]}" target="_blank" rel="noopener">{w.get("cta","Siteyi ziyaret et")}</a>' if w.get("url") else f'<a class="btn btn-gold" href="calismalar.html#{w["id"]}">Taslağı incele</a>'
     desc = w.get("note") or w.get("case")
-    return f'''<article class="slide" style="--i:{i}"><div class="sl-vis bg-{w["id"]}"><div class="stage"><div class="laptop"><div class="lid"><div class="scr">{mimg("site-"+w["id"], w["name"]+" web sitesi")}</div></div><div class="base"></div></div><div class="phone"><div class="pscr">{mimg("ig-"+w["id"], w["name"]+" mobil görünüm")}</div></div></div></div>
+    return f'''<article class="slide" style="--i:{i}"><div class="sl-vis bg-{w["id"]}"><div class="stage"><div class="laptop"><div class="lid"><div class="scr">{mimg("site-"+w["id"], w["name"]+(" Instagram profili" if w["id"] in ("lp","astro") else " web sitesi"))}</div></div><div class="base"></div></div><div class="phone"><div class="pscr">{mimg("ig-"+w["id"], w["name"]+" mobil görünüm")}</div></div></div></div>
 <div class="sl-tx">{kind_tag(w)}<h3>{w["name"]}</h3><p class="sl-sub">{w["sector"]}, {w["city"]}</p><p class="sl-d">{desc}</p><div class="chips">{chips}</div><div class="sl-act">{link}</div></div></article>'''
 
 MANIFESTO = "Müşterin seni önce Google'da arar, sonra Instagram'da inceler, en son WhatsApp'tan yazar. Bu üç anın üçünü de biz kuruyoruz, sen işine bakıyorsun."
