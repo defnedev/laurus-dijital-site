@@ -9,7 +9,7 @@ for (const [vw,vh,tag,mob] of [[390,844,'m',true],[1440,900,'d',false]]){
  for (const u of urls){
   const p=await c.newPage(); const errs=[],fails=[];
   p.on('pageerror',e=>errs.push(e.message)); p.on('console',m=>{if(m.type()==='error')errs.push('console:'+m.text().slice(0,120))});
-  p.on('response',r=>{if(r.status()>=400)fails.push(r.status()+' '+r.url())}); p.on('requestfailed',r=>fails.push('fail '+r.url()));
+  p.on('response',r=>{if(r.status()>=400)fails.push(r.status()+' '+r.url())}); p.on('requestfailed',r=>{const ft=(r.failure()||{}).errorText||''; if(/ABORTED/.test(ft)&&/\.(webm|mp4)(\?|$)/.test(r.url())) return; fails.push('fail '+r.url()+' '+ft)});
   await p.addInitScript(()=>{try{sessionStorage.setItem('li','1')}catch(e){}});
   const res=await p.goto(u,{waitUntil:'networkidle',timeout:45000});
   // scroll through to trigger lazy/reveal
