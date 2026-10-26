@@ -149,7 +149,7 @@ def schemas(slug, url, title, desc):
 META_FIX = {
  "index.html": ("Laurus Dijital | Web Tasarım, Sosyal Medya ve SEO Ajansı","Web sitesi, mobil uygulama, Instagram yönetimi, Google reklamı ve SEO. İstanbul merkezli dijital ajans; açık fiyatlar, ilk site 7 günde yayında."),
  "mobil-uygulama.html": ("Mobil Uygulama Geliştirme · İstanbul | Laurus Dijital","iOS, Android ve web uygulaması geliştirme; üyelik, abonelik ve mağaza yayını dahil. oh same., Sorbi, Sekiz8, Çınar ve Nefes'i kendi ekibimiz geliştiriyor."),
- "calismalar.html": ("Çalışmalarımız: Web, Sosyal Medya, Uygulama | Laurus Dijital","Seven For Life, Feronya, Nil Pet Kuaför ve @astrodefnee için yaptığımız işler; oh same., Sorbi, Sekiz8, Çınar ve Nefes uygulamalarımız."),
+ "calismalar.html": ("Çalışmalarımız: Web, Sosyal Medya, Uygulama | Laurus Dijital","Seven For Life, Feronya, Nil Pet Kuaför, Little Paws ve @astrodefnee işlerimiz; oh same., Sorbi, Sekiz8, Çınar ve Nefes uygulamalarımız."),
  "rehber.html": ("Rehber: Web Sitesi, Sosyal Medya, Reklam, SEO | Laurus Dijital","Web sitesi yaptırmak, sosyal medya fiyatları, Google reklam bütçesi ve SEO hakkında 2026 rehberleri; açık fiyatlar ve kontrol listeleri."),
  "hakkimizda.html": ("Hakkımızda | Laurus Dijital, İstanbul Dijital Ajans","8 yılı aşkın yazılım ve dijital deneyimle web tasarım, mobil uygulama, sosyal medya, Google Ads ve SEO hizmeti veren İstanbul merkezli ajans."),
  "web-sitesi-yaptirmak.html": ("Web Sitesi Yaptırmak 2026: Fiyatlar ve Süreç | Laurus Dijital","Web sitesi yaptırmak ne kadar tutar, kaç günde biter? Site türlerine göre 2026 fiyat tablosu, gizli maliyetler ve teklif kontrol listesi."),
@@ -344,9 +344,13 @@ BMAP = {b["id"]: b for b in BRANDS}
 
 WORKS = [
   dict(id="nil", name="Nil Pet Kuaför", sector="Pet kuaför", cat="pet", kind="real", city="Kadıköy",
-       svcs=["Web sitesi","Instagram tasarımı"], url="https://nilpetkuafor.com",
-       note="Kadıköy'de pet kuaför. Web sitesini ve Instagram tasarımlarını biz hazırladık.",
-       did=["Tek sayfa site: hizmetler, öncesi-sonrası galeri, randevu formu","Fiyat listesi ve vizyon gönderileri dahil Instagram tasarımları","WhatsApp, arama ve yol tarifi düğmeleri"]),
+       svcs=["Web sitesi","Instagram yönetimi"], url="https://nilpetkuafor.com",
+       note="Kadıköy'de pet kuaför. Web sitesinin tamamını biz yaptık; Instagram hesabını da içerik planından tasarıma biz yönetiyoruz.",
+       did=["Web sitesinin tamamı: hizmetler, öncesi-sonrası galeri, randevu formu","Instagram yönetimi: fiyat listesi, vizyon gönderileri ve düzenli paylaşım","WhatsApp, arama ve yol tarifi düğmeleri"]),
+  dict(id="lp", name="Little Paws Pet Shop", sector="Pet shop", cat="pet", kind="real", city="Çorlu, Tekirdağ",
+       svcs=["Logo tasarımı","Instagram yönetimi","Görsel tasarım","Reklam kampanyaları"], url="https://www.instagram.com/corlulittlepawspetshop/", cta="Profili gör",
+       note="Çorlu'daki Little Paws Pet Shop'un logosunu biz tasarladık; Instagram hesabının tamamını, tüm görselleri ve reklam kampanyalarını biz yürütüyoruz. Hesap 19 bini aşkın takipçiye ulaştı.",
+       did=["Logo ve marka kimliği tasarımı","Instagram yönetimi: Reels, bilgilendirme ve tanıtım görselleri","Meta reklam kampanyaları ile mağaza ve showroom ziyaretleri"]),
   dict(id="astro", name="Astrolog Defne", sector="Astroloji içerik hesabı", cat="icerik", kind="real", city="Instagram · @astrodefnee",
        svcs=["Instagram yönetimi","İçerik tasarımı","Hesap düzeni"], url="https://www.instagram.com/astrodefnee/", cta="Profili gör",
        note="@astrodefnee Instagram hesabı: haftalık burç yorumu serisi, “Astro İnceleme” ünlü harita serisi ve tutarlı bir görsel dil. İçerik planı, tasarım ve hesap yönetimi bizde.",
@@ -407,6 +411,9 @@ def w_stage(w, cls=""):
         k = "seven" if w["id"]=="otel" else "feronya"
         lap = f'<img class="shot" src="img/app/{k}-d.webp" alt="{w["name"]} web sitesi" loading="lazy">'
         ph = f'<img class="shot" src="img/app/{k}-m.webp" alt="{w["name"]} mobil site" loading="lazy">'
+    elif w["id"] == "lp":
+        lap = '<img class="shot" src="img/app/lp-d.webp" alt="Little Paws Pet Shop Instagram profili, bilgisayar görünümü" loading="lazy">'
+        ph = '<img class="shot" src="img/app/lp-m.webp" alt="Little Paws Pet Shop Instagram profili, telefon görünümü" loading="lazy">'
     elif w["id"] == "astro":
         lap = '<img class="shot" src="img/app/astro-d.webp" alt="@astrodefnee Instagram profili, bilgisayar görünümü" loading="lazy">'
         ph = '<img class="shot" src="img/app/astro-m.webp" alt="@astrodefnee Instagram profili, telefon görünümü" loading="lazy">'
@@ -668,8 +675,8 @@ REEL_COLS = [
   ["site-nil","ig-os","site-otel","ig-astro"],
   ["ig-feronya","site-os","ig-nil","site-sb"],
   ["site-astro","ig-sb","site-feronya","ig-otel"],
-  ["ig-sk","site-otel","ig-astro","site-nil"],
-  ["site-sb","ig-nil","site-feronya","ig-os"],
+  ["ig-sk","site-otel","ig-lp","site-nil"],
+  ["site-sb","ig-lp","site-feronya","ig-os"],
   ["ig-otel","site-astro","ig-sk","site-os"],
 ]
 
@@ -722,7 +729,7 @@ def page_index():
 </div></section>
 
 <section id="calismalar" class="works3" aria-labelledby="h-works">
-<div class="w3-pin"><div class="wrap w3-head" data-rv><div><span class="eyebrow">Çalışmalarımız</span><h2 id="h-works">Yaptığımız işler.</h2></div><p>Müşterilerimiz için yaptığımız gerçek işler: Seven For Life, Feronya, Nil Pet Kuaför ve @astrodefnee. <a class="link" href="calismalar.html">Hepsini incele</a></p></div>
+<div class="w3-pin"><div class="wrap w3-head" data-rv><div><span class="eyebrow">Çalışmalarımız</span><h2 id="h-works">Yaptığımız işler.</h2></div><p>Müşterilerimiz için yaptığımız gerçek işler: Seven For Life, Feronya, Nil Pet Kuaför, Little Paws ve @astrodefnee. <a class="link" href="calismalar.html">Hepsini incele</a></p></div>
 <div class="w3-track snap" data-hscroll>{slides}</div>
 <div class="wrap w3-prog" aria-hidden="true"><i data-hprog></i></div></div>
 </section>
@@ -848,7 +855,7 @@ def page_ads():
     return ("Google Ads ve Meta (Instagram) Reklam Yönetimi | Laurus Dijital","Google arama, harita ve Instagram reklamları. Aylık 9.000 ₺ yönetim ücreti, bütçe senin kartından, her ay şeffaf rapor.", body)
 
 def page_gbp():
-    visual = f'<div class="bcase-vis bg-nil">{w_stage(WMAP["nil"], "in-case")}</div><p class="knote" style="margin-top:12px">Nil Pet Kuaför: site, Instagram ve Google profili.</p>'
+    visual = f'<div class="bcase-vis bg-nil">{w_stage(WMAP["nil"], "in-case")}</div><p class="knote" style="margin-top:12px">Nil Pet Kuaför: web sitesinin tamamı ve Instagram yönetimi.</p>'
     body = service_page("google-isletme.html","Google İşletme ve yerel SEO","Google Haritalar'da seni arayan ilk bakışta güvensin.",
       "Google İşletme Profili, müşterinin seni haritada bulduğu kartvizittir. Fotoğrafları, saatleri, hizmetleri ve yorumları düzenler, semtindeki aramalarda öne çıkarırız.",
       "harita","Telefonda Google Haritalar ve yakındaki işletmeler",
@@ -876,13 +883,13 @@ def page_cases():
 <section class="phero" aria-labelledby="h-page" style="padding-bottom:40px"><div class="wrap" style="grid-template-columns:1fr">
 <div><nav class="crumbs" aria-label="Konum"><a href="index.html">Ana sayfa</a> / Çalışmalar</nav>
 <h1 id="h-page">Ne yaptığımızı gör.</h1>
-<p class="lead">Müşterilerimiz için yaptığımız işler (Seven For Life, Feronya, Nil Pet Kuaför, @astrodefnee) ve kendi geliştirdiğimiz uygulamalar (oh same., Sorbi, Sekiz8, Çınar, Nefes).</p>
+<p class="lead">Müşterilerimiz için yaptığımız işler (Seven For Life, Feronya, Nil Pet Kuaför, Little Paws Pet Shop, @astrodefnee) ve kendi geliştirdiğimiz uygulamalar (oh same., Sorbi, Sekiz8, Çınar, Nefes).</p>
 </div>
 </div></section>
 <section class="ksec" aria-label="Çalışmalar" style="padding-top:24px"><div class="wrap">{T}</div></section>
 {contact()}
 '''
-    return ("Çalışmalarımız: Web Sitesi, Sosyal Medya, Reklam ve Uygulama | Laurus Dijital","Seven For Life Thermal Hotel, Feronya Restaurant, Nil Pet Kuaför ve @astrodefnee için yaptığımız web sitesi, Instagram, Google reklam ve SEO işleri; oh same., Sorbi, Sekiz8, Çınar ve Nefes uygulamalarımız.", body)
+    return ("Çalışmalarımız: Web Sitesi, Sosyal Medya, Reklam ve Uygulama | Laurus Dijital","Seven For Life Thermal Hotel, Feronya Restaurant, Nil Pet Kuaför, Little Paws Pet Shop ve @astrodefnee için web sitesi, logo, Instagram, reklam ve SEO işleri; oh same., Sorbi, Sekiz8, Çınar ve Nefes uygulamalarımız.", body)
 
 def page_prices():
     rows = [

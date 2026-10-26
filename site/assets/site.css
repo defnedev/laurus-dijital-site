@@ -1507,3 +1507,4 @@ h1,h2,h3{text-wrap:balance}
 .lv-buzz i{border-width:4px;border-color:rgba(176,158,255,.95)}
 .dd-panel a:last-child:nth-child(odd){grid-column:1/-1}
 .lv-video{-webkit-mask-image:linear-gradient(180deg,transparent,#000 5%,#000 94%,transparent);mask-image:linear-gradient(180deg,transparent,#000 5%,#000 94%,transparent)}
+.bg-lp{background:linear-gradient(140deg,#F4EBDD 0%,#D2B190 100%)}
