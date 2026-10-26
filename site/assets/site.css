@@ -1359,3 +1359,15 @@ a.fc:hover .fc-go{transform:translateX(4px);color:var(--gold)}
   .flinks ul{grid-template-columns:1fr 1fr;column-gap:18px}
   .flinks a{white-space:nowrap}
 }
+/* v13 guide tables → cards on phones */
+@media (max-width:640px){
+  .gt{overflow:visible;border:0;background:none}
+  .gt table{min-width:0;font-size:15px}
+  .gt thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .gt tbody,.gt tr,.gt td{display:block;width:100%}
+  .gt tr{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:6px 16px;margin-bottom:10px}
+  .gt td{border:0;padding:8px 0;display:flex;justify-content:space-between;gap:16px;text-align:right}
+  .gt td + td{border-top:1px dashed var(--line)}
+  .gt td::before{content:attr(data-l);font-size:13px;font-weight:600;color:var(--ink-soft);text-align:left;flex:0 0 38%}
+  .gt td:first-child{font-weight:700;font-size:16px;color:var(--ink)}
+}

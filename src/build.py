@@ -980,7 +980,7 @@ GUIDE_DATE = "2026-10-23"
 
 def gtable(head, rows):
     th = "".join(f'<th scope="col">{h}</th>' for h in head)
-    tr = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r) + "</tr>" for r in rows)
+    tr = "".join("<tr>" + "".join(f'<td data-l="{head[i]}">{c}</td>' for i,c in enumerate(r)) + "</tr>" for r in rows)
     return f'<div class="gt"><table><thead><tr>{th}</tr></thead><tbody>{tr}</tbody></table></div>'
 
 def gnote(title, text, href="#iletisim", cta="Ücretsiz ön görüşme al"):
