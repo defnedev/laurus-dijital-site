@@ -217,3 +217,18 @@ sizeWorks(); onScroll();
   window.addEventListener('scroll',onS,{passive:true}); window.addEventListener('resize',onS);
   if(mq.addEventListener) mq.addEventListener('change',mode); mode();
 })();
+
+/* v16 live app mockups: lazy-load animation module near the showcase */
+(function(){
+  var s=document.querySelector('[data-appshow]'); if(!s) return;
+  var done=false;
+  function go(){ if(done) return; done=true; var sc=document.createElement('script'); sc.src='/assets/live.js?v=__LIVEV__'; sc.async=true; document.head.appendChild(sc); }
+  if('IntersectionObserver' in window){ var o=new IntersectionObserver(function(es){ if(es.some(function(e){return e.isIntersecting})){ o.disconnect(); go(); } },{rootMargin:'600px 0px'}); o.observe(s); } else go();
+})();
+
+/* v17 hide floating WhatsApp when the contact block or footer is on screen */
+(function(){
+  var f=document.querySelector('.wa-float'); if(!f||!('IntersectionObserver' in window)) return;
+  var on=new Set(); var o=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting) on.add(e.target); else on.delete(e.target); }); f.classList.toggle('wa-hide', on.size>0);},{threshold:.12});
+  ['#iletisim','footer'].forEach(function(q){var el=document.querySelector(q); if(el) o.observe(el);});
+})();

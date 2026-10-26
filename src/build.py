@@ -30,6 +30,7 @@ I = {
  "chart": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
  "target": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>',
  "lock": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>',
+ "app": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.6"/><path d="M10.5 18.5h3"/><path d="M9.5 7.5h2v2h-2zM12.5 7.5h2v2h-2zM9.5 10.5h2v2h-2zM12.5 10.5h2v2h-2z" stroke-width="1.2"/></svg>',
  "phone": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3h4l2 5-3 2a11 11 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>',
  "check": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 5 5 9-10"/></svg>',
  "arrow": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
@@ -45,7 +46,7 @@ SERVICES = [
   ("sosyal-medya.html", "ig", "Sosyal medya ve içerik", "Instagram, TikTok, Reels ve aylık plan"),
   ("reklam-yonetimi.html", "ads", "Google ve Meta reklamları", "Semtindeki doğru kişilere görün"),
   ("google-isletme.html", "pin", "Google İşletme ve yerel SEO", "Haritalarda bul, yorum topla"),
-  ("mobil-uygulama.html", "phone", "Mobil uygulama ve yazılım", "iOS, Android ve web uygulamaları"),
+  ("mobil-uygulama.html", "app", "Mobil uygulama ve yazılım", "iOS, Android ve web uygulamaları"),
 ]
 
 # ---------- layout ----------
@@ -525,7 +526,7 @@ def app_case(a):
             f'<div class="wf-act"><a class="btn btn-gold" href="#iletisim">Uygulamamı konuşalım</a>{link}</div></div></div>')
 
 def page_apps():
-    does = [("phone","iOS ve Android","Tek kod tabanıyla iki platformda çalışan, mağaza kurallarına uygun uygulamalar."),
+    does = [("app","iOS ve Android","Tek kod tabanıyla iki platformda çalışan, mağaza kurallarına uygun uygulamalar."),
             ("web","Web uygulaması","Tarayıcıda uygulama gibi çalışan, telefona eklenebilen web uygulamaları."),
             ("lock","Üyelik ve giriş","Apple, Google ve e-posta ile giriş; anonim kullanım ve güvenli veri saklama."),
             ("star","Abonelik ve ödeme","Uygulama içi satın alma, abonelik ve ücretli katmanlar."),
@@ -569,8 +570,8 @@ def page_apps():
 # ---------- cinematic app showcase (v10) ----------
 SB_ICONS = '<svg viewBox="0 0 64 14" aria-hidden="true"><g fill="currentColor"><rect x="0" y="9" width="3" height="5" rx="1"/><rect x="5" y="6" width="3" height="8" rx="1"/><rect x="10" y="3" width="3" height="11" rx="1"/><rect x="15" y="0" width="3" height="14" rx="1"/><path d="M30 13.5l-2.6-3.2a4.2 4.2 0 0 1 5.2 0zM24.6 7a8.6 8.6 0 0 1 10.8 0l-1.5 1.8a6.2 6.2 0 0 0-7.8 0zM21.8 3.6a13 13 0 0 1 16.4 0l-1.5 1.9a10.6 10.6 0 0 0-13.4 0z"/><rect x="44" y="1.5" width="17" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="46" y="3.5" width="12" height="7" rx="1.6"/><rect x="62" y="5" width="1.6" height="4" rx=".8"/></g></svg>'
 
-def iph(src, alt, cls=""):
-    return (f'<div class="iph {cls}"><div class="iph-scr"><div class="iph-sb"><b>9:41</b>{SB_ICONS}</div>'
+def iph(src, alt, cls="", live=""):
+    return (f'<div class="iph {cls}"{f' data-live="{live}"' if live else ''}><div class="iph-scr"><div class="iph-sb"><b>9:41</b>{SB_ICONS}</div>'
             f'<img src="img/app/{src}.webp" alt="{alt}" loading="lazy" decoding="async"></div>'
             f'<span class="iph-isl" aria-hidden="true"></span><span class="iph-gl" aria-hidden="true"></span></div>')
 
@@ -584,7 +585,7 @@ SHOW = [
        feats=["Canlı dünya küresi","Apple, Google, e-posta ile giriş","iOS ve web, TR ve EN"],
        status="Web'de yayında · iOS sürümü yolda", url="https://ohsame.app", cta="oh same.'i aç",
        icon='<img src="img/app/os-icon.webp" alt="" width="56" height="56">',
-       dev=lambda: (iph("os-start","oh same. giriş ekranı","b1") + iph("os-world","oh same. dünya ekranı: şu an nasılsın?","m") +
+       dev=lambda: (iph("os-start","oh same. giriş ekranı","b1") + iph("os-world","oh same. dünya ekranı: şu an nasılsın?","m","globe") +
                     '<div class="fl fl-pills" aria-hidden="true"><span><i style="background:#F28A3C"></i>heyecanlı</span><span><i style="background:#E8457A"></i>mutlu</span><span><i style="background:#A44CF0"></i>sakin</span></div>'
                     '<div class="fl fl-count" aria-hidden="true"><b>340 kişi</b><span>senin gibi heyecanlı.</span><small>12\'si İstanbul\'da · 41 şehirde</small></div>')),
   dict(id="sorbi", name="Sorbi", kind="Web platformu", tag="Doğduğun an kaç kişide bir?",
@@ -592,7 +593,7 @@ SHOW = [
        feats=["Kendi hesap motorumuz","Üyelik ve giriş sistemi","Paylaşılabilir kartlar"],
        status="sorbiapp.com'da yayında", url="https://sorbiapp.com", cta="Sorbi'yi aç",
        icon='<span class="as-ico-sorbi" aria-hidden="true">✦</span>',
-       dev=lambda: (bwin("sorbi-d","sorbiapp.com","Sorbi ana sayfası, bilgisayar görünümü","bw") + iph("sb-chart","Sorbi doğum haritası ekranı","m") +
+       dev=lambda: (bwin("sorbi-d","sorbiapp.com","Sorbi ana sayfası, bilgisayar görünümü","bw") + iph("sb-chart","Sorbi doğum haritası ekranı","m","chart") +
                     '<div class="fl fl-img"><img src="img/app/sb-cards.webp" alt="Sorbi Güneş, Ay ve yükselen kartları" loading="lazy"></div>'
                     '<div class="fl fl-stat" aria-hidden="true"><b>1.367.496</b><span>gök anı sayıldı</span></div>')),
   dict(id="sekiz", name="Sekiz8", kind="iOS uygulaması", tag="Karar veremediğinde salla.",
@@ -600,14 +601,14 @@ SHOW = [
        feats=["Dört mod: Sekiz, Evet/Hayır, Seç, Sayı","Sallama sensörü ve titreşim","Temalar"],
        status="App Store'da yayında", url="https://apps.apple.com/tr/app/sekiz8/id6758377312", cta="App Store'da indir",
        icon='<img src="img/app/sk-icon.webp" alt="" width="56" height="56">',
-       dev=lambda: (iph("sk-sec","Sekiz8 seçim modu","l") + iph("sk-evet","Sekiz8 evet/hayır modu","r") + iph("sk-sekiz","Sekiz8 ana ekranı","m shake") +
+       dev=lambda: (iph("sk-sec","Sekiz8 seçim modu","l") + iph("sk-evet","Sekiz8 evet/hayır modu","r") + iph("sk-sekiz","Sekiz8 ana ekranı","m","eight") +
                     '<img class="fl fl-icon" src="img/app/sk-icon.webp" alt="" loading="lazy">')),
   dict(id="cinar", name="Çınar", kind="iOS uygulaması · TestFlight", tag="Ailenin hikâyesi, kuşaktan kuşağa.",
        desc="Soy ağacını kuruyorsun; büyüklerinin sesi, fotoğraflar ve anılar ailenin kendi çınarında birikiyor. Her gün biri suladıkça ağaç canlı kalıyor.",
        feats=["Canlı 3D soy ağacı","Büyüklerin sesinden masallar","Önemli tarihler takvimi"],
        status="TestFlight'ta test ediliyor · yakında App Store'da", beta=True, url="#iletisim", cta="Erken erişim iste",
        icon='<img src="img/app/cn-icon.webp" alt="" width="56" height="56">',
-       dev=lambda: (iph("cn-agac","Çınar soy ağacı ekranı","l") + iph("cn-takvim","Çınar önemli tarihler takvimi","r") + iph("cn-home","Çınar ana ekranı: ailenin çınarı","m") +
+       dev=lambda: (iph("cn-agac","Çınar soy ağacı ekranı","l") + iph("cn-takvim","Çınar önemli tarihler takvimi","r") + iph("cn-home","Çınar ana ekranı: ailenin çınarı","m","tree") +
                     '<div class="fl fl-note" aria-hidden="true"><small>Anneanneyle kurabiye</small><b>▶ Dinle · 1:04</b></div>'
                     '<img class="fl fl-icon" src="img/app/cn-icon.webp" alt="" loading="lazy">')),
   dict(id="nefes", name="Nefes", kind="iOS uygulaması · TestFlight", tag="Sevdiğin sesten, her gün bir dua.",
@@ -615,7 +616,7 @@ SHOW = [
        feats=["Konuma göre vakitler","Kur'an okuyucu ve dualar","Sevdiğin sesten dua"],
        status="TestFlight'ta test ediliyor · yakında App Store'da", beta=True, url="#iletisim", cta="Erken erişim iste",
        icon='<img src="img/app/nf-icon.webp" alt="" width="56" height="56">',
-       dev=lambda: (iph("nf-dinle","Nefes: duaları sevdiklerinin sesinden dinle","l") + iph("nf-kuran","Nefes Kur'an okuyucu","r") + iph("nf-main","Nefes ana ekranı: namaz vakitleri","m") +
+       dev=lambda: (iph("nf-dinle","Nefes: duaları sevdiklerinin sesinden dinle","l") + iph("nf-kuran","Nefes Kur'an okuyucu","r") + iph("nf-main","Nefes ana ekranı: namaz vakitleri","m","nefes") +
                     '<div class="fl fl-note gold" aria-hidden="true"><small>Sıradaki vakit · İkindi</small><b>15:46</b></div>'
                     '<img class="fl fl-icon" src="img/app/nf-icon.webp" alt="" loading="lazy">')),
 ]
@@ -1260,13 +1261,18 @@ def build():
         t = t.replace('href="assets/','href="/assets/').replace('src="assets/','src="/assets/').replace('src="img/','src="/img/').replace('href="favicon.svg"','href="/favicon.svg"').replace('href="fonts/','href="/fonts/')
         open(f,"w").write(t)
     p404 = os.path.join(OUT,"404.html"); t = open(p404).read()
-    t = t.replace('href="#','href="/#')
+    t = re.sub(r'(<a\b[^>]*?)href="#', r'\1href="/#', t)
     t = re.sub(r'<link rel="canonical"[^>]*>\n?','',t).replace('content="index, follow, max-image-preview:large"','content="noindex, follow"')
     open(p404,"w").write(t)
     css = os.path.join(OUT,"assets","site.css")
     c = open(css).read().replace("url(../fonts/","url(/fonts/")
     open(css,"w").write(c)
     import hashlib
+    LV = os.path.join(SRC,"live")
+    live = open(os.path.join(LV,"d3g.min.js")).read() + "\nwindow.LAUR_LAND=" + open(os.path.join(LV,"land.json")).read() + ";\n" + open(os.path.join(LV,"live-src.js")).read()
+    open(os.path.join(OUT,"assets","live.js"),"w").write(live)
+    lver = hashlib.md5(live.encode()).hexdigest()[:10]
+    sj = os.path.join(OUT,"assets","site.js"); sjt = open(sj).read().replace("__LIVEV__", lver); open(sj,"w").write(sjt)
     ver = hashlib.md5((c + open(os.path.join(OUT,"assets","site.js")).read()).encode()).hexdigest()[:10]
     for f in glob.glob(os.path.join(OUT,"*.html")):
         t = open(f).read().replace('href="/assets/site.css"', f'href="/assets/site.css?v={ver}"').replace('src="/assets/site.js"', f'src="/assets/site.js?v={ver}"')
