@@ -1287,8 +1287,16 @@ def build():
     lver = hashlib.md5(live.encode()).hexdigest()[:10]
     sj = os.path.join(OUT,"assets","site.js"); sjt = open(sj).read().replace("__LIVEV__", lver); open(sj,"w").write(sjt)
     ver = hashlib.md5((c + open(os.path.join(OUT,"assets","site.js")).read()).encode()).hexdigest()[:10]
+    _ih = {}
+    def _imgv(m):
+        path = m.group(2)
+        if path not in _ih:
+            fp = os.path.join(OUT, path.lstrip("/"))
+            _ih[path] = hashlib.md5(open(fp,"rb").read()).hexdigest()[:8] if os.path.exists(fp) else None
+        return m.group(1) + path + (f"?v={_ih[path]}" if _ih[path] else "") + m.group(3)
     for f in glob.glob(os.path.join(OUT,"*.html")):
         t = open(f).read().replace('href="/assets/site.css"', f'href="/assets/site.css?v={ver}"').replace('src="/assets/site.js"', f'src="/assets/site.js?v={ver}"')
+        t = re.sub(r'((?:src|href|poster)=")(/img/[^"?#]+\.(?:webp|png|jpg|jpeg|svg|mp4|webm))(")', _imgv, t)
         open(f,"w").write(t)
     open(os.path.join(OUT,"_headers"),"w").write("/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: DENY\n/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n/img/*\n  Cache-Control: public, max-age=2592000\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n")
     print("built", len(PAGES), "pages ->", OUT)
