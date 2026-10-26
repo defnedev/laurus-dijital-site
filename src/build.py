@@ -93,15 +93,57 @@ def contact(title="İşletmeni anlat, taslağını gör.", need="Web sitesi"):
 <p class="fine">Form bilgilerini sitede saklamıyoruz; mesaj doğrudan senin WhatsApp'ından gider.</p>
 </form></div></section>'''
 
+LOWER_KEEP = {"ve","ile","veya","ya","da","de","ki","mi","mı","oh","same."}
+def _cap(p):
+    if not p: return p
+    if p[0] in "@#" or p[:3]=="iOS" or any(c.isdigit() for c in p[:1]): return p
+    if p.isupper() and len(p)>1: return p
+    return ("İ" if p[0]=="i" else "I" if p[0]=="ı" else p[0].upper())+p[1:]
 def tr_title(t):
-    out=[]
-    for w in t.split(" "):
-        if w in ("ve","ile","ya","da","de") or not w: out.append(w); continue
-        if w.isupper(): out.append(w); continue
-        parts=w.split("-")
-        parts=[(("İ" if p[0]=="i" else "I" if p[0]=="ı" else p[0].upper())+p[1:]) if p else p for p in parts]
-        out.append("-".join(parts))
+    ws=t.split(" "); out=[]
+    for i,w in enumerate(ws):
+        if not w: out.append(w); continue
+        if w.lower() in ("oh","same.") : out.append(w); continue
+        if i>0 and w in LOWER_KEEP: out.append(w); continue
+        out.append("-".join(_cap(x) for x in w.split("-")))
     return " ".join(out)
+
+TC_LOG = set()
+def _tc_ok(txt):
+    t=txt.strip()
+    if not t or "<" in t or len(t)>44: return False
+    if t[-1] in ".?!:;," or "," in t or "·" in t or "/" in t or "₺" in t or "%" in t: return False
+    if len(t.split())>6: return False
+    if t.startswith("@") or t.lower().startswith("oh same"): return False
+    return any(ch.isalpha() for ch in t)
+def title_case_html(h):
+    def sub_plain(m):
+        open_tag, txt, close_tag = m.group(1), m.group(2), m.group(3)
+        if not _tc_ok(txt): return m.group(0)
+        lead = txt[:len(txt)-len(txt.lstrip())]; trail = txt[len(txt.rstrip()):]
+        nt = lead + tr_title(txt.strip()) + trail
+        if nt != txt: TC_LOG.add((txt.strip(), nt.strip()))
+        return open_tag + nt + close_tag
+    pats = [r'(<h3\b[^>]*>)([^<]+)(</h3>)', r'(<h4\b[^>]*>)([^<]+)(</h4>)',
+            r'(<span class="eyebrow"[^>]*>)([^<]+)(</span>)',
+            r'(<button\b[^>]*>)([^<]+)(</button>)',
+            r'(<a\b[^>]*class="[^"]*\bbtn\b[^"]*"[^>]*>(?:<svg.*?</svg>|<span class="ic">.*?</span>)?)([^<]+)((?:<span aria-hidden="true">.*?</span>)?</a>)',
+
+            r'(<span class="wtag[^"]*">)([^<]+)(</span>)',
+            r'(<div class="bcase-id"><div><b>)([^<]+)(</b>)',
+            r'(<span><b>)([^<]+)(</b><small>)',
+            r'(<nav class="crumbs"[^>]*>(?:.*?</a> / )*?<a [^>]*>)([^<]+)(</a>)',
+            r'(<a class="ftop-btn"[^>]*>.*?<span>)([^<]+)(</span></a>)']
+    def group(m):
+        inner = re.sub(r'(<(?:span|li)>)([^<]+)(</(?:span|li)>)', sub_plain, m.group(2))
+        return m.group(1) + inner + m.group(3)
+    h = re.sub(r'(<div class="chips">)(.*?)(</div>)', group, h, flags=re.S)
+    h = re.sub(r'(<ul class="as-feats">)(.*?)(</ul>)', group, h, flags=re.S)
+    for _ in range(8):
+        before = h
+        for pt in pats: h = re.sub(pt, sub_plain, h, flags=re.S)
+        if h == before: break
+    return h
 
 def footer():
     FSHORT = {"Sosyal medya ve içerik":"Sosyal medya","Google ve Meta reklamları":"Google ve Meta reklamı","Google İşletme ve yerel SEO":"Google profili ve SEO","Mobil uygulama ve yazılım":"Mobil uygulama","Güzellik salonu ve nail bar":"Güzellik ve nail bar","Avukat ve danışmanlık":"Avukat ve danışman"}
@@ -119,9 +161,10 @@ def footer():
 <div class="fsec"><h4>Sektörler</h4><ul>{sec}</ul></div>
 <div><h4>Laurus</h4><ul>{lau}</ul></div>
 </nav></div>
-<div class="fbot"><span>© 2026 Laurus Dijital · Tüm hakları saklıdır.</span><span class="fbot-r"><span>Bu site çerez kullanmaz.</span><a class="ftop-btn" href="#main" aria-label="Sayfanın başına dön">{up}<span>Başa dön</span></a></span></div>
+<div class="fbot"><span>© 2026 Laurus Dijital · Tüm hakları saklıdır.</span><span class="fbot-r"><span>Bu site çerez kullanmaz.</span></span></div>
 </div></footer>
-<a class="wa-float js-wa" href="https://wa.me/905434309702" aria-label="WhatsApp'tan yaz">{I['wa']}</a>'''
+<a class="wa-float js-wa" href="https://wa.me/905434309702" aria-label="WhatsApp'tan yaz">{I['wa']}</a>
+<a class="to-top" href="#main" aria-label="Sayfanın başına dön"><svg class="tt-ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22"/><circle class="tt-p" cx="24" cy="24" r="22" pathLength="100"/></svg>{up}</a>'''
 
 import json, re
 def _strip(t): return re.sub(r"<[^>]+>","",t)
@@ -482,27 +525,27 @@ def brand_case(w):
 
 # ---------- own apps ----------
 APPS = [
-  dict(id="ohsame", name="oh same.", kind="Mobil + web uygulaması", status="Web'de yayında · iOS sürümü yolda",
+  dict(id="ohsame", name="oh same.", kind="Mobil + Web Uygulaması", status="Web'de yayında · iOS sürümü yolda",
        url="https://ohsame.app", cta="oh same.'i aç", lap="ohsame-d", ph="os-world",
        desc="Nasıl hissettiğini seçiyorsun; dünyada aynı anda aynı şeyi hisseden insanları canlı bir küre üzerinde görüyorsun. “Ah, benim gibi biri daha var” dedirten bir uygulama.",
        did=["Canlı dünya küresi ve anlık sayaçlar","Apple, Google ve e-posta ile giriş; isteyen anonim kullanır","Türkçe ve İngilizce, iOS ve web aynı üründe"],
        tech=["iOS","Web uygulaması","Canlı veri","Üyelik sistemi"]),
-  dict(id="sorbi", name="Sorbi", kind="Web platformu", status="sorbiapp.com'da yayında",
+  dict(id="sorbi", name="Sorbi", kind="Web Platformu", status="sorbiapp.com'da yayında",
        url="https://sorbiapp.com", cta="Sorbi'yi aç", lap="sorbi-d", ph="sb-chart",
        desc="Doğum tarihini yazıyorsun, doğduğun anın gökyüzünü ve haritanın kaç kişide bir görüldüğünü saniyeler içinde görüyorsun. Arkasında 1,3 milyondan fazla gök anını sayan kendi hesap motorumuz var.",
        did=["Swiss Ephemeris ile test edilmiş hesap motoru","Üyelik: Google ve e-posta ile giriş","Paylaşılabilir kartlar, günlük gökyüzü ve dersler"],
        tech=["Web platformu","Hesap motoru","Üyelik","SEO"]),
-  dict(id="sekiz", name="Sekiz8", kind="iOS uygulaması", status="App Store'da yayında",
+  dict(id="sekiz", name="Sekiz8", kind="iOS Uygulaması", status="App Store'da yayında",
        url="https://apps.apple.com/tr/app/sekiz8/id6758377312", cta="App Store'da gör", lap=None, ph="sekiz-m", ph2="sekiz-sec",
        desc="Karar veremediğinde salla. Aklındaki soruyu tut, telefonu salla ya da dokun; cevap topun içinde belirsin. Evet/hayır, kendi seçeneklerin arasından seçim ya da rastgele sayı için de aynı hareket.",
        did=["Dört mod: Sekiz, Evet/Hayır, Seç ve Sayı","Telefonu sallamayı algılayan hareket sensörü ve titreşim","Kendi seçeneklerini yazıp aralarından seçtirme, temalar"],
        tech=["iOS","App Store","React Native"]),
-  dict(id="cinar", name="Çınar", kind="iOS uygulaması · yakında", status="TestFlight'ta test ediliyor", beta=True,
+  dict(id="cinar", name="Çınar", kind="iOS Uygulaması · Yakında", status="TestFlight'ta test ediliyor", beta=True,
        url=None, cta="", lap=None, ph="cn-home", ph2="cn-agac", ph2alt="soy ağacı ekranı",
        desc="Ailenin hikâyesi, kuşaktan kuşağa. Soy ağacını kuruyorsun; büyüklerinin sesi, fotoğraflar ve anılar ailenin kendi çınarında birikiyor. Her gün biri suladıkça ağaç canlı kalıyor.",
        did=["Canlı soy ağacı ve kişi sayfaları","Büyüklerin sesinden kayıtlar ve masallar","Önemli tarihler takvimi, aile bülteni ve telefon eşleme"],
        tech=["iOS","3D ağaç","Ses kaydı","Aile hesabı"]),
-  dict(id="nefes", name="Nefes", kind="iOS uygulaması · yakında", status="TestFlight'ta test ediliyor", beta=True,
+  dict(id="nefes", name="Nefes", kind="iOS Uygulaması · Yakında", status="TestFlight'ta test ediliyor", beta=True,
        url=None, cta="", lap=None, ph="nf-main", ph2="nf-dinle", ph2alt="dua dinleme ekranı",
        desc="Sevdiğin sesten, her gün bir dua. Bulunduğun şehre göre namaz vakitleri, izin verdiğinde ezan hatırlatmaları, Kur'an okuyucu, dualar ve zikirmatik tek uygulamada; duaları sevdiklerinin sesinden dinleyebiliyorsun.",
        did=["Konuma göre namaz vakitleri ve Hicri takvim","Kur'an okuyucu, günün duası, zikirmatik ve virdler","Duaları anne, baba ya da kendi sesinden dinleme"],
@@ -533,7 +576,7 @@ def app_case(a):
     chips = "".join(f"<span>{t}</span>" for t in a["tech"])
     link = f'<a class="btn btn-line" href="{a["url"]}" target="_blank" rel="noopener">{a["cta"]}</a>' if a["url"] else ""
     return (f'<div class="bcase"><div class="bcase-vis bg-{a["id"]}">{app_stage(a, "in-case")}</div><div class="bcase-tx">'
-            f'<div class="bcase-id"><div><b>{a["name"]}</b><small>Kendi ürünümüz, {a["kind"] if a["kind"].startswith("iOS") else a["kind"].lower()}</small></div></div>'
+            f'<div class="bcase-id"><div><b>{a["name"]}</b><small>Kendi ürünümüz, {(lambda k: k[:3]+k[3:].lower() if k.startswith("iOS") else k.lower())(a["kind"].split(" · ")[0])}</small></div></div>'
             f'<div class="chips">{chips}</div><h3>Ne yaptık</h3><p>{a["desc"]}</p><h3>Neler var</h3>{checks(a["did"])}'
             f'<p class="app-st{" beta" if a.get("beta") else ""}"><i></i>{a["status"]}</p>'
             f'<div class="wf-act"><a class="btn btn-gold" href="#iletisim">Uygulamamı konuşalım</a>{link}</div></div></div>')
@@ -593,7 +636,7 @@ def bwin(src, url, alt, cls=""):
             f'<img src="img/app/{src}.webp" alt="{alt}" loading="lazy" decoding="async"></div>')
 
 SHOW = [
-  dict(id="ohsame", name="oh same.", kind="Mobil + web uygulaması", tag="Farklı hayatlar. Aynı an.",
+  dict(id="ohsame", name="oh same.", kind="Mobil + Web Uygulaması", tag="Farklı hayatlar. Aynı an.",
        desc="Nasıl hissettiğini seçiyorsun; dünyada aynı anda aynı şeyi hisseden insanları canlı bir küre üzerinde görüyorsun.",
        feats=["Canlı dünya küresi","Apple, Google, e-posta ile giriş","iOS ve web, TR ve EN"],
        status="Web'de yayında · iOS sürümü yolda", url="https://ohsame.app", cta="oh same.'i aç",
@@ -601,7 +644,7 @@ SHOW = [
        dev=lambda: (iph("os-start","oh same. giriş ekranı","b1") + iph("os-world","oh same. dünya ekranı: şu an nasılsın?","m","globe") +
                     '<div class="fl fl-pills" aria-hidden="true"><span><i style="background:#F28A3C"></i>heyecanlı</span><span><i style="background:#E8457A"></i>mutlu</span><span><i style="background:#A44CF0"></i>sakin</span></div>'
                     '<div class="fl fl-count" aria-hidden="true"><b>340 kişi</b><span>senin gibi heyecanlı.</span><small>12\'si İstanbul\'da · 41 şehirde</small></div>')),
-  dict(id="sorbi", name="Sorbi", kind="Web platformu", tag="Doğduğun an kaç kişide bir?",
+  dict(id="sorbi", name="Sorbi", kind="Web Platformu", tag="Doğduğun an kaç kişide bir?",
        desc="Doğum tarihini yazıyorsun; doğduğun anın gökyüzünü ve haritanın kaç kişide bir görüldüğünü saniyeler içinde görüyorsun.",
        feats=["Kendi hesap motorumuz","Üyelik ve giriş sistemi","Paylaşılabilir kartlar"],
        status="sorbiapp.com'da yayında", url="https://sorbiapp.com", cta="Sorbi'yi aç",
@@ -609,14 +652,14 @@ SHOW = [
        dev=lambda: (bwin("sorbi-d","sorbiapp.com","Sorbi ana sayfası, bilgisayar görünümü","bw") + iph("sb-chart","Sorbi doğum haritası ekranı","m","chart") +
                     '<div class="fl fl-img"><img src="img/app/sb-cards.webp" alt="Sorbi Güneş, Ay ve yükselen kartları" loading="lazy"></div>'
                     '<div class="fl fl-stat" aria-hidden="true"><b>1.367.496</b><span>gök anı sayıldı</span></div>')),
-  dict(id="sekiz", name="Sekiz8", kind="iOS uygulaması", tag="Karar veremediğinde salla.",
+  dict(id="sekiz", name="Sekiz8", kind="iOS Uygulaması", tag="Karar veremediğinde salla.",
        desc="Aklındaki soruyu tut, telefonu salla; cevap topun içinde belirsin. Evet/hayır, kendi seçeneklerin ya da rastgele sayı için de aynı hareket.",
        feats=["Dört mod: Sekiz, Evet/Hayır, Seç, Sayı","Sallama sensörü ve titreşim","Temalar"],
        status="App Store'da yayında", url="https://apps.apple.com/tr/app/sekiz8/id6758377312", cta="App Store'da indir",
        icon='<img src="img/app/sk-icon.webp" alt="" width="56" height="56">',
        dev=lambda: (iph("sk-sec","Sekiz8 seçim modu","l") + iph("sk-evet","Sekiz8 evet/hayır modu","r") + iph("sk-sekiz","Sekiz8 ana ekranı","m","eight") +
                     '<img class="fl fl-icon" src="img/app/sk-icon.webp" alt="" loading="lazy">')),
-  dict(id="cinar", name="Çınar", kind="iOS uygulaması · TestFlight", tag="Ailenin hikâyesi, kuşaktan kuşağa.",
+  dict(id="cinar", name="Çınar", kind="iOS Uygulaması · TestFlight", tag="Ailenin hikâyesi, kuşaktan kuşağa.",
        desc="Soy ağacını kuruyorsun; büyüklerinin sesi, fotoğraflar ve anılar ailenin kendi çınarında birikiyor. Her gün biri suladıkça ağaç canlı kalıyor.",
        feats=["Canlı 3D soy ağacı","Büyüklerin sesinden masallar","Önemli tarihler takvimi"],
        status="TestFlight'ta test ediliyor · yakında App Store'da", beta=True, url="#iletisim", cta="Erken erişim iste",
@@ -624,7 +667,7 @@ SHOW = [
        dev=lambda: (iph("cn-agac","Çınar soy ağacı ekranı","l") + iph("cn-takvim","Çınar önemli tarihler takvimi","r") + iph("cn-home","Çınar ana ekranı: ailenin çınarı","m","tree") +
                     '<div class="fl fl-note" aria-hidden="true"><small>Anneanneyle kurabiye</small><b>▶ Dinle · 1:04</b></div>'
                     '<img class="fl fl-icon" src="img/app/cn-icon.webp" alt="" loading="lazy">')),
-  dict(id="nefes", name="Nefes", kind="iOS uygulaması · TestFlight", tag="Sevdiğin sesten, her gün bir dua.",
+  dict(id="nefes", name="Nefes", kind="iOS Uygulaması · TestFlight", tag="Sevdiğin sesten, her gün bir dua.",
        desc="Bulunduğun şehre göre namaz vakitleri, izin verdiğinde ezan hatırlatmaları, Kur'an okuyucu ve zikirmatik tek yerde. Duaları sevdiklerinin sesinden dinleyebiliyorsun.",
        feats=["Konuma göre vakitler","Kur'an okuyucu ve dualar","Sevdiğin sesten dua"],
        status="TestFlight'ta test ediliyor · yakında App Store'da", beta=True, url="#iletisim", cta="Erken erişim iste",
@@ -1256,7 +1299,7 @@ def build():
     shutil.copytree(os.path.join(SRC,"img"), os.path.join(OUT,"img"))
     for slug,(fn,active) in PAGES.items():
         title, desc, body = fn()
-        open(os.path.join(OUT,slug),"w").write(layout(slug,title,desc,body,active))
+        open(os.path.join(OUT,slug),"w").write(title_case_html(layout(slug,title,desc,body,active)))
     urls = "".join(f"<url><loc>{BASE}{'/' if s=='index.html' else '/'+s.replace('.html','')}</loc><lastmod>{GUIDE_DATE}</lastmod><changefreq>{'weekly' if s=='index.html' else 'monthly'}</changefreq><priority>{'1.0' if s=='index.html' else ('0.9' if s in GMAP or s in ('web-tasarim.html','sosyal-medya.html','mobil-uygulama.html') else '0.7')}</priority></url>" for s in PAGES)
     open(os.path.join(OUT,"sitemap.xml"),"w").write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
     PREV = os.path.join(os.path.dirname(SRC),"site-preview")
@@ -1299,6 +1342,7 @@ def build():
         t = re.sub(r'((?:src|href|poster)=")(/img/[^"?#]+\.(?:webp|png|jpg|jpeg|svg|mp4|webm))(")', _imgv, t)
         open(f,"w").write(t)
     open(os.path.join(OUT,"_headers"),"w").write("/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: DENY\n/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n/img/*\n  Cache-Control: public, max-age=2592000\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n")
+    open("/tmp/claude-0/tc_log.txt","w").write("\n".join(f"{a}  ->  {b}" for a,b in sorted(TC_LOG)))
     print("built", len(PAGES), "pages ->", OUT)
 
 if __name__ == "__main__":
