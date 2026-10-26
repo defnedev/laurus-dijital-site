@@ -147,8 +147,8 @@ def schemas(slug, url, title, desc):
 
 META_FIX = {
  "index.html": ("Laurus Dijital | Web Tasarım, Sosyal Medya ve SEO Ajansı","Web sitesi, mobil uygulama, Instagram yönetimi, Google reklamı ve SEO. İstanbul merkezli dijital ajans; açık fiyatlar, ilk site 7 günde yayında."),
- "mobil-uygulama.html": ("Mobil Uygulama Geliştirme · İstanbul | Laurus Dijital","iOS, Android ve web uygulaması geliştirme; üyelik, abonelik ve mağaza yayını dahil. oh same., Sorbi ve Sekiz8'i kendi ekibimiz geliştirdi."),
- "calismalar.html": ("Çalışmalarımız: Web, Sosyal Medya, Uygulama | Laurus Dijital","Seven For Life, Feronya, Nil Pet Kuaför ve @astrodefnee için yaptığımız işler; oh same., Sorbi ve Sekiz8 uygulamalarımız."),
+ "mobil-uygulama.html": ("Mobil Uygulama Geliştirme · İstanbul | Laurus Dijital","iOS, Android ve web uygulaması geliştirme; üyelik, abonelik ve mağaza yayını dahil. oh same., Sorbi, Sekiz8, Çınar ve Nefes'i kendi ekibimiz geliştiriyor."),
+ "calismalar.html": ("Çalışmalarımız: Web, Sosyal Medya, Uygulama | Laurus Dijital","Seven For Life, Feronya, Nil Pet Kuaför ve @astrodefnee için yaptığımız işler; oh same., Sorbi, Sekiz8, Çınar ve Nefes uygulamalarımız."),
  "rehber.html": ("Rehber: Web Sitesi, Sosyal Medya, Reklam, SEO | Laurus Dijital","Web sitesi yaptırmak, sosyal medya fiyatları, Google reklam bütçesi ve SEO hakkında 2026 rehberleri; açık fiyatlar ve kontrol listeleri."),
  "hakkimizda.html": ("Hakkımızda | Laurus Dijital, İstanbul Dijital Ajans","8 yılı aşkın yazılım ve dijital deneyimle web tasarım, mobil uygulama, sosyal medya, Google Ads ve SEO hizmeti veren İstanbul merkezli ajans."),
  "web-sitesi-yaptirmak.html": ("Web Sitesi Yaptırmak 2026: Fiyatlar ve Süreç | Laurus Dijital","Web sitesi yaptırmak ne kadar tutar, kaç günde biter? Site türlerine göre 2026 fiyat tablosu, gizli maliyetler ve teklif kontrol listesi."),
@@ -483,6 +483,16 @@ APPS = [
        desc="Karar veremediğinde salla. Aklındaki soruyu tut, telefonu salla ya da dokun; cevap topun içinde belirsin. Evet/hayır, kendi seçeneklerin arasından seçim ya da rastgele sayı için de aynı hareket.",
        did=["Dört mod: Sekiz, Evet/Hayır, Seç ve Sayı","Telefonu sallamayı algılayan hareket sensörü ve titreşim","Kendi seçeneklerini yazıp aralarından seçtirme, temalar"],
        tech=["iOS","App Store","React Native"]),
+  dict(id="cinar", name="Çınar", kind="iOS uygulaması · yakında", status="TestFlight'ta test ediliyor", beta=True,
+       url=None, cta="", lap=None, ph="cn-home", ph2="cn-agac", ph2alt="soy ağacı ekranı",
+       desc="Ailenin hikâyesi, kuşaktan kuşağa. Soy ağacını kuruyorsun; büyüklerinin sesi, fotoğraflar ve anılar ailenin kendi çınarında birikiyor. Her gün biri suladıkça ağaç canlı kalıyor.",
+       did=["Canlı soy ağacı ve kişi sayfaları","Büyüklerin sesinden kayıtlar ve masallar","Önemli tarihler takvimi, aile bülteni ve telefon eşleme"],
+       tech=["iOS","3D ağaç","Ses kaydı","Aile hesabı"]),
+  dict(id="nefes", name="Nefes", kind="iOS uygulaması · yakında", status="TestFlight'ta test ediliyor", beta=True,
+       url=None, cta="", lap=None, ph="nf-main", ph2="nf-dinle", ph2alt="dua dinleme ekranı",
+       desc="Sevdiğin sesten, her gün bir dua. Bulunduğun şehre göre namaz vakitleri, izin verdiğinde ezan hatırlatmaları, Kur'an okuyucu, dualar ve zikirmatik tek uygulamada; duaları sevdiklerinin sesinden dinleyebiliyorsun.",
+       did=["Konuma göre namaz vakitleri ve Hicri takvim","Kur'an okuyucu, günün duası, zikirmatik ve virdler","Duaları anne, baba ya da kendi sesinden dinleme"],
+       tech=["iOS","Konum","Bildirim","Abonelik"]),
 ]
 AMAP = {a["id"]: a for a in APPS}
 
@@ -490,20 +500,20 @@ def app_stage(a, cls=""):
     ph = f'<div class="phone"><div class="pscr"><img class="shot" src="img/app/{a["ph"]}.webp" alt="{a["name"]} telefon ekranı" loading="lazy"></div></div>'
     if not a["lap"]:
         if a.get("ph2"):
-            ph += f'<div class="phone p2"><div class="pscr"><img class="shot" src="img/app/{a["ph2"]}.webp" alt="{a["name"]} seçim modu ekranı" loading="lazy"></div></div>'
+            ph += f'<div class="phone p2"><div class="pscr"><img class="shot" src="img/app/{a["ph2"]}.webp" alt="{a["name"]} {a.get("ph2alt","seçim modu ekranı")}" loading="lazy"></div></div>'
         return f'<div class="stage solo{" duo" if a.get("ph2") else ""} {cls}">{ph}</div>'
     lap = f'<div class="laptop"><div class="lid"><div class="scr"><img class="shot" src="img/app/{a["lap"]}.webp" alt="{a["name"]} bilgisayar görünümü" loading="lazy"></div></div><div class="base"></div></div>'
     return f'<div class="stage {cls}">{lap}{ph}</div>'
 
 def app_card(a, i=0, big=False):
     chips = "".join(f"<span>{t}</span>" for t in a["tech"])
-    act = f'<a class="btn btn-gold" href="{a["url"]}" target="_blank" rel="noopener">{a["cta"]}</a>' if a["url"] else '<a class="btn btn-gold" href="#iletisim">Benzerini konuşalım</a>'
+    act = f'<a class="btn btn-gold" href="{a["url"]}" target="_blank" rel="noopener">{a["cta"]}</a>' if a["url"] else '<a class="btn btn-gold" href="#iletisim">Erken erişim iste</a>'
     return (f'<article class="appc{" appc-big" if big else ""}" id="app-{a["id"]}" data-rv style="--d:{i*90}ms"><div class="app-vis bg-{a["id"]}">{app_stage(a)}</div>'
             f'<div class="app-tx"><span class="app-kind">{a["kind"]}</span><h3>{a["name"]}</h3><p>{a["desc"]}</p>{checks(a["did"])}<div class="chips">{chips}</div>'
-            f'<div class="app-foot"><span class="app-st"><i></i>{a["status"]}</span>{act}</div></div></article>')
+            f'<div class="app-foot"><span class="app-st{" beta" if a.get("beta") else ""}"><i></i>{a["status"]}</span>{act}</div></div></article>')
 
 def apps_block():
-    return '<div class="apps">' + app_card(APPS[0], 0, True) + app_card(APPS[1], 1) + app_card(APPS[2], 2) + '</div>'
+    return '<div class="apps">' + app_card(APPS[0], 0, True) + ''.join(app_card(a, i) for i,a in enumerate(APPS[1:],1)) + '</div>'
 
 def app_case(a):
     chips = "".join(f"<span>{t}</span>" for t in a["tech"])
@@ -511,7 +521,7 @@ def app_case(a):
     return (f'<div class="bcase"><div class="bcase-vis bg-{a["id"]}">{app_stage(a, "in-case")}</div><div class="bcase-tx">'
             f'<div class="bcase-id"><div><b>{a["name"]}</b><small>Kendi ürünümüz, {a["kind"] if a["kind"].startswith("iOS") else a["kind"].lower()}</small></div></div>'
             f'<div class="chips">{chips}</div><h3>Ne yaptık</h3><p>{a["desc"]}</p><h3>Neler var</h3>{checks(a["did"])}'
-            f'<p class="app-st"><i></i>{a["status"]}</p>'
+            f'<p class="app-st{" beta" if a.get("beta") else ""}"><i></i>{a["status"]}</p>'
             f'<div class="wf-act"><a class="btn btn-gold" href="#iletisim">Uygulamamı konuşalım</a>{link}</div></div></div>')
 
 def page_apps():
@@ -552,7 +562,7 @@ def page_apps():
 {contact(title="Uygulama fikrini anlat, taslağını gör.", need="Mobil uygulama")}
 '''
     return ("Mobil Uygulama Geliştirme ve Web Uygulaması · İstanbul | Laurus Dijital",
-            "iOS, Android ve web uygulaması geliştirme: üyelik, abonelik, canlı veri ve mağaza yayını dahil. oh same., Sorbi ve Sekiz8 uygulamalarını kendi ekibimiz geliştirdi.", body)
+            "iOS, Android ve web uygulaması geliştirme: üyelik, abonelik, canlı veri ve mağaza yayını dahil. oh same., Sorbi, Sekiz8, Çınar ve Nefes uygulamalarını kendi ekibimiz geliştirdi.", body)
 
 
 
@@ -592,6 +602,22 @@ SHOW = [
        icon='<img src="img/app/sk-icon.webp" alt="" width="56" height="56">',
        dev=lambda: (iph("sk-sec","Sekiz8 seçim modu","l") + iph("sk-evet","Sekiz8 evet/hayır modu","r") + iph("sk-sekiz","Sekiz8 ana ekranı","m shake") +
                     '<img class="fl fl-icon" src="img/app/sk-icon.webp" alt="" loading="lazy">')),
+  dict(id="cinar", name="Çınar", kind="iOS uygulaması · TestFlight", tag="Ailenin hikâyesi, kuşaktan kuşağa.",
+       desc="Soy ağacını kuruyorsun; büyüklerinin sesi, fotoğraflar ve anılar ailenin kendi çınarında birikiyor. Her gün biri suladıkça ağaç canlı kalıyor.",
+       feats=["Canlı 3D soy ağacı","Büyüklerin sesinden masallar","Önemli tarihler takvimi"],
+       status="TestFlight'ta test ediliyor · yakında App Store'da", beta=True, url="#iletisim", cta="Erken erişim iste",
+       icon='<img src="img/app/cn-icon.webp" alt="" width="56" height="56">',
+       dev=lambda: (iph("cn-agac","Çınar soy ağacı ekranı","l") + iph("cn-takvim","Çınar önemli tarihler takvimi","r") + iph("cn-home","Çınar ana ekranı: ailenin çınarı","m") +
+                    '<div class="fl fl-note" aria-hidden="true"><small>Anneanneyle kurabiye</small><b>▶ Dinle · 1:04</b></div>'
+                    '<img class="fl fl-icon" src="img/app/cn-icon.webp" alt="" loading="lazy">')),
+  dict(id="nefes", name="Nefes", kind="iOS uygulaması · TestFlight", tag="Sevdiğin sesten, her gün bir dua.",
+       desc="Bulunduğun şehre göre namaz vakitleri, izin verdiğinde ezan hatırlatmaları, Kur'an okuyucu ve zikirmatik tek yerde. Duaları sevdiklerinin sesinden dinleyebiliyorsun.",
+       feats=["Konuma göre vakitler","Kur'an okuyucu ve dualar","Sevdiğin sesten dua"],
+       status="TestFlight'ta test ediliyor · yakında App Store'da", beta=True, url="#iletisim", cta="Erken erişim iste",
+       icon='<img src="img/app/nf-icon.webp" alt="" width="56" height="56">',
+       dev=lambda: (iph("nf-dinle","Nefes: duaları sevdiklerinin sesinden dinle","l") + iph("nf-kuran","Nefes Kur'an okuyucu","r") + iph("nf-main","Nefes ana ekranı: namaz vakitleri","m") +
+                    '<div class="fl fl-note gold" aria-hidden="true"><small>Sıradaki vakit · İkindi</small><b>15:46</b></div>'
+                    '<img class="fl fl-icon" src="img/app/nf-icon.webp" alt="" loading="lazy">')),
 ]
 
 def app_show(h2="Sadece site değil. <br>Uygulama da yapıyoruz.", eyebrow="Uygulamalarımız", sid="uygulamalar"):
@@ -605,7 +631,7 @@ def app_show(h2="Sadece site değil. <br>Uygulama da yapıyoruz.", eyebrow="Uygu
                    f'<div class="as-id"><span class="as-ico">{a["icon"]}</span><span class="as-kind">{a["kind"]}</span></div>'
                    f'<h3 class="as-name">{a["name"]}</h3><p class="as-tag">{a["tag"]}</p><p class="as-desc">{a["desc"]}</p>'
                    f'<ul class="as-feats">{feats}</ul>'
-                   f'<div class="as-foot"><a class="btn as-cta" href="{a["url"]}" target="_blank" rel="noopener">{a["cta"]} <span aria-hidden="true">↗</span></a><span class="as-st"><i></i>{a["status"]}</span></div>'
+                   f'<div class="as-foot">{f'<a class="btn as-cta" href="{a["url"]}">{a["cta"]}</a>' if a.get("beta") else f'<a class="btn as-cta" href="{a["url"]}" target="_blank" rel="noopener">{a["cta"]} <span aria-hidden="true">↗</span></a>'}<span class="as-st{" beta" if a.get("beta") else ""}"><i></i>{a["status"]}</span></div>'
                    f'</div><div class="as-dev"><div class="as-dv-in">{a["dev"]()}</div></div></div></article>')
     return (f'<section id="{sid}" class="appshow" data-appshow aria-labelledby="h-{sid}"><div class="as-pin">'
             f'{scenes}'
@@ -844,18 +870,18 @@ def page_gbp():
     return ("Yerel SEO ve Google İşletme Profili Hizmeti | Laurus Dijital","Google Haritalar'da öne çıkın: profil kurulumu, fotoğraflar, saatler, yorum akışı ve yerel arama ayarları.", body)
 
 def page_cases():
-    T = tabs([(w["id"], w["name"], brand_case(w)) for w in WORKS] + [(a["id"], a["name"], app_case(a)) for a in APPS], "Çalışmalar")
+    T = tabs([(w["id"], {"otel":"Seven For Life","feronya":"Feronya"}.get(w["id"], w["name"]), brand_case(w)) for w in WORKS] + [(a["id"], a["name"], app_case(a)) for a in APPS], "Çalışmalar")
     body = f'''
 <section class="phero" aria-labelledby="h-page" style="padding-bottom:40px"><div class="wrap" style="grid-template-columns:1fr">
 <div><nav class="crumbs" aria-label="Konum"><a href="index.html">Ana sayfa</a> / Çalışmalar</nav>
 <h1 id="h-page">Ne yaptığımızı gör.</h1>
-<p class="lead">Müşterilerimiz için yaptığımız işler (Seven For Life, Feronya, Nil Pet Kuaför, @astrodefnee) ve kendi geliştirdiğimiz uygulamalar (oh same., Sorbi, Sekiz8).</p>
+<p class="lead">Müşterilerimiz için yaptığımız işler (Seven For Life, Feronya, Nil Pet Kuaför, @astrodefnee) ve kendi geliştirdiğimiz uygulamalar (oh same., Sorbi, Sekiz8, Çınar, Nefes).</p>
 </div>
 </div></section>
 <section class="ksec" aria-label="Çalışmalar" style="padding-top:24px"><div class="wrap">{T}</div></section>
 {contact()}
 '''
-    return ("Çalışmalarımız: Web Sitesi, Sosyal Medya, Reklam ve Uygulama | Laurus Dijital","Seven For Life Thermal Hotel, Feronya Restaurant, Nil Pet Kuaför ve @astrodefnee için yaptığımız web sitesi, Instagram, Google reklam ve SEO işleri; oh same., Sorbi ve Sekiz8 uygulamalarımız.", body)
+    return ("Çalışmalarımız: Web Sitesi, Sosyal Medya, Reklam ve Uygulama | Laurus Dijital","Seven For Life Thermal Hotel, Feronya Restaurant, Nil Pet Kuaför ve @astrodefnee için yaptığımız web sitesi, Instagram, Google reklam ve SEO işleri; oh same., Sorbi, Sekiz8, Çınar ve Nefes uygulamalarımız.", body)
 
 def page_prices():
     rows = [
@@ -1148,7 +1174,7 @@ def page_about():
 <div data-rv><span class="eyebrow">Biz kimiz</span><h2 id="h-biz">8 yılı aşkın deneyim, tek ekip.</h2></div>
 <div class="ab-tx" data-rv>
 <p>Laurus Dijital, yazılım, bankacılık teknolojileri ve dijital projelerde <b>8 yılı aşkın deneyime</b> sahip bir ekip tarafından kuruldu. Büyük kurumların dijital projelerinde öğrendiğimiz disiplini, küçük ve orta ölçekli işletmelerin anlayacağı sade bir dille ve açık fiyatlarla sunuyoruz.</p>
-<p>Yazılım geçmişimiz sayesinde işimiz web sitesiyle sınırlı değil: <b>mobil uygulama</b> ve <b>web uygulaması</b> da geliştiriyoruz. oh same., Sorbi ve Sekiz8 bu ekibin tasarlayıp kodladığı, kendi ürünlerimiz.</p>
+<p>Yazılım geçmişimiz sayesinde işimiz web sitesiyle sınırlı değil: <b>mobil uygulama</b> ve <b>web uygulaması</b> da geliştiriyoruz. oh same., Sorbi, Sekiz8, Çınar ve Nefes bu ekibin tasarlayıp kodladığı, kendi ürünlerimiz.</p>
 <p>Ekibimizde tasarım, yazılım, içerik ve reklam yönetimi tarafları birlikte çalışır. Bir işletmenin <b>web sitesini</b>, <b>Instagram ve sosyal medya hesaplarını</b>, <b>Google Ads ve Meta reklamlarını</b> ve <b>Google İşletme Profili ile SEO çalışmasını</b> aynı masada planlarız. Böylece sitedeki mesaj, Instagram'daki görsel dil ve Google'daki reklam birbirini tamamlar.</p>
 <p>İstanbul'dan Türkiye genelinde online hizmet veriyoruz. Kuaförden otele, klinikten hukuk bürosuna kadar müşterisini internetten bulan her işletmeyle çalışıyoruz.</p>
 </div></div></section>

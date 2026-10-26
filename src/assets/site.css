@@ -1371,3 +1371,30 @@ a.fc:hover .fc-go{transform:translateX(4px);color:var(--gold)}
   .gt td::before{content:attr(data-l);font-size:13px;font-weight:600;color:var(--ink-soft);text-align:left;flex:0 0 38%}
   .gt td:first-child{font-weight:700;font-size:16px;color:var(--ink)}
 }
+
+/* ---------- v14 Çınar + Nefes ---------- */
+.as-cinar{background:#08120D}.as-cinar .g1{background:#2F5D46}.as-cinar .g2{background:#C8643B;opacity:.5}.as-cinar .g3{background:#7FA86B}
+.as-nefes{background:#040907}.as-nefes .g1{background:#163F35}.as-nefes .g2{background:#DDB866;opacity:.32}.as-nefes .g3{background:#0E2A22}
+.as-cinar{--t1:#CFE6C9;--t2:#E9A27B;--acc:#3E8A63}
+.as-nefes{--t1:#F6E6B8;--t2:#DDB866;--acc:#C9A24E}
+.as-cinar .iph.l,.as-nefes .iph.l{left:6%;top:9%;height:86%;transform:rotate(-10deg);filter:brightness(.7)}
+.as-cinar .iph.r,.as-nefes .iph.r{left:58%;top:9%;height:86%;transform:rotate(10deg);filter:brightness(.7)}
+.as-cinar .iph.m,.as-nefes .iph.m{left:31%;top:0;z-index:2}
+.as-cinar .fl-icon,.as-nefes .fl-icon{right:-2%;top:-2%}
+.fl-note{display:flex;flex-direction:column;gap:4px;padding:13px 18px;border-radius:18px;background:#FAF6EF;color:#1F2421;box-shadow:0 30px 60px -20px rgba(0,0,0,.8);animation-delay:-3s;left:-3%;bottom:10%}
+.fl-note small{font:600 12px var(--body);color:#5C625D}
+.fl-note b{font:800 17px var(--display);color:#2F5D46}
+.fl-note.gold{background:rgba(10,20,16,.9);border:1px solid rgba(221,184,102,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.fl-note.gold small{color:rgba(244,238,225,.7)}.fl-note.gold b{color:#DDB866;font:500 30px/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.04em}
+.as-st.beta i,.app-st.beta i{background:#F2B544;box-shadow:0 0 0 4px rgba(242,181,68,.2)}
+@media (min-width:901px){ .js .appshow{height:520vh} .as-tabs button{padding:10px 13px} }
+@media (min-width:901px) and (max-width:1180px){ .as-tabs button span{display:none} .js .as-head h2{font-size:24px} }
+@media (max-width:900px){
+  .as-cinar .iph.l,.as-nefes .iph.l{left:0}.as-cinar .iph.r,.as-nefes .iph.r{left:52%}.as-cinar .iph.m,.as-nefes .iph.m{left:24%}
+  .fl-note{left:0;bottom:4%;padding:9px 12px}.fl-note b{font-size:14px}.fl-note.gold b{font-size:22px}
+}
+.bg-cinar{background:linear-gradient(140deg,#E2ECE5 0%,#F6E1D6 100%)}
+.bg-nefes{background:radial-gradient(80% 90% at 50% 40%,#1E4A3D 0%,#0C1915 70%,#050B09 100%)}
+.as-tabs button{white-space:nowrap}
+.tablist{flex-wrap:nowrap;max-width:100%;overflow-x:auto;scrollbar-width:none}.tablist::-webkit-scrollbar{display:none}
+@media (min-width:901px){.tablist button{padding:11px 16px}}
