@@ -117,7 +117,7 @@ document.querySelectorAll("[data-showcase]").forEach(sc => {
   sc.addEventListener("mouseenter", stop); sc.addEventListener("mouseleave", start);
   // preload next set's images shortly after load
   setTimeout(() => sets.forEach(s => s.querySelectorAll("img[loading=lazy]").forEach(im => im.loading = "eager")), 4000);
-  setTimeout(start, document.documentElement.classList.contains("intro") ? 3600 : 0);
+  setTimeout(start, document.documentElement.classList.contains("intro") ? 5600 : 0);
 });
 
 // works filter
@@ -237,7 +237,7 @@ sizeWorks(); onScroll();
 (function(){
   var RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (RM || !("IntersectionObserver" in window)) return;
-  var SKIP = ".appshow,.works3,.mani,.hero3,.reel,header,footer,.dd-panel,.as-scene";
+  var SKIP = ".appshow,.works3,.mani,.hero3,.reel,header,footer,.dd-panel,.as-scene,.chero,.ctab,.chaps,#pt";
   function skip(el){ return el.closest(SKIP); }
   function mark(el, kind, d){ if (!el || skip(el) || el.hasAttribute("data-rv") || el.closest("[data-rv]:not(.kgrp)")) return; el.setAttribute("data-rv",""); el.classList.add("rv-"+kind); if (d) el.style.setProperty("--d", d+"ms"); }
   // 1. headings: word-by-word mask rise
@@ -276,7 +276,7 @@ sizeWorks(); onScroll();
   // hero intro sequence on load
   document.querySelectorAll(".phero [data-rv], .ghero [data-rv]").forEach(function(el, k){ el.style.setProperty("--d", (120 + k * 110) + "ms"); });
   var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); var par = e.target.parentElement; if (par && par.scrollWidth > par.clientWidth + 4) [].slice.call(par.children).forEach(function(c){ c.classList.add("in"); }); } }); }, { rootMargin: "0px 0px -8% 0px", threshold: 0.06 });
-  document.querySelectorAll("[data-rv]:not(.in)").forEach(function(el){ io.observe(el); });
+  var _go=function(){ document.querySelectorAll("[data-rv]:not(.in)").forEach(function(el){ io.observe(el); }); }; if (document.documentElement.classList.contains("pt-in")) setTimeout(_go, 650); else _go();
   // tab switches: replay the reveal inside the newly opened panel
   document.querySelectorAll("[data-tabs] [role=tab]").forEach(function(t){
     t.addEventListener("click", function(){
@@ -294,4 +294,36 @@ sizeWorks(); onScroll();
   function u(){ raf=0; var h=document.documentElement.scrollHeight-innerHeight, y=scrollY; b.classList.toggle('on', y>innerHeight*1.2); b.style.setProperty('--tp', h>0?(y/h).toFixed(3):0); }
   addEventListener('scroll',function(){ if(!raf) raf=requestAnimationFrame(u); },{passive:true}); u();
   b.addEventListener('click',function(e){ e.preventDefault(); scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}); });
+})();
+
+/* v20 cinematic page transitions */
+(function(){
+  var R = document.documentElement, pt = document.getElementById("pt"); if (!pt) return;
+  var T = pt.querySelector(".pt-t");
+  var RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var NAMES = {"":"Laurus","index":"Laurus","hizmetler":"Hizmetler","calismalar":"Çalışmalar","mobil-uygulama":"Uygulamalar","surec":"Süreç","fiyatlar":"Fiyatlar","hakkimizda":"Hakkımızda","iletisim":"İletişim","rehber":"Rehber","web-tasarim":"Web Tasarım","sosyal-medya":"Sosyal Medya","reklam-yonetimi":"Reklam","google-isletme":"Google ve SEO"};
+  function key(p){ return p.replace(/^\//,"").replace(/\.html$/,"").replace(/\/$/,""); }
+  // arriving
+  if (R.classList.contains("pt-in")) {
+    T.textContent = window.__pt || "Laurus";
+    var go = function(){ R.classList.add("pt-go"); setTimeout(function(){ R.classList.add("pt-done"); R.classList.remove("pt-in","pt-go"); }, 1500); };
+    if (document.fonts && document.fonts.ready) Promise.race([document.fonts.ready, new Promise(function(r){ setTimeout(r, 400); })]).then(function(){ setTimeout(go, 120); }); else setTimeout(go, 200);
+  }
+  // leaving
+  document.addEventListener("click", function(e){
+    var a = e.target.closest && e.target.closest("a[href]"); if (!a || e.defaultPrevented) return;
+    if (e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.target === "_blank" || a.hasAttribute("download") || a.classList.contains("js-wa")) return;
+    var u; try { u = new URL(a.href, location.href); } catch(_) { return; }
+    if (u.origin !== location.origin || /^(mailto|tel):/.test(a.getAttribute("href"))) return;
+    if (u.pathname === location.pathname) return; // same page (anchors)
+    if (/\.(xml|txt|png|jpe?g|webp|pdf)$/i.test(u.pathname)) return;
+    if (RM) return;
+    e.preventDefault();
+    var name = a.dataset.pt || NAMES[key(u.pathname)] || (a.textContent || "").trim().slice(0, 28) || "Laurus";
+    T.textContent = name;
+    R.classList.remove("pt-done","pt-in","pt-go"); R.classList.add("pt-out");
+    try { sessionStorage.setItem("lnav", name); } catch(_) {}
+    setTimeout(function(){ location.href = u.href; }, 720);
+  });
+  addEventListener("pageshow", function(ev){ if (ev.persisted) { R.classList.remove("pt-out","pt-in","pt-go"); } });
 })();

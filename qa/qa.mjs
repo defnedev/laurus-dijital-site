@@ -2,7 +2,7 @@ let chromium; try{({chromium}=await import('/opt/node22/lib/node_modules/playwri
 import fs0 from 'fs'; const S=(process.env.QA_OUT||'/tmp/laurus-qa')+'/'; fs0.mkdirSync(S,{recursive:true});
 const BASE=process.env.QA_BASE||'https://laurusdijital.com';
 const sm=await (await fetch(BASE+'/sitemap.xml')).text();
-const urls=[...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);
+const urls=[...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1].replace('https://laurusdijital.com',BASE));
 const b=await chromium.launch(); const report=[]; const links=new Set();
 for (const [vw,vh,tag,mob] of [[390,844,'m',true],[1440,900,'d',false]]){
  const c=await b.newContext({viewport:{width:vw,height:vh},isMobile:mob,hasTouch:mob});
@@ -10,7 +10,7 @@ for (const [vw,vh,tag,mob] of [[390,844,'m',true],[1440,900,'d',false]]){
   const p=await c.newPage(); const errs=[],fails=[];
   p.on('pageerror',e=>errs.push(e.message)); p.on('console',m=>{if(m.type()==='error')errs.push('console:'+m.text().slice(0,120))});
   p.on('response',r=>{if(r.status()>=400)fails.push(r.status()+' '+r.url())}); p.on('requestfailed',r=>{const ft=(r.failure()||{}).errorText||''; if(/ABORTED/.test(ft)&&/\.(webm|mp4)(\?|$)/.test(r.url())) return; fails.push('fail '+r.url()+' '+ft)});
-  await p.addInitScript(()=>{try{sessionStorage.setItem('li','1')}catch(e){}});
+  await p.addInitScript(()=>{try{sessionStorage.setItem('li','1');sessionStorage.setItem('noin','1')}catch(e){}});
   const res=await p.goto(u,{waitUntil:'networkidle',timeout:45000});
   // scroll through to trigger lazy/reveal
   const H=await p.evaluate(()=>document.body.scrollHeight);
@@ -58,9 +58,9 @@ console.log('tiny/smallTap', report.filter(r=>r.tiny||r.smallTap.length).map(r=>
 
 // contact form test
 { const b2=await chromium.launch(); const c2=await b2.newContext({viewport:{width:390,height:844}}); const p2=await c2.newPage();
-  await p2.addInitScript(()=>{try{sessionStorage.setItem('li','1')}catch(e){}});
+  await p2.addInitScript(()=>{try{sessionStorage.setItem('li','1');sessionStorage.setItem('noin','1')}catch(e){}});
   await c2.route(/wa\.me|whatsapp/, r=>r.fulfill({status:200,body:'ok'}));
-  await p2.goto(BASE+'/',{waitUntil:'networkidle'});
+  await p2.goto(BASE+'/iletisim',{waitUntil:'networkidle'});
   let ok=false; try{ await p2.fill('#f-name','Test'); await p2.fill('#f-biz','Deneme, kafe');
     const [pop]=await Promise.all([c2.waitForEvent('page',{timeout:8000}), p2.click('#quick button[type=submit]')]);
     ok=decodeURIComponent(pop.url()).includes('Merhaba, ben Test'); }catch(e){}

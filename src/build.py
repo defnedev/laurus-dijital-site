@@ -62,12 +62,13 @@ def header(active):
 <header class="nav"><div class="wrap">
 <a class="brand" href="index.html" aria-label="Laurus Dijital ana sayfa"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#logo"/></svg><span><b>Laurus</b><small>DİJİTAL AJANS</small></span></a>
 <nav class="menu" id="menu" aria-label="Ana menü">
-<div class="dd"><button type="button" aria-expanded="false" aria-controls="dd-svc">Hizmetler {I['down']}</button><div class="dd-panel" id="dd-svc" hidden>{dd}</div></div>
+<div class="dd"><button type="button" aria-expanded="false" aria-controls="dd-svc">Hizmetler {I['down']}</button><div class="dd-panel" id="dd-svc" hidden><a class="dd-all" href="hizmetler.html"><span><b>Tüm hizmetler</b><small>Hepsi tek sayfada, yakından</small></span></a>{dd}</div></div>
 <a href="calismalar.html"{cur("calismalar")}>Çalışmalar</a>
+<a href="mobil-uygulama.html"{cur("uygulama")}>Uygulamalar</a>
+<a href="surec.html"{cur("surec")}>Süreç</a>
 <a href="fiyatlar.html"{cur("fiyatlar")}>Fiyatlar</a>
 <a href="hakkimizda.html"{cur("hakkimizda")}>Hakkımızda</a>
-<a href="rehber.html"{cur("rehber")}>Rehber</a>
-<a class="btn btn-gold" href="#iletisim">Teklif al</a>
+<a class="btn btn-gold" href="iletisim.html">Teklif al</a>
 </nav>
 <button class="burger" id="burger" aria-label="Menüyü aç" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 </div></header>'''
@@ -149,7 +150,7 @@ def footer():
     FSHORT = {"Sosyal medya ve içerik":"Sosyal medya","Google ve Meta reklamları":"Google ve Meta reklamı","Google İşletme ve yerel SEO":"Google profili ve SEO","Mobil uygulama ve yazılım":"Mobil uygulama","Güzellik salonu ve nail bar":"Güzellik ve nail bar","Avukat ve danışmanlık":"Avukat ve danışman"}
     svc = "".join(f'<li><a href="{h}">{tr_title(FSHORT.get(t,t))}</a></li>' for h,_,t,_ in SERVICES)
     sec = "".join(f'<li><a href="{x["slug"]}">{tr_title(FSHORT.get(x["short"],x["short"]))}</a></li>' for x in SECTORS)
-    lau = [("hakkimizda.html","Hakkımızda"),("calismalar.html","Çalışmalar"),("fiyatlar.html","Fiyatlar"),("index.html#sss","Sık Sorulanlar"),("rehber.html","Rehber"),("web-sitesi-yaptirmak.html","Web Sitesi Yaptırmak"),("sosyal-medya-yonetimi-fiyatlari.html","Sosyal Medya Fiyatları")]
+    lau = [("hizmetler.html","Tüm Hizmetler"),("calismalar.html","Çalışmalar"),("surec.html","Süreç"),("fiyatlar.html","Fiyatlar"),("hakkimizda.html","Hakkımızda"),("iletisim.html","İletişim"),("surec.html#sss","Sık Sorulanlar"),("rehber.html","Rehber"),("web-sitesi-yaptirmak.html","Web Sitesi Yaptırmak"),("sosyal-medya-yonetimi-fiyatlari.html","Sosyal Medya Fiyatları")]
     lau = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in lau)
     up = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>'
     return f'''<footer><div class="wrap">
@@ -243,12 +244,13 @@ def layout(slug, title, desc, body, active=""):
 <script type="application/ld+json">{sch}</script>
 </head>
 <body class="pg-{slug.replace('.html','')}">
-<script>try{{if("scrollRestoration" in history)history.scrollRestoration="manual";var _n=performance.getEntriesByType&&performance.getEntriesByType("navigation")[0];if(_n&&_n.type==="reload"){{if(location.hash)history.replaceState(null,"",location.pathname+location.search);window.scrollTo(0,0);addEventListener("load",function(){{window.scrollTo(0,0)}})}}}}catch(e){{}}document.documentElement.classList.add("js");try{{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&!sessionStorage.getItem("li")){{document.documentElement.classList.add("intro");sessionStorage.setItem("li","1")}}}}catch(e){{}}</script>
+<script>try{{if("scrollRestoration" in history)history.scrollRestoration="manual";var _n=performance.getEntriesByType&&performance.getEntriesByType("navigation")[0];if(_n&&_n.type==="reload"){{if(location.hash)history.replaceState(null,"",location.pathname+location.search);window.scrollTo(0,0);addEventListener("load",function(){{window.scrollTo(0,0)}})}}}}catch(e){{}}document.documentElement.classList.add("js");try{{var _r=document.documentElement,_rm=matchMedia("(prefers-reduced-motion: reduce)").matches,_lv=sessionStorage.getItem("lnav"),_q=sessionStorage.getItem("noin");sessionStorage.removeItem("lnav");var _bf=_n&&_n.type==="back_forward";if(_lv&&!_rm){{_r.classList.add("pt-in");window.__pt=_lv}}else if(!_rm&&!_q&&!_bf){{_r.classList.add("intro")}}}}catch(e){{}}</script>
 <div id="intro"><div class="cur c1" aria-hidden="true"></div><div class="cur c2" aria-hidden="true"></div>
 <div class="in-mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path class="in-l" d="M13.8 8v21.2H29"/><path class="in-leaf" d="M20.5 21.5c.2-6.4 3.6-11 9.5-13 .4 6.3-3.1 11.2-9.5 13z"/></svg><span>Laurus</span></div>
 <div class="cuts" aria-hidden="true"><div class="cut" style="--i:0"><img src="img/salon-fon.webp" alt=""><b>Kuaför</b></div><div class="cut" style="--i:1"><img src="img/kafe-latte.webp" alt=""><b>Kafe</b></div><div class="cut" style="--i:2"><img src="img/dis-klinik.webp" alt=""><b>Klinik</b></div><div class="cut" style="--i:3"><img src="img/otel-havuz.webp" alt=""><b>Otel</b></div><div class="cut" style="--i:4"><img src="img/hukuk-kutuphane.webp" alt=""><b>Avukat</b></div><div class="cut" style="--i:5"><img src="img/butik-aski.webp" alt=""><b>Butik</b></div><div class="cut" style="--i:6"><img src="img/emlak-salon.webp" alt=""><b>Emlak</b></div><div class="cut" style="--i:7"><img src="img/pet-beyaz.webp" alt=""><b>Pet kuaför</b></div></div>
 <div class="in-end" aria-hidden="true"><span>Senin işin için.</span><i></i></div>
 <button type="button" class="in-skip" id="in-skip">Geç</button></div>
+<div id="pt" aria-hidden="true"><div class="pt-p"></div><div class="pt-c"><svg viewBox="0 0 40 40"><use href="#logo"/></svg><span class="pt-t">Laurus</span><i></i></div></div>
 {SYMBOLS}
 {header(active)}
 <main id="main">
@@ -1255,13 +1257,17 @@ def page_about():
             "Laurus Dijital, 8 yılı aşkın yazılım ve dijital deneyime sahip ekibiyle web tasarım, mobil uygulama, sosyal medya yönetimi, Google Ads ve SEO hizmeti veren İstanbul merkezli dijital ajans.", body)
 
 
+exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"v20.py")).read())
 PAGES = {
   "index.html": (page_index, ""),
+  "hizmetler.html": (page_services, "svc"),
+  "surec.html": (page_process, "surec"),
+  "iletisim.html": (page_contact, "iletisim"),
   "web-tasarim.html": (page_web, "svc"),
   "sosyal-medya.html": (page_social, "svc"),
   "reklam-yonetimi.html": (page_ads, "svc"),
   "google-isletme.html": (page_gbp, "svc"),
-  "mobil-uygulama.html": (page_apps, "svc"),
+  "mobil-uygulama.html": (page_apps, "uygulama"),
   "calismalar.html": (page_cases, "calismalar"),
   "fiyatlar.html": (page_prices, "fiyatlar"),
   "rehber.html": (page_rehber, "rehber"),
@@ -1282,6 +1288,9 @@ PAGE_META.update({
   "fiyatlar.html": dict(crumb=[("Fiyatlar","/fiyatlar")]),
 })
 PAGE_META["rehber.html"] = dict(crumb=[("Rehber","/rehber")])
+PAGE_META["hizmetler.html"] = dict(crumb=[("Hizmetler","/hizmetler")])
+PAGE_META["surec.html"] = dict(crumb=[("Süreç","/surec")])
+PAGE_META["iletisim.html"] = dict(crumb=[("İletişim","/iletisim")])
 PAGE_META["hakkimizda.html"] = dict(crumb=[("Hakkımızda","/hakkimizda")])
 for _g in GUIDES:
     PAGE_META[_g["slug"]] = dict(crumb=[("Rehber","/rehber"),(_g["kw"].capitalize().replace("Seo","SEO"),"/"+_g["slug"].replace(".html",""))])
@@ -1299,6 +1308,7 @@ def build():
     shutil.copytree(os.path.join(SRC,"img"), os.path.join(OUT,"img"))
     for slug,(fn,active) in PAGES.items():
         title, desc, body = fn()
+        body = v20_post(slug, body)
         open(os.path.join(OUT,slug),"w").write(title_case_html(layout(slug,title,desc,body,active)))
     urls = "".join(f"<url><loc>{BASE}{'/' if s=='index.html' else '/'+s.replace('.html','')}</loc><lastmod>{GUIDE_DATE}</lastmod><changefreq>{'weekly' if s=='index.html' else 'monthly'}</changefreq><priority>{'1.0' if s=='index.html' else ('0.9' if s in GMAP or s in ('web-tasarim.html','sosyal-medya.html','mobil-uygulama.html') else '0.7')}</priority></url>" for s in PAGES)
     open(os.path.join(OUT,"sitemap.xml"),"w").write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
