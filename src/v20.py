@@ -35,14 +35,15 @@ def stats_strip():
     st = [("8+","yıllık deneyim"),("5","kendi uygulamamız"),("19 bin+","takipçi: Little Paws"),("7 gün","ilk taslaktan yayına")]
     return '<section class="stats" aria-label="Rakamlarla Laurus"><div class="wrap stats-in">' + "".join(f'<div data-rv style="--d:{i*90}ms"><b>{a}</b><span>{b}</span></div>' for i,(a,b) in enumerate(st)) + '</div></section>'
 
+POS={'app/ohsame-d':'85% 40%','real/nil-galeri':'50% 75%'}
 def explore():
     T = [("hizmetler.html","tasarim-laptop","Hizmetler","Web sitesi, sosyal medya, reklam, SEO ve uygulama.","xbig"),
-         ("calismalar.html","app/seven-d","Çalışmalar","Gerçek müşteriler, gerçek işler.","xbig"),
+         ("calismalar.html","real/nil-galeri","Çalışmalar","Gerçek müşteriler, gerçek işler.","xbig"),
          ("mobil-uygulama.html","app/ohsame-d","Uygulamalar","Kendi tasarlayıp kodladığımız beş ürün.",""),
          ("surec.html","planlama","Süreç","İlk görüşmeden yayına yedi gün.",""),
          ("fiyatlar.html","is-sahibi","Fiyatlar","Açık fiyat, sürpriz yok.",""),
          ("hakkimizda.html","cekim","Hakkımızda","8 yılı aşkın deneyim, tek ekip.","")]
-    tiles = "".join(f'<a class="xt {c}" href="{h}" data-pt="{t}" data-rv style="--d:{i*80}ms"><img src="img/{p}.webp" alt="" loading="lazy" decoding="async"><span class="xt-sh" aria-hidden="true"></span><span class="xt-tx"><b>{t}</b><small>{d}</small></span><span class="xt-ar" aria-hidden="true">{I["arrow"]}</span></a>' for i,(h,p,t,d,c) in enumerate(T))
+    tiles = "".join(f'<a class="xt {c}" href="{h}" data-pt="{t}" data-rv style="--d:{i*80}ms"><img src="img/{p}.webp" alt="" loading="lazy" decoding="async"{(" style=\"object-position:"+POS[p]+"\"") if p in POS else ""}><span class="xt-sh" aria-hidden="true"></span><span class="xt-tx"><b>{t}</b><small>{d}</small></span><span class="xt-ar" aria-hidden="true">{I["arrow"]}</span></a>' for i,(h,p,t,d,c) in enumerate(T))
     return f'''<section class="xpl" aria-labelledby="h-xpl"><div class="wrap">
 <div class="khead" data-rv><div><span class="eyebrow">Keşfet</span><h2 id="h-xpl">Laurus'u yakından tanı.</h2></div><p>Her bölüm kendi sayfasında. Birini seç, içeri gir.</p></div>
 <div class="xgrid">{tiles}</div></div></section>'''
