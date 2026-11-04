@@ -35,39 +35,36 @@ def stats_strip():
     st = [("8+","yıllık deneyim"),("5","kendi uygulamamız"),("19 bin+","takipçi: Little Paws"),("7 gün","ilk taslaktan yayına")]
     return '<section class="stats" aria-label="Rakamlarla Laurus"><div class="wrap stats-in">' + "".join(f'<div data-rv style="--d:{i*90}ms"><b>{a}</b><span>{b}</span></div>' for i,(a,b) in enumerate(st)) + '</div></section>'
 
-POS={'app/ohsame-d':'85% 40%','real/nil-galeri':'50% 75%'}
+POS={"app/os-world":"50% 38%",'real/nil-galeri':'50% 75%'}
 def explore():
     T = [("hizmetler.html","tasarim-laptop","Hizmetler","Web sitesi, sosyal medya, reklam, SEO ve uygulama.","xbig"),
          ("calismalar.html","real/nil-galeri","Çalışmalar","Gerçek müşteriler, gerçek işler.","xbig"),
-         ("mobil-uygulama.html","app/ohsame-d","Uygulamalar","Kendi tasarlayıp kodladığımız beş ürün.",""),
+         ("mobil-uygulama.html","app/os-world","Uygulamalar","Kendi tasarlayıp kodladığımız beş ürün.",""),
          ("surec.html","planlama","Süreç","İlk görüşmeden yayına yedi gün.",""),
          ("fiyatlar.html","is-sahibi","Fiyatlar","Açık fiyat, sürpriz yok.",""),
          ("hakkimizda.html","cekim","Hakkımızda","8 yılı aşkın deneyim, tek ekip.","")]
-    tiles = "".join(f'<a class="xt {c}" href="{h}" data-pt="{t}" data-rv style="--d:{i*80}ms"><img src="img/{p}.webp" alt="" loading="lazy" decoding="async"{(" style=\"object-position:"+POS[p]+"\"") if p in POS else ""}><span class="xt-sh" aria-hidden="true"></span><span class="xt-tx"><b>{t}</b><small>{d}</small></span><span class="xt-ar" aria-hidden="true">{I["arrow"]}</span></a>' for i,(h,p,t,d,c) in enumerate(T))
-    return f'''<section class="xpl" aria-labelledby="h-xpl"><div class="wrap">
-<div class="khead" data-rv><div><span class="eyebrow">Keşfet</span><h2 id="h-xpl">Laurus'u yakından tanı.</h2></div><p>Her bölüm kendi sayfasında. Birini seç, içeri gir.</p></div>
+    tiles = "".join(f'<a class="xt {c}" href="{h}" data-pt="{t}" data-tilt data-rv style="--d:{i*80}ms"><img src="img/{p}.webp" alt="" loading="lazy" decoding="async"{(" style=\"object-position:"+POS[p]+"\"") if p in POS else ""}><span class="xt-sh" aria-hidden="true"></span><span class="xt-gl" aria-hidden="true"></span><span class="xt-tx"><b>{t}</b><small>{d}</small></span><span class="xt-ar" aria-hidden="true">{I["arrow"]}</span></a>' for i,(h,p,t,d,c) in enumerate(T))
+    return f'''<section class="xpl" id="kesfet" aria-labelledby="h-xpl"><div class="wrap">
+<div class="khead" data-rv><div><span class="eyebrow">Keşfet</span><h2 id="h-xpl">Laurus'u yakından tanı.</h2></div><p>Her kapı ayrı bir sayfaya açılıyor. Birini seç, içeri gir.</p></div>
 <div class="xgrid">{tiles}</div></div></section>'''
 
+_H3D = [("real/nil-site","d"),("app/lp-m","p"),("app/seven-d","d"),("app/sb-home","p"),("app/feronya-d","d"),("app/os-world","p"),("app/sorbi-d","d"),("real/nil-ig","p"),("app/ohsame-d","d"),("app/nf-main","p"),("app/lp-d","d"),("app/cn-home","p"),("real/nil-galeri","d"),("app/sk-sekiz","p")]
+H3D_DATA = '<script>window.__H3D_IMGS=' + json.dumps([{"src":"/img/"+p+".webp","k":k,"href":"/calismalar"} for p,k in _H3D]) + '</script>'
 def page_index():
     slides = "".join(slide(w, i) for i, w in enumerate(WORKS))
     words = "".join(f'<span>{w}</span> ' for w in MANIFESTO.split(" "))
     body = f'''
 <section class="hero3" aria-labelledby="h-hero">
 {reel()}
+<div class="h3d" aria-hidden="true"></div>
+{H3D_DATA}
 <div class="h3-shade" aria-hidden="true"></div>
 <div class="wrap h3-in">
 <h1 id="h-hero"><span class="ln"><span>İşletmeni</span></span> <span class="ln"><span>internete</span></span> <span class="ln"><span>taşıyoruz.</span></span></h1>
 <p class="lead">İstanbul merkezli dijital ajans: web tasarım, mobil uygulama, sosyal medya yönetimi, Google reklamı ve SEO. Kuaförden otele, kliniğe kadar her işletme için tek ekip.</p>
 <div class="actions"><a class="btn btn-gold" href="iletisim.html">Ücretsiz ön görüşme al</a><a class="btn btn-line" href="calismalar.html">İşlerimizi gör</a></div>
 </div>
-<a class="h3-scroll" href="#manifesto" aria-label="Aşağı kaydır"><i></i></a>
-</section>
-<section id="manifesto" class="mani" aria-label="Ne yapıyoruz"><div class="mani-pin"><div class="wrap"><p class="mani-tx" data-mani>{words}</p></div></div></section>
-{stats_strip()}
-<section id="calismalar" class="works3" aria-labelledby="h-works">
-<div class="w3-pin"><div class="wrap w3-head" data-rv><div><span class="eyebrow">Seçilmiş işler</span><h2 id="h-works">Yaptığımız işler.</h2></div><p>Seven For Life, Feronya, Nil Pet Kuaför, Little Paws ve @astrodefnee. <a class="link" href="calismalar.html">Hepsini incele</a></p></div>
-<div class="w3-track snap" data-hscroll>{slides}</div>
-<div class="wrap w3-prog" aria-hidden="true"><i data-hprog></i></div></div>
+<a class="h3-scroll" href="#kesfet" aria-label="Aşağı kaydır"><i></i></a>
 </section>
 {explore()}
 {cta_band()}
@@ -95,7 +92,7 @@ def page_services():
 <section class="chaps" aria-label="Hizmet ayrıntıları"><div class="wrap">{ch}</div></section>
 {cta_band("Hangisiyle|başlayalım?","Emin değilsen sorun değil. İşletmeni anlat, en hızlı sonuç verecek adımı birlikte seçelim.","kadin-telefon")}
 '''
-    return ("Hizmetler: Web Tasarım, Sosyal Medya, Reklam, SEO ve Uygulama | Laurus Dijital","Web sitesi, sosyal medya yönetimi, Google ve Meta reklamları, Google İşletme Profili ve SEO, mobil uygulama: Laurus Dijital'in tüm hizmetleri tek sayfada.", body)
+    return ("Hizmetler: Web Tasarım, Sosyal Medya, Reklam, SEO ve Uygulama | Laurus Dijital","Web sitesi, sosyal medya yönetimi, Google ve Meta reklamları, Google İşletme Profili ve SEO, mobil uygulama. Her hizmetin kendi sayfası, fiyatı ve örnek işleri.", body)
 
 def page_process():
     steps = [("1. gün","Tanışma","15 dakikalık görüşmede işletmeni, müşterini ve hedefini dinleriz. Neye ihtiyacın olduğunu birlikte netleştiririz."),

@@ -62,7 +62,7 @@ def header(active):
 <header class="nav"><div class="wrap">
 <a class="brand" href="index.html" aria-label="Laurus Dijital ana sayfa"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#logo"/></svg><span><b>Laurus</b><small>DİJİTAL AJANS</small></span></a>
 <nav class="menu" id="menu" aria-label="Ana menü">
-<div class="dd"><button type="button" aria-expanded="false" aria-controls="dd-svc">Hizmetler {I['down']}</button><div class="dd-panel" id="dd-svc" hidden><a class="dd-all" href="hizmetler.html"><span><b>Tüm hizmetler</b><small>Hepsi tek sayfada, yakından</small></span></a>{dd}</div></div>
+<div class="dd"><button type="button" aria-expanded="false" aria-controls="dd-svc">Hizmetler {I['down']}</button><div class="dd-panel" id="dd-svc" hidden>{dd}</div></div>
 <a href="calismalar.html"{cur("calismalar")}>Çalışmalar</a>
 <a href="mobil-uygulama.html"{cur("uygulama")}>Uygulamalar</a>
 <a href="surec.html"{cur("surec")}>Süreç</a>
@@ -150,7 +150,7 @@ def footer():
     FSHORT = {"Sosyal medya ve içerik":"Sosyal medya","Google ve Meta reklamları":"Google ve Meta reklamı","Google İşletme ve yerel SEO":"Google profili ve SEO","Mobil uygulama ve yazılım":"Mobil uygulama","Güzellik salonu ve nail bar":"Güzellik ve nail bar","Avukat ve danışmanlık":"Avukat ve danışman"}
     svc = "".join(f'<li><a href="{h}">{tr_title(FSHORT.get(t,t))}</a></li>' for h,_,t,_ in SERVICES)
     sec = "".join(f'<li><a href="{x["slug"]}">{tr_title(FSHORT.get(x["short"],x["short"]))}</a></li>' for x in SECTORS)
-    lau = [("hizmetler.html","Tüm Hizmetler"),("calismalar.html","Çalışmalar"),("surec.html","Süreç"),("fiyatlar.html","Fiyatlar"),("hakkimizda.html","Hakkımızda"),("iletisim.html","İletişim"),("surec.html#sss","Sık Sorulanlar"),("rehber.html","Rehber"),("web-sitesi-yaptirmak.html","Web Sitesi Yaptırmak"),("sosyal-medya-yonetimi-fiyatlari.html","Sosyal Medya Fiyatları")]
+    lau = [("hizmetler.html","Hizmetler"),("calismalar.html","Çalışmalar"),("surec.html","Süreç"),("fiyatlar.html","Fiyatlar"),("hakkimizda.html","Hakkımızda"),("iletisim.html","İletişim"),("surec.html#sss","Sık Sorulanlar"),("rehber.html","Rehber"),("web-sitesi-yaptirmak.html","Web Sitesi Yaptırmak"),("sosyal-medya-yonetimi-fiyatlari.html","Sosyal Medya Fiyatları")]
     lau = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in lau)
     up = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>'
     return f'''<footer><div class="wrap">
@@ -1338,7 +1338,7 @@ def build():
     live = open(os.path.join(LV,"d3g.min.js")).read() + "\nwindow.LAUR_LAND=" + open(os.path.join(LV,"land.json")).read() + ";\n" + open(os.path.join(LV,"live-src.js")).read()
     open(os.path.join(OUT,"assets","live.js"),"w").write(live)
     lver = hashlib.md5(live.encode()).hexdigest()[:10]
-    sj = os.path.join(OUT,"assets","site.js"); sjt = open(sj).read().replace("__LIVEV__", lver); open(sj,"w").write(sjt)
+    sj = os.path.join(OUT,"assets","site.js"); h3v = hashlib.md5(open(os.path.join(OUT,"assets","hero3d.js"),"rb").read()).hexdigest()[:8]; sjt = open(sj).read().replace("__LIVEV__", lver).replace("__H3DV__", h3v); open(sj,"w").write(sjt)
     ver = hashlib.md5((c + open(os.path.join(OUT,"assets","site.js")).read()).encode()).hexdigest()[:10]
     _ih = {}
     def _imgv(m):

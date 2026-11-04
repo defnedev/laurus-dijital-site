@@ -1747,3 +1747,24 @@ html:not(.scrolled) body:has(.chero) header.nav{background:linear-gradient(180de
   .ch-h{font-size:clamp(40px,11.5vw,64px)}
   .chero.long .ch-h{font-size:clamp(34px,9.5vw,52px)}
 }
+/* v21: 3D home hero + tilt portals */
+.h3d{position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity 1.8s ease}
+.h3d canvas{display:block;width:100%;height:100%}
+.hero3.h3d-on .h3d{opacity:1}
+.hero3 .reel{transition:opacity 1.4s ease}
+.hero3.h3d-on .reel{opacity:0}
+.hero3.h3d-on .h3-shade{background:linear-gradient(90deg,rgba(11,18,14,.96) 0%,rgba(11,18,14,.88) 34%,rgba(11,18,14,.35) 52%,rgba(11,18,14,0) 64%),linear-gradient(0deg,var(--night) 0%,rgba(13,22,17,0) 24%)}
+.hero3.h3d-hov{cursor:pointer}
+@media (max-width:759px){.hero3.h3d-on .h3-shade{background:linear-gradient(180deg,rgba(11,18,14,.1) 0%,rgba(11,18,14,.2) 26%,rgba(11,18,14,.92) 46%,var(--night) 70%)}}
+.xgrid{perspective:1400px}
+.xt[data-tilt]{transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.xt[data-tilt].tilting{transition:transform .12s linear,box-shadow .5s;box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 0 1px rgba(217,178,76,.35)}
+.xt[data-tilt] .xt-tx{transform:translateZ(46px)}
+.xt[data-tilt] .xt-ar{transform:translateZ(60px)}
+.xt[data-tilt]:hover .xt-ar{transform:translateZ(60px) rotate(-45deg)}
+.xt-gl{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(420px circle at var(--gx,50%) var(--gy,50%),rgba(255,226,150,.18),transparent 60%)}
+.xt.tilting .xt-gl{opacity:1}
+.xt img{animation:xtkb 18s ease-in-out infinite alternate}
+@keyframes xtkb{from{transform:scale(1.04) translate3d(0,0,0)}to{transform:scale(1.1) translate3d(-1.5%,-1%,0)}}
+.xt:hover img{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.xt img{animation:none}.h3d{display:none}}

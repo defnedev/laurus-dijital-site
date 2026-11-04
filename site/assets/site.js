@@ -327,3 +327,22 @@ sizeWorks(); onScroll();
   });
   addEventListener("pageshow", function(ev){ if (ev.persisted) { R.classList.remove("pt-out","pt-in","pt-go"); } });
 })();
+
+// v21: 3D showcase on the home hero + 3D tilt portals
+(function(){
+  var host=document.querySelector('.h3d'); if(!host) return;
+  var ok=false; try{var c=document.createElement('canvas'); ok=!!(window.WebGLRenderingContext&&(c.getContext('webgl2')||c.getContext('webgl')));}catch(e){}
+  var sd=navigator.connection&&navigator.connection.saveData;
+  if(!ok||sd) return;
+  var wait=document.documentElement.classList.contains('intro')?4600:150;
+  setTimeout(function(){ import('/assets/hero3d.js?v=f5c0857c').catch(function(){}); }, wait);
+})();
+(function(){
+  if(matchMedia('(hover: none)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('[data-tilt]').forEach(function(el){
+    var raf=0;
+    el.addEventListener('pointermove',function(e){ var r=el.getBoundingClientRect(), x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+      cancelAnimationFrame(raf); raf=requestAnimationFrame(function(){ el.style.setProperty('--rx',((.5-y)*10).toFixed(2)+'deg'); el.style.setProperty('--ry',((x-.5)*12).toFixed(2)+'deg'); el.style.setProperty('--gx',(x*100).toFixed(1)+'%'); el.style.setProperty('--gy',(y*100).toFixed(1)+'%'); el.classList.add('tilting'); }); });
+    el.addEventListener('pointerleave',function(){ cancelAnimationFrame(raf); el.classList.remove('tilting'); el.style.setProperty('--rx','0deg'); el.style.setProperty('--ry','0deg'); });
+  });
+})();
