@@ -335,7 +335,7 @@ sizeWorks(); onScroll();
   var sd=navigator.connection&&navigator.connection.saveData;
   if(!ok||sd) return;
   var wait=document.documentElement.classList.contains('intro')?4600:150;
-  setTimeout(function(){ import('/assets/hero3d.js?v=f5c0857c').catch(function(){}); }, wait);
+  setTimeout(function(){ import('/assets/hero3d.js?v=3bd436de').catch(function(){}); }, wait);
 })();
 (function(){
   if(matchMedia('(hover: none)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
