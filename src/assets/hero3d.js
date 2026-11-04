@@ -174,7 +174,7 @@ function start() {
   function size() {
     const r = host.getBoundingClientRect(); W = r.width || innerWidth; H = r.height || innerHeight;
     renderer.setSize(W, H, false); camera.aspect = W / H; camera.updateProjectionMatrix();
-    if (W >= 1000) { ox = 5.0; oy = 0.25; sc = 0.84; } else if (W >= 760) { ox = 3.8; oy = 0; sc = 0.7; } else { ox = 0.2; oy = 4.6; sc = 0.6; }
+    if (W >= 1000) { ox = 4.6; oy = 0.25; sc = 0.82; } else if (W >= 760) { ox = 3.8; oy = 0; sc = 0.7; } else { ox = 0.2; oy = 4.6; sc = 0.6; }
     stage.position.set(ox, oy, 0); stage.scale.setScalar(sc);
   }
   size(); addEventListener('resize', size);
