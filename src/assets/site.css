@@ -1752,7 +1752,7 @@ html:not(.scrolled) body:has(.chero) header.nav{background:linear-gradient(180de
 .h3d canvas{display:block;width:100%;height:100%}
 .hero3.h3d-on .h3d{opacity:1}
 .hero3 .reel{transition:opacity 1.4s ease}
-.hero3.h3d-on .reel{opacity:0}
+.hero3.h3d-on .reel{opacity:0!important;visibility:hidden;transition:opacity 1.4s ease,visibility 0s 1.4s}
 .hero3.h3d-on .h3-shade{background:linear-gradient(90deg,rgba(11,18,14,.96) 0%,rgba(11,18,14,.88) 34%,rgba(11,18,14,.35) 52%,rgba(11,18,14,0) 64%),linear-gradient(0deg,var(--night) 0%,rgba(13,22,17,0) 24%)}
 .hero3.h3d-hov{cursor:pointer}
 @media (max-width:759px){.hero3.h3d-on .h3-shade{background:linear-gradient(180deg,rgba(11,18,14,.1) 0%,rgba(11,18,14,.2) 26%,rgba(11,18,14,.92) 46%,var(--night) 70%)}}
