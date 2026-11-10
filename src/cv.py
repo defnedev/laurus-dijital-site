@@ -1,5 +1,13 @@
 # ===== v22: CV hazırlama ve kariyer danışmanlığı sayfaları =====
 CV_DATE = "2026-11-10"
+KBAR = [("cv-hazirlama.html","CV Hazırlama"),("cv-ornekleri.html","CV Örnekleri"),("ats-uyumlu-cv.html","ATS Uyumlu CV"),("ingilizce-cv.html","İngilizce CV"),("on-yazi-ornegi.html","Ön Yazı"),("maas-beklentisi.html","Maaş Beklentisi")]
+def KMENU(slug):
+    return "\n".join(f'<a href="{h}"{" aria-current=\"page\"" if h==slug else ""}>{t}</a>' for h,t in KBAR)
+def kbar(slug):
+    return ""
+def _kbar_unused(slug):
+    it = "".join(f'<a href="{h}"{" aria-current=\"page\"" if h==slug else ""}>{t}</a>' for h,t in KBAR)
+    return f'''<nav class="kbar" aria-label="Laurus Kariyer"><div class="wrap kbar-in"><span class="kbar-id"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#logo"/></svg><span>Laurus <b>Kariyer</b></span></span><div class="kbar-l">{it}</div></div></nav>'''
 WA_CV = "https://wa.me/905434309702?text=" + "Merhaba%2C%20CV%27mi%20%C3%BCcretsiz%20taratmak%20istiyorum."
 
 def cv_scanner():
@@ -17,7 +25,7 @@ def cv_scanner():
 </div>'''
 
 def cv_cta(title="CV'n okunuyor mu?|Ücretsiz öğren.", sub="CV'ni WhatsApp'tan gönder, okunabilirlik raporunu aynı gün yollayalım. Ödeme adımı yok."):
-    return f'''<section class="ctab" aria-label="Ücretsiz CV taraması"><div class="ctab-bg" aria-hidden="true"><img src="img/planlama.webp" alt="" loading="lazy" decoding="async"></div>
+    return f'''<section class="ctab cvcta" aria-label="Ücretsiz CV taraması"><div class="ctab-bg cvcta-bg" aria-hidden="true"><i class="cvcta-p p1"></i><i class="cvcta-p p2"></i><i class="cvcta-p p3"></i><i class="cvcta-beam"></i></div>
 <div class="wrap ctab-in" data-rv><span class="eyebrow">Ücretsiz CV taraması</span><h2>{_words(title)}</h2><p class="lead">{sub}</p>
 <div class="actions"><a class="btn btn-gold js-wa" href="{WA_CV}">CV'mi ücretsiz tarat</a><a class="btn btn-line" href="cv-hazirlama.html#paketler">Paketleri gör</a></div></div></section>'''
 
@@ -67,7 +75,8 @@ def page_cv():
     gh = "".join(f'<a class="cvg" href="{h}" data-rv style="--d:{i*70}ms"><b>{t}</b><span>{d}</span><i aria-hidden="true">{I["arrow"]}</i></a>' for i,(h,t,d) in enumerate(guides))
     body = f'''
 {cine_hero("CV hazırlama","CV hazırlama ve kariyer danışmanlığı","CV'n işverene|ulaşmıyor olabilir.","Başvurular artık önce yazılıma düşüyor. Güzel görünen bir CV, yazılım onu okuyamıyorsa hiç gönderilmemiş sayılır. CV'ni okunur hale getiriyor, nereye nasıl yükleyeceğini gösteriyor, istersen telefonda birlikte oturuyoruz.",["planlama","tasarim-laptop","kadin-telefon"],f'<a class="btn btn-gold js-wa" href="{WA_CV}">CV\'mi ücretsiz tarat</a><a class="btn btn-line" href="#paketler">Paketleri gör</a>','',
-  '<ul class="cv-pills"><li>Abonelik yok</li><li>Kart bilgisi istemiyoruz</li><li>Tek seferlik ödeme</li></ul>')}
+  '<ul class="cv-pills"><li>Abonelik yok</li><li>Kart bilgisi istemiyoruz</li><li>Tek seferlik ödeme</li></ul>').replace('<section class="chero ','<section class="chero cvh ',1).replace('<div class="ch-shade"','<div class="cv3d" aria-hidden="true"></div><div class="ch-shade"',1)}
+{kbar("cv-hazirlama.html")}
 <section class="cvx" aria-labelledby="h-cvx"><div class="wrap cvx-g">
 <div class="cvx-tx" data-rv><span class="eyebrow">Ücretsiz okunabilirlik raporu</span><h2 id="h-cvx">{_words("Yazılım senin CV'ni|nasıl okuyor?")}</h2>
 <p class="lead">Başvurduğun şirketlerin çoğu CV'ni önce bir yazılıma okutur. Tablo içindeki yetenekler, ikonla birleşmiş unvanlar ve iki kolonlu düzenler bu yazılımda kaybolur. Raporumuz hangi alanın okunmadığını ve nasıl düzeltileceğini satır satır gösterir.</p>
@@ -145,7 +154,8 @@ def cvg_page(slug, kw, h1, lead, read, title, desc, sections, faq, related):
     rel = "".join(f'<a class="grel" href="{r}">{names.get(r,r)}</a>' for r in related)
     mid = f'<aside class="gnote cvnote"><b>CV\'ni biz hazırlayalım</b><p>ATS uyumlu Türkçe ve İngilizce CV, ilana özel ön yazı ve profil metinleri. Önce ücretsiz okunabilirlik raporunu al, sonra karar ver.</p><a class="btn btn-gold js-wa" href="{WA_CV}">Ücretsiz CV taraması</a></aside>'
     body = f'''
-{cine_hero('<a href="cv-hazirlama.html">CV hazırlama</a> / ' + kw, "CV rehberi", h1, lead, ["planlama","tasarim-laptop","kadin-telefon"], f'<a class="btn btn-gold js-wa" href="{WA_CV}">CV\'mi ücretsiz tarat</a><a class="btn btn-line" href="cv-hazirlama.html#paketler">Paketler</a>', "sm", f'<p class="gmeta">Güncelleme: 10 Kasım 2026 · Okuma: {read} · Laurus Dijital</p>')}
+{cine_hero('<a href="cv-hazirlama.html">CV hazırlama</a> / ' + kw, "CV rehberi", h1, lead, ["planlama"], f'<a class="btn btn-gold js-wa" href="{WA_CV}">CV\'mi ücretsiz tarat</a><a class="btn btn-line" href="cv-hazirlama.html#paketler">Paketler</a>', "sm cvgh", f'<p class="gmeta">Güncelleme: 10 Kasım 2026 · Okuma: {read} · Laurus Kariyer</p>')}
+{kbar(slug)}
 <section class="light gbody"><div class="wrap ggrid">
 <aside class="gtoc"><b>Bu rehberde</b><ol>{toc}</ol><a class="btn btn-gold js-wa" href="{WA_CV}">Ücretsiz CV taraması</a></aside>
 <article class="gart">{secs}{mid}

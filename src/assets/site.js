@@ -346,3 +346,12 @@ sizeWorks(); onScroll();
     el.addEventListener('pointerleave',function(){ cancelAnimationFrame(raf); el.classList.remove('tilting'); el.style.setProperty('--rx','0deg'); el.style.setProperty('--ry','0deg'); });
   });
 })();
+// v23: Laurus Kariyer 3D hero
+(function(){
+  var host=document.querySelector('.cv3d'); if(!host) return;
+  var ok=false; try{var c=document.createElement('canvas'); ok=!!(window.WebGLRenderingContext&&(c.getContext('webgl2')||c.getContext('webgl')));}catch(e){}
+  var sd=navigator.connection&&navigator.connection.saveData;
+  if(!ok||sd) return;
+  var wait=document.documentElement.classList.contains('intro')?4600:150;
+  setTimeout(function(){ import('/assets/cv3d.js?v=__CV3DV__').catch(function(){}); }, wait);
+})();

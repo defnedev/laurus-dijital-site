@@ -57,20 +57,28 @@ SYMBOLS = '''<svg width="0" height="0" style="position:absolute" aria-hidden="tr
 <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7c.1.2 1.9 2.9 4.6 4 1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2z"/></symbol>
 </svg>'''
 
-def header(active):
+def header(active, slug=''):
     dd = "".join(f'<a href="{h}"><span class="ic">{I[ic]}</span><span><b>{tr_title(t)}</b><small>{d}</small></span></a>' for h,ic,t,d in SERVICES)
     def cur(k): return ' aria-current="page"' if active == k else ""
-    return f'''<a class="skip" href="#main">İçeriğe geç</a>
-<header class="nav"><div class="wrap">
-<a class="brand" href="index.html" aria-label="Laurus Dijital ana sayfa"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#logo"/></svg><span><b>Laurus</b><small>DİJİTAL AJANS</small></span></a>
-<nav class="menu" id="menu" aria-label="Ana menü">
-<div class="dd"><button type="button" aria-expanded="false" aria-controls="dd-svc">Hizmetler {I['down']}</button><div class="dd-panel" id="dd-svc" hidden>{dd}</div></div>
+    cv = active == "cv"
+    AMENU = f'''<div class="dd"><button type="button" aria-expanded="false" aria-controls="dd-svc">Hizmetler {I['down']}</button><div class="dd-panel" id="dd-svc" hidden>{dd}</div></div>
 <a href="calismalar.html"{cur("calismalar")}>Çalışmalar</a>
 <a href="mobil-uygulama.html"{cur("uygulama")}>Uygulamalar</a>
 <a href="surec.html"{cur("surec")}>Süreç</a>
 <a href="fiyatlar.html"{cur("fiyatlar")}>Fiyatlar</a>
 <a href="hakkimizda.html"{cur("hakkimizda")}>Hakkımızda</a>
-<a class="btn btn-gold" href="iletisim.html">Teklif al</a>
+'''
+    NAVCV = '<a class="nav-cv" href="cv-hazirlama.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>CV Hazırlama</a>'
+    sub = "KARİYER" if cv else "DİJİTAL AJANS"
+    cta = f'<a class="btn btn-gold js-wa" href="{WA_CV}">CV\'mi gönder</a>' if cv else '<a class="btn btn-gold" href="iletisim.html">Teklif al</a>'
+    return f'''<a class="skip" href="#main">İçeriğe geç</a>
+<header class="nav"><div class="wrap">
+<a class="brand" href="{'cv-hazirlama.html' if cv else 'index.html'}" aria-label="{'Laurus Kariyer' if cv else 'Laurus Dijital ana sayfa'}"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#logo"/></svg><span><b>Laurus</b><small>{sub}</small></span></a>
+<nav class="menu" id="menu" aria-label="Ana menü">
+{KMENU(slug) if cv else AMENU}
+<span class="nav-sep" aria-hidden="true"></span>
+{'<a class="nav-back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Laurus Dijital</a>' if cv else NAVCV}
+{cta}
 </nav>
 <button class="burger" id="burger" aria-label="Menüyü aç" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 </div></header>'''
@@ -148,25 +156,31 @@ def title_case_html(h):
         if h == before: break
     return h
 
-def footer():
+def footer(active=""):
     FSHORT = {"Sosyal medya ve içerik":"Sosyal medya","Google ve Meta reklamları":"Google ve Meta reklamı","Google İşletme ve yerel SEO":"Google profili ve SEO","Mobil uygulama ve yazılım":"Mobil uygulama","CV hazırlama ve kariyer":"CV hazırlama","Güzellik salonu ve nail bar":"Güzellik ve nail bar","Avukat ve danışmanlık":"Avukat ve danışman"}
     svc = "".join(f'<li><a href="{h}">{tr_title(FSHORT.get(t,t))}</a></li>' for h,_,t,_ in SERVICES)
     sec = "".join(f'<li><a href="{x["slug"]}">{tr_title(FSHORT.get(x["short"],x["short"]))}</a></li>' for x in SECTORS)
     lau = [("hizmetler.html","Hizmetler"),("calismalar.html","Çalışmalar"),("surec.html","Süreç"),("fiyatlar.html","Fiyatlar"),("hakkimizda.html","Hakkımızda"),("iletisim.html","İletişim"),("surec.html#sss","Sık Sorulanlar"),("rehber.html","Rehber"),("web-sitesi-yaptirmak.html","Web Sitesi Yaptırmak"),("sosyal-medya-yonetimi-fiyatlari.html","Sosyal Medya Fiyatları")]
     lau = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in lau)
+    if active == "cv":
+        kar = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in KBAR)
+        ajs = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in [("index.html","Laurus Dijital ana sayfa"),("hizmetler.html","Ajans hizmetleri"),("hakkimizda.html","Hakkımızda"),("iletisim.html","İletişim")])
+        lau = f'''<div><h4>Laurus Kariyer</h4><ul>{kar}</ul></div>
+<div><h4>Paketler</h4><ul><li><a href="cv-hazirlama.html#paketler">CV Hazırlama · 1.290 ₺</a></li><li><a href="cv-hazirlama.html#paketler">CV + Başvuru Kiti · 2.490 ₺</a></li><li><a href="cv-hazirlama.html#paketler">Birebir Danışmanlık</a></li><li><a class="js-wa" href="{WA_CV}">Ücretsiz CV taraması</a></li></ul></div>
+<div><h4>Laurus Dijital</h4><ul>{ajs}</ul></div>'''
     up = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>'
+    FB_AG = '<div class="fbrand"><a class="brand" href="index.html" aria-label="Laurus Dijital"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#logo"/></svg><span><b>Laurus</b><small>DİJİTAL AJANS</small></span></a><p class="about">İstanbul merkezli dijital ajans. Web tasarım, mobil uygulama, sosyal medya yönetimi, Google Ads ve SEO; Türkiye geneline online hizmet.</p></div>'
+    FB_CV = '<div class="fbrand"><a class="brand" href="cv-hazirlama.html" aria-label="Laurus Kariyer"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#logo"/></svg><span><b>Laurus</b><small>KARİYER</small></span></a><p class="about">ATS uyumlu CV, ön yazı ve kariyer danışmanlığı. Abonelik yok, kart bilgisi istemiyoruz. Laurus Kariyer, Laurus Dijital\'in kariyer markasıdır.</p></div>'
+    FL_AG = f'<div><h4>Hizmetler</h4><ul>{svc}</ul></div><div class="fsec"><h4>Sektörler</h4><ul>{sec}</ul></div><div><h4>Laurus</h4><ul>{lau}</ul></div>'
     return f'''<footer><div class="wrap">
 <div class="fgrid2">
-<div class="fbrand"><a class="brand" href="index.html" aria-label="Laurus Dijital"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#logo"/></svg><span><b>Laurus</b><small>DİJİTAL AJANS</small></span></a>
-<p class="about">İstanbul merkezli dijital ajans. Web tasarım, mobil uygulama, sosyal medya yönetimi, Google Ads ve SEO; Türkiye geneline online hizmet.</p></div>
+{FB_CV if active=="cv" else FB_AG}
 <nav class="flinks" aria-label="Alt menü">
-<div><h4>Hizmetler</h4><ul>{svc}</ul></div>
-<div class="fsec"><h4>Sektörler</h4><ul>{sec}</ul></div>
-<div><h4>Laurus</h4><ul>{lau}</ul></div>
+{lau if active=="cv" else FL_AG}
 </nav></div>
 <div class="fbot"><span>© 2026 Laurus Dijital · Tüm hakları saklıdır.</span><span class="fbot-r"><span>Bu site çerez kullanmaz.</span></span></div>
 </div></footer>
-<a class="wa-float js-wa" href="https://wa.me/905434309702" aria-label="WhatsApp'tan yaz">{I['wa']}</a>
+<a class="wa-float js-wa" href="{WA_CV if active=='cv' else 'https://wa.me/905434309702'}" aria-label="WhatsApp'tan yaz">{I['wa']}</a>
 <a class="to-top" href="#main" aria-label="Sayfanın başına dön"><svg class="tt-ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22"/><circle class="tt-p" cx="24" cy="24" r="22" pathLength="100"/></svg>{up}</a>'''
 
 import json, re
@@ -257,11 +271,11 @@ def layout(slug, title, desc, body, active=""):
 <button type="button" class="in-skip" id="in-skip">Geç</button></div>
 <div id="pt" aria-hidden="true"><div class="pt-p"></div><div class="pt-c"><svg viewBox="0 0 40 40"><use href="#logo"/></svg><span class="pt-t">Laurus</span><i></i></div></div>
 {SYMBOLS}
-{header(active)}
+{header(active, slug)}
 <main id="main">
 {body}
 </main>
-{footer()}
+{footer(active)}
 <script src="assets/site.js"></script>
 </body>
 </html>
@@ -1345,7 +1359,7 @@ def build():
     live = open(os.path.join(LV,"d3g.min.js")).read() + "\nwindow.LAUR_LAND=" + open(os.path.join(LV,"land.json")).read() + ";\n" + open(os.path.join(LV,"live-src.js")).read()
     open(os.path.join(OUT,"assets","live.js"),"w").write(live)
     lver = hashlib.md5(live.encode()).hexdigest()[:10]
-    sj = os.path.join(OUT,"assets","site.js"); h3v = hashlib.md5(open(os.path.join(OUT,"assets","hero3d.js"),"rb").read()).hexdigest()[:8]; sjt = open(sj).read().replace("__LIVEV__", lver).replace("__H3DV__", h3v); open(sj,"w").write(sjt)
+    sj = os.path.join(OUT,"assets","site.js"); h3v = hashlib.md5(open(os.path.join(OUT,"assets","hero3d.js"),"rb").read()).hexdigest()[:8]; sjt = open(sj).read().replace("__LIVEV__", lver).replace("__H3DV__", h3v).replace("__CV3DV__", hashlib.md5(open(os.path.join(OUT,"assets","cv3d.js"),"rb").read()).hexdigest()[:8]); open(sj,"w").write(sjt)
     ver = hashlib.md5((c + open(os.path.join(OUT,"assets","site.js")).read()).encode()).hexdigest()[:10]
     _ih = {}
     def _imgv(m):
