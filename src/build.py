@@ -72,12 +72,12 @@ def header(active, slug=''):
     sub = "KARİYER" if cv else "DİJİTAL AJANS"
     cta = f'<a class="btn btn-gold js-wa" href="{WA_CV}">CV\'mi gönder</a>' if cv else '<a class="btn btn-gold" href="iletisim.html">Teklif al</a>'
     return f'''<a class="skip" href="#main">İçeriğe geç</a>
-<header class="nav"><div class="wrap">
+<header class="nav{' nav-k' if cv else ''}"><div class="wrap">
 <a class="brand" href="{'cv-hazirlama.html' if cv else 'index.html'}" aria-label="{'Laurus Kariyer' if cv else 'Laurus Dijital ana sayfa'}"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#logo"/></svg><span><b>Laurus</b><small>{sub}</small></span></a>
 <nav class="menu" id="menu" aria-label="Ana menü">
 {KMENU(slug) if cv else AMENU}
 <span class="nav-sep" aria-hidden="true"></span>
-{'<a class="nav-back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Laurus Dijital</a>' if cv else NAVCV}
+{'<span class="bsw" role="group" aria-label="Laurus markaları"><a href="index.html">Ajans</a><b aria-current="true">Kariyer</b></span>' if cv else NAVCV}
 {cta}
 </nav>
 <button class="burger" id="burger" aria-label="Menüyü aç" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -163,10 +163,10 @@ def footer(active=""):
     lau = [("hizmetler.html","Hizmetler"),("calismalar.html","Çalışmalar"),("surec.html","Süreç"),("fiyatlar.html","Fiyatlar"),("hakkimizda.html","Hakkımızda"),("iletisim.html","İletişim"),("surec.html#sss","Sık Sorulanlar"),("rehber.html","Rehber"),("web-sitesi-yaptirmak.html","Web Sitesi Yaptırmak"),("sosyal-medya-yonetimi-fiyatlari.html","Sosyal Medya Fiyatları")]
     lau = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in lau)
     if active == "cv":
-        kar = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in KBAR)
+        kar = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in KBAR + [("cv-hakkimda-yazisi.html","CV Hakkımda Yazısı"),("yeni-mezun-cv.html","Yeni Mezun CV"),("mulakatta-kendini-tanitma.html","Mülakatta Kendini Tanıtma")])
         ajs = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in [("index.html","Laurus Dijital ana sayfa"),("hizmetler.html","Ajans hizmetleri"),("hakkimizda.html","Hakkımızda"),("iletisim.html","İletişim")])
         lau = f'''<div><h4>Laurus Kariyer</h4><ul>{kar}</ul></div>
-<div><h4>Paketler</h4><ul><li><a href="cv-hazirlama.html#paketler">CV Hazırlama · 1.290 ₺</a></li><li><a href="cv-hazirlama.html#paketler">CV + Başvuru Kiti · 2.490 ₺</a></li><li><a href="cv-hazirlama.html#paketler">Birebir Danışmanlık</a></li><li><a class="js-wa" href="{WA_CV}">Ücretsiz CV taraması</a></li></ul></div>
+<div><h4>Paketler</h4><ul><li><a href="cv-hazirlama.html#paketler">CV Hazırlama · 790 ₺</a></li><li><a href="cv-hazirlama.html#paketler">CV + Başvuru Kiti · 1.490 ₺</a></li><li><a href="cv-hazirlama.html#paketler">Birebir Danışmanlık</a></li><li><a class="js-wa" href="{WA_CV}">Ücretsiz CV taraması</a></li><li><a href="cv-hazirlama-fiyatlari.html">CV hazırlama fiyatları</a></li></ul></div>
 <div><h4>Laurus Dijital</h4><ul>{ajs}</ul></div>'''
     up = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>'
     FB_AG = '<div class="fbrand"><a class="brand" href="index.html" aria-label="Laurus Dijital"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#logo"/></svg><span><b>Laurus</b><small>DİJİTAL AJANS</small></span></a><p class="about">İstanbul merkezli dijital ajans. Web tasarım, mobil uygulama, sosyal medya yönetimi, Google Ads ve SEO; Türkiye geneline online hizmet.</p></div>'
@@ -202,6 +202,7 @@ def schemas(slug, url, title, desc):
         n,price,d = m["service"]
         sv={"@type":"Service","name":n,"description":d,"provider":{"@id":BASE+"/#org"},"areaServed":"TR","url":url}
         if price: sv["offers"]={"@type":"Offer","price":price,"priceCurrency":"TRY","url":url+"#fiyat"}
+        if m.get("offers"): sv["offers"]=[{"@type":"Offer","name":on,"price":op,"priceCurrency":"TRY","url":url+"#paketler","availability":"https://schema.org/InStock"} for on,op in m["offers"]]; sv["serviceType"]="CV hazırlama"
         graph.append(sv)
     if slug in globals().get("GMAP", {}):
         g = GMAP[slug]

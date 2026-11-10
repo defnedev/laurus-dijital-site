@@ -13,7 +13,7 @@ function start() {
   const mobile = innerWidth < 760;
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' }); }
-  catch (e) { return; }
+  catch (e) { hero.classList.add('cv3d-off'); return; }
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, mobile ? 1.7 : 1.8));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;

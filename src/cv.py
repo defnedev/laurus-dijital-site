@@ -55,8 +55,8 @@ def page_cv():
              ("Kamu portalı","Meslek kodu seçimi ve beceri beyanı"),
              ("Şirket panelleri","Maaş beklentisi, ön yazı kutusu, “neden bu pozisyon” sorusu")]
     wh = "".join(f'<li data-rv style="--d:{i*80}ms"><b>{a}</b><span>{b}</span></li>' for i,(a,b) in enumerate(where))
-    plans = [("CV","1.290 ₺","tek seferlik","Hızlıca okunur bir CV isteyenler",["Kısa CV, Türkçe ve İngilizce","Detaylı özgeçmiş, Türkçe","ATS okunabilirlik raporu","PDF ve Word","2 düzeltme turu"],"","CV paketi"),
-             ("CV + Başvuru Kiti","2.490 ₺","tek seferlik","Aktif başvuru yapanlar",["CV paketinin tamamı","Detaylı özgeçmiş, İngilizce","5 ilana özel ön yazı","Her ilan için maaş rakamı ve gerekçesi","Profil alanları için hazır metinler"],"hot","CV + Başvuru Kiti"),
+    plans = [("CV","790 ₺","tek seferlik","Hızlıca okunur bir CV isteyenler",["Kısa CV, Türkçe ve İngilizce","Detaylı özgeçmiş, Türkçe","ATS okunabilirlik raporu","PDF ve Word","2 düzeltme turu"],"","CV paketi"),
+             ("CV + Başvuru Kiti","1.490 ₺","tek seferlik","Aktif başvuru yapanlar",["CV paketinin tamamı","Detaylı özgeçmiş, İngilizce","5 ilana özel ön yazı","Her ilan için maaş rakamı ve gerekçesi","Profil alanları için hazır metinler"],"hot","CV + Başvuru Kiti"),
              ("Birebir Danışmanlık","Görüşmede netleşir","ihtiyacına göre","Süreci biriyle birlikte yürütmek isteyenler",["Başvuru Kiti'nin tamamı","60 dakika birebir görüşme","Profil kurulumu ve alan doldurma desteği","Başvurduğun sitelerde ön yazı yazımı","10 gün WhatsApp desteği ve süreç takibi"],"","Birebir danışmanlık")]
     ph = ""
     for n,p,u,f,l,h,key in plans:
@@ -71,7 +71,10 @@ def page_cv():
               ("ingilizce-cv.html","İngilizce CV","Başlık karşılıkları, güçlü fiiller ve örnek özet."),
               ("on-yazi-ornegi.html","Ön yazı örnekleri","Deneyimli, yeni mezun ve kariyer değiştiren için 3 hazır şablon."),
               ("maas-beklentisi.html","Maaş beklentisi","Formdaki kutuya ve mülakatta ne yazılır, nasıl söylenir."),
-              ("cv-ornekleri.html#cv-nasil-yazilir","CV nasıl yazılır","Yedi bölümde, sırasıyla, ne yazılır.")]
+              ("cv-ornekleri.html#cv-nasil-yazilir","CV nasıl yazılır","Yedi bölümde, sırasıyla, ne yazılır."),
+              ("cv-hakkimda-yazisi.html","CV hakkımda yazısı","3 cümlelik formül ve kopyalanabilir 10 özet örneği."),
+              ("yeni-mezun-cv.html","Yeni mezun CV örneği","Deneyim olmadan güçlü CV: bölüm sırası ve dolu örnek."),
+              ("mulakatta-kendini-tanitma.html","Mülakatta kendini tanıtma","“Kendinizden bahseder misiniz?” için 60 saniyelik cevap.")]
     gh = "".join(f'<a class="cvg" href="{h}" data-rv style="--d:{i*70}ms"><b>{t}</b><span>{d}</span><i aria-hidden="true">{I["arrow"]}</i></a>' for i,(h,t,d) in enumerate(guides))
     body = f'''
 {cine_hero("CV hazırlama","CV hazırlama ve kariyer danışmanlığı","CV'n işverene|ulaşmıyor olabilir.","Başvurular artık önce yazılıma düşüyor. Güzel görünen bir CV, yazılım onu okuyamıyorsa hiç gönderilmemiş sayılır. CV'ni okunur hale getiriyor, nereye nasıl yükleyeceğini gösteriyor, istersen telefonda birlikte oturuyoruz.",["planlama","tasarim-laptop","kadin-telefon"],f'<a class="btn btn-gold js-wa" href="{WA_CV}">CV\'mi ücretsiz tarat</a><a class="btn btn-line" href="#paketler">Paketleri gör</a>','',
@@ -96,7 +99,7 @@ def page_cv():
 <section id="paketler" class="light ksec" aria-labelledby="h-pk"><div class="wrap">
 <div class="khead" data-rv><div><span class="eyebrow">Paketler</span><h2 id="h-pk">Fiyatlar açık.</h2></div><p>Deneme süresi, sepet ve otomatik yenileme yok. Danışmanlığın kapsamını ihtiyacına göre görüşmede birlikte belirliyoruz.</p></div>
 <div class="kplans">{ph}</div>
-<div class="cvjet" data-rv><span><b>Sadece bir ön yazı mı lazım?</b> Jeton al: 1 jeton = 1 ilana özel ön yazı ve o ilan için maaş rakamı. 1 jeton 249 ₺, 5 jeton 990 ₺. Jetonların süresi dolmaz.</span><a class="btn btn-ink js-wa" href="https://wa.me/905434309702?text=Merhaba%2C%20%C3%B6n%20yaz%C4%B1%20jetonu%20almak%20istiyorum.">Jeton al</a></div>
+<div class="cvjet" data-rv><span><b>Sadece bir ön yazı mı lazım?</b> Jeton al: 1 jeton = 1 ilana özel ön yazı ve o ilan için maaş rakamı. 1 jeton 149 ₺, 5 jeton 590 ₺. Jetonların süresi dolmaz.</span><a class="btn btn-ink js-wa" href="https://wa.me/905434309702?text=Merhaba%2C%20%C3%B6n%20yaz%C4%B1%20jetonu%20almak%20istiyorum.">Jeton al</a></div>
 </div></section>
 <section class="ksec" aria-labelledby="h-hum"><div class="wrap cvh-g">
 <div data-rv><span class="eyebrow">İnsan desteği</span><h2 id="h-hum">{_words("Karşında konuşabileceğin|biri var.")}</h2>
@@ -116,8 +119,8 @@ def page_cv():
 {faq_list(CV_FAQ)}</div></section>
 {cv_cta()}
 '''
-    return ("CV Hazırlama Hizmeti: ATS Uyumlu CV ve Ön Yazı | Laurus Dijital",
-            "Profesyonel CV hazırlama ve CV oluşturma: ATS uyumlu Türkçe ve İngilizce CV, ilana özel ön yazı, kariyer danışmanlığı. Ücretsiz CV taraması, abonelik yok, tek seferlik ödeme.", body)
+    return ("CV Hazırlama Hizmeti: ATS Uyumlu Profesyonel CV | Laurus",
+            "Profesyonel CV hazırlama hizmeti: ATS uyumlu Türkçe ve İngilizce özgeçmiş, ön yazı ve kariyer danışmanlığı. 790 ₺'den, ücretsiz CV taraması, abonelik yok.", body)
 
 # ---------- SEO rehberleri ----------
 def _ul(items): return "<ul>" + "".join(f"<li>{x}</li>" for x in items) + "</ul>"
@@ -151,6 +154,7 @@ def cvg_page(slug, kw, h1, lead, read, title, desc, sections, faq, related):
     toc = "".join(f'<li><a href="#{sid}">{t}</a></li>' for sid,t,_ in sections)
     secs = "".join(f'<section id="{sid}" class="gsec">' + (f"<h2>{t}</h2>" if t else "") + f'{b}</section>' for sid,t,b in sections)
     names = {"cv-hazirlama.html":"CV hazırlama hizmeti","cv-ornekleri.html":"CV örnekleri","ats-uyumlu-cv.html":"ATS uyumlu CV","ingilizce-cv.html":"İngilizce CV","on-yazi-ornegi.html":"Ön yazı örnekleri","maas-beklentisi.html":"Maaş beklentisi"}
+    names.update({"cv-hazirlama-fiyatlari.html":"CV hazırlama fiyatları","cv-hakkimda-yazisi.html":"CV hakkımda yazısı örnekleri","yeni-mezun-cv.html":"Yeni mezun CV örneği","mulakatta-kendini-tanitma.html":"Mülakatta kendini tanıtma"})
     rel = "".join(f'<a class="grel" href="{r}">{names.get(r,r)}</a>' for r in related)
     mid = f'<aside class="gnote cvnote"><b>CV\'ni biz hazırlayalım</b><p>ATS uyumlu Türkçe ve İngilizce CV, ilana özel ön yazı ve profil metinleri. Önce ücretsiz okunabilirlik raporunu al, sonra karar ver.</p><a class="btn btn-gold js-wa" href="{WA_CV}">Ücretsiz CV taraması</a></aside>'
     body = f'''
@@ -274,7 +278,90 @@ CV_NAMES = {"cv-ornekleri.html":"CV örnekleri","ats-uyumlu-cv.html":"ATS uyumlu
 for _s,_f in CV_PAGES.items():
     PAGES[_s] = (_f, "cv")
     if _s == "cv-hazirlama.html":
-        PAGE_META[_s] = dict(crumb=[("CV hazırlama","/cv-hazirlama")], service=("CV hazırlama ve kariyer danışmanlığı","1290","ATS uyumlu Türkçe ve İngilizce CV, ilana özel ön yazı ve kariyer danışmanlığı."))
+        PAGE_META[_s] = dict(crumb=[("CV hazırlama","/cv-hazirlama")], service=("CV hazırlama ve kariyer danışmanlığı","790","ATS uyumlu Türkçe ve İngilizce CV, ilana özel ön yazı ve kariyer danışmanlığı."), offers=[("CV Hazırlama","790"),("CV + Başvuru Kiti","1490"),("Ön yazı jetonu","149")])
     else:
         PAGE_META[_s] = dict(crumb=[("CV hazırlama","/cv-hazirlama"),(CV_NAMES[_s],"/"+_s.replace(".html",""))], article=True)
 PT_NAMES.update({"cv-hazirlama":"CV Hazırlama","cv-ornekleri":"CV Örnekleri","ats-uyumlu-cv":"ATS Uyumlu CV","ingilizce-cv":"İngilizce CV","on-yazi-ornegi":"Ön Yazı","maas-beklentisi":"Maaş Beklentisi"})
+
+# ---------- v24: keyword guides (fiyat, hakkımda, yeni mezun, mülakat) ----------
+def _exs(items): return "".join(_ex(t, x) for t, x in items)
+
+def page_cv_prices():
+    tbl = '<div class="gtbl"><table><thead><tr><th>Paket</th><th>İçerik</th><th>Fiyat</th></tr></thead><tbody><tr><td>CV</td><td>Kısa CV (Türkçe ve İngilizce), detaylı Türkçe özgeçmiş, ATS okunabilirlik raporu, PDF ve Word, 2 düzeltme turu</td><td><b>790 ₺</b></td></tr><tr><td>CV + Başvuru Kiti</td><td>CV paketi, İngilizce detaylı özgeçmiş, 5 ilana özel ön yazı, maaş rakamı ve gerekçesi, profil metinleri</td><td><b>1.490 ₺</b></td></tr><tr><td>Ön yazı jetonu</td><td>1 ilana özel ön yazı ve o ilan için maaş rakamı</td><td><b>149 ₺</b> (5\'li 590 ₺)</td></tr><tr><td>Birebir danışmanlık</td><td>60 dakika görüşme, profil kurulumu, başvuru desteği</td><td>Görüşmede netleşir</td></tr></tbody></table></div>'
+    secs = [("etkenler","CV hazırlama fiyatını belirleyen 5 etken", _ol(["<b>Deneyim seviyesi:</b> yeni mezun CV'si ile 15 yıllık yönetici özgeçmişi aynı emek değildir.","<b>Dil:</b> yalnızca Türkçe mi, İngilizce de isteniyor mu?","<b>Kapsam:</b> sadece CV mi; ön yazı, profil metni ve maaş araştırması da var mı?","<b>Düzeltme hakkı:</b> kaç tur revizyon dahil?","<b>Teslim süresi:</b> acil işler genelde daha pahalıdır."]) + "<p>Türkiye'de profesyonel CV hazırlama hizmeti, kapsamına göre birkaç yüz liradan birkaç bin liraya kadar değişiyor. Fiyatı karşılaştırırken rakama değil, pakete ne girdiğine bak.</p>"),
+            ("paketler","Laurus Kariyer paketleri ve fiyatları", tbl + '<p>Tüm ödemeler tek seferliktir; abonelik yoktur. Ayrıntılar için <a href="cv-hazirlama.html#paketler">CV hazırlama hizmeti</a> sayfasına bak.</p>'),
+            ("ucretsiz","Ücretsiz araçlar ne zaman yeter?", "<p>Deneyimin azsa, başvurduğun ilan sayısı sınırlıysa ve yazı yazmakta rahatsan ücretsiz bir şablonla iyi bir CV çıkarabilirsin; <a href=\"cv-ornekleri.html\">CV örnekleri</a> ve <a href=\"ats-uyumlu-cv.html\">ATS uyumlu CV</a> rehberlerimiz bunun için var.</p><p>Şu durumlarda profesyonel destek almak mantıklıdır: çok başvurup dönüş alamıyorsan, sektör ya da kariyer değiştiriyorsan, yurt dışına başvuruyorsan ya da deneyimini kâğıda dökmekte zorlanıyorsan.</p>"),
+            ("ucuz","Çok ucuz hizmetlerde nelere dikkat etmeli?", _ul(["Hazır şablona yalnızca bilgilerini yapıştıran işler; içerik aynı kalır.","Tablo ve grafik dolu, yazılımların okuyamadığı tasarımlar.","Düzeltme hakkı olmayan ya da Word dosyası vermeyen teslimler.","Kişisel verinin ne olacağını söylemeyen satıcılar."])),
+            ("sure","Süreç ve teslim süresi", "<p>CV'ni WhatsApp'tan ya da e-postayla gönderirsin; aynı gün ücretsiz okunabilirlik raporunu alırsın. Onay verirsen dosyaların 2 iş günü içinde hazır olur. İki düzeltme turu fiyata dahildir.</p>")]
+    faq = [("CV hazırlatmak ne kadar tutar?","Laurus Kariyer'de CV paketi 790 ₺, CV + Başvuru Kiti 1.490 ₺'dir. Ödeme tek seferliktir. Piyasada fiyatlar kapsama göre birkaç yüz liradan birkaç bin liraya kadar değişir."),
+           ("CV'yi profesyonele yazdırmak işe yarar mı?","CV tek başına iş buldurmaz; ama okunmayan bir CV hiç değerlendirilmez. Profesyonel destek, deneyimini doğru kelimelerle ve yazılımların okuyabildiği bir düzende sunmanı sağlar."),
+           ("CV kaç günde teslim edilir?","Ücretsiz rapor aynı gün, CV dosyaları onayından sonra 2 iş günü içinde teslim edilir."),
+           ("İngilizce CV ayrıca ücretli mi?","Kısa İngilizce CV, CV paketine dahildir. Detaylı İngilizce özgeçmiş Başvuru Kiti'nde yer alır.")]
+    return cvg_page("cv-hazirlama-fiyatlari.html","CV hazırlama fiyatları","CV hazırlama|fiyatları",
+        "Profesyonel CV hazırlama ne kadar tutar, fiyat neye göre değişir? Paket içerikleri, ücretsiz araçların yettiği durumlar ve ucuz hizmetlerde dikkat edilecekler.","4 dakika",
+        "CV Hazırlama Fiyatları 2026: Hizmet Ne Kadar Tutar?",
+        "Profesyonel CV hazırlama fiyatları neye göre değişir? Paket içerikleri, ATS uyumlu CV ve ön yazı ücretleri, ucuz hizmetlerde dikkat edilecekler.",
+        secs, faq, ["cv-hazirlama.html","ats-uyumlu-cv.html","cv-ornekleri.html","on-yazi-ornegi.html"])
+
+def page_cv_about():
+    secs = [("nedir","Hakkımda kısmı nedir, neden önemli?", "<p>Hakkımda (profil özeti), CV'nin en üstünde duran 2–4 cümlelik tanıtımdır. İşe alımcı çoğu zaman önce burayı okur; yazılımlar da pozisyonla eşleşen kelimeleri burada arar. İyi bir özet, özgeçmişin geri kalanının okunmasını sağlar.</p>"),
+            ("formul","3 cümlelik formül", _ol(["<b>Kimsin:</b> unvanın ve deneyim yılın.","<b>Ne yaptın:</b> rakamla desteklenmiş en güçlü sonucun.","<b>Ne arıyorsun:</b> hedeflediğin rol ve katacağın değer."]) + _ex("Formülün uygulanmış hali","7 yıllık deneyime sahip dijital pazarlama uzmanıyım. Son görevimde reklam bütçesini değiştirmeden dönüşüm oranını yüzde 32 artırdım. Performans pazarlama ekibini büyütebileceğim bir yönetici rolü arıyorum.")),
+            ("yeni-mezun","Yeni mezun ve öğrenci için hakkımda örnekleri", _exs([("İşletme yeni mezunu","İşletme bölümünden 2026'da mezun oldum. Stajımda haftalık satış raporlarını hazırladım, kariyer kulübünde 300 kişilik bir etkinliğin organizasyonunda görev aldım. Pazarlama alanında öğrenerek büyüyebileceğim bir başlangıç pozisyonu arıyorum."),("Bilgisayar mühendisliği öğrencisi","Bilgisayar mühendisliği 4. sınıf öğrencisiyim. Bitirme projemde mobil bir rezervasyon uygulaması geliştirdim; iki yaz stajında web ön yüz ekibinde çalıştım. Mezuniyet sonrası tam zamanlı yazılım geliştirici olarak çalışmak istiyorum."),("Deneyimi olmayan aday","Lise mezunuyum ve ilk tam zamanlı işimi arıyorum. Yaz dönemlerinde aile işletmemizde kasa ve müşteri karşılama görevlerini yürüttüm. Dakik, öğrenmeye açık ve ekip içinde uyumlu çalışan biriyim.")])),
+            ("deneyimli","Deneyimli adaylar için hakkımda örnekleri", _exs([("Satış","B2B satışta 7 yıllık deneyime sahibim. 40 kurumsal müşteriden oluşan portföyde yıllık satışı yüzde 18 artırdım. Bölge satış yöneticiliği sorumluluğu almak istiyorum."),("Muhasebe","Genel muhasebe ve vergi süreçlerinde 6 yıllık deneyimim var. Ay sonu kapanış süresini 8 iş gününden 5 iş gününe indirdim. Kurumsal bir finans ekibinde kıdemli uzman olarak çalışmayı hedefliyorum."),("Müşteri hizmetleri","Çağrı merkezi ve canlı destek kanallarında 4 yıl çalıştım. Günde ortalama 70 görüşme yürütürken memnuniyet puanımı yüzde 92'nin üzerinde tuttum. Ekip liderliğine geçmek istiyorum."),("Proje yönetimi","Yazılım projelerinde 9 yıllık deneyime sahip proje yöneticisiyim. 12 kişilik ekiplerle 15'ten fazla projeyi zamanında teslim ettim. Çevik yöntemlerle çalışan, ürün odaklı bir ekip arıyorum.")])),
+            ("kariyer-degisikligi","Kariyer değiştirenler için örnekler", _exs([("Öğretmenlikten insan kaynaklarına","8 yıl İngilizce öğretmenliği yaptım; eğitim tasarımı, sunum ve birebir geri bildirim konularında deneyimliyim. İnsan kaynakları sertifika programını tamamladım. Eğitim ve gelişim alanında uzman yardımcısı olarak çalışmak istiyorum."),("Bankacılıktan veri analizine","Bireysel bankacılıkta 5 yıl çalıştım, müşteri verisiyle günlük raporlama yaptım. Son bir yılda SQL ve veri görselleştirme eğitimlerini tamamlayıp üç portföy projesi hazırladım. Veri analisti olarak kariyerime devam etmeyi hedefliyorum.")]) + "<p>Kariyer değiştirirken eski işindeki <b>aktarılabilir becerileri</b> ve yeni alan için attığın somut adımı (eğitim, sertifika, proje) aynı paragrafta göster.</p>"),
+            ("ingilizce","İngilizce “summary” örneği", _ex("Professional summary","Sales professional with 7 years of B2B experience. Grew a 40-account corporate portfolio by 18% year over year. Seeking a regional sales manager role where I can lead a team and expand key accounts.") + '<p>Daha fazlası için <a href="ingilizce-cv.html">İngilizce CV</a> rehberine bak.</p>'),
+            ("klise","Kaçınılacak klişeler", _ul(["“Dinamik, yenilikçi, sonuç odaklı” gibi kanıtsız sıfat dizileri.","“Kendimi geliştirebileceğim bir kurum arıyorum”: ne katacağını söylemiyor.","Beş cümleyi aşan, paragraf paragraf hayat hikâyesi.","Her ilana aynı özet: ilandaki unvanı ve iki anahtar beceriyi özete taşı."]))]
+    faq = [("CV'de hakkımda kısmı kaç cümle olmalı?","2–4 cümle, en fazla 60–70 kelime. Daha uzunu okunmaz."),
+           ("Hakkımda yazısı ile kariyer hedefi aynı şey mi?","Değil. Kariyer hedefi yalnızca ne istediğini söyler; hakkımda yazısı kim olduğunu, neyi başardığını ve ne aradığını birlikte anlatır."),
+           ("Deneyimim yoksa hakkımda kısmına ne yazarım?","Eğitimini, stajını, projelerini ve gönüllü işlerini yaz. Hangi alanda başlamak istediğini net söyle."),
+           ("Hakkımda yazısında “ben” diye mi yazılır?","Türkçede birinci tekil şahıs doğaldır (“çalıştım”, “yönettim”). “Ben” zamirini tekrar etmeye gerek yok.")]
+    return cvg_page("cv-hakkimda-yazisi.html","CV hakkımda yazısı","CV hakkımda yazısı|örnekleri",
+        "CV'de hakkımda kısmına ne yazılır? 3 cümlelik formül ve yeni mezun, deneyimli ve kariyer değiştirenler için kopyalayıp uyarlayabileceğin 10 örnek.","6 dakika",
+        "CV Hakkımda Yazısı Örnekleri: 10 Hazır Özet Metni",
+        "CV'de hakkımda kısmına ne yazılır? Yeni mezun, deneyimli ve kariyer değiştirenler için kopyalanabilir 10 hakkımda yazısı örneği ve yazım formülü.",
+        secs, faq, ["cv-hazirlama.html","cv-ornekleri.html","yeni-mezun-cv.html","ingilizce-cv.html"])
+
+def page_cv_grad():
+    sample = '<div class="gex"><b>Örnek yeni mezun CV</b><p><b>Deniz Kaya</b> · İstanbul · 05xx xxx xx xx · deniz.kaya@ornek.com</p><p><b>Profil:</b> İşletme bölümü 2026 mezunuyum. Stajımda haftalık satış raporlarını hazırladım, kariyer kulübünde etkinlik organizasyonu yürüttüm. Pazarlama alanında başlangıç pozisyonu arıyorum.</p><p><b>Eğitim:</b> İşletme, Lisans · 2022–2026 · Ortalama 3,2/4</p><p><b>Staj:</b> Satış Stajyeri, Örnek Dağıtım A.Ş. · Tem–Ağu 2025<br>• Haftalık satış raporlarını hazırlayıp ekip toplantısında sundum.<br>• 120 müşterilik listeyi güncelleyip CRM\'e aktardım.</p><p><b>Proje ve kulüp:</b> Kariyer Kulübü, Etkinlik Ekibi · 2024–2026<br>• 300 kişilik kariyer gününün organizasyonunda görev aldım.<br>• Kulübün Instagram hesabını 1.200\'den 3.400 takipçiye çıkardım.</p><p><b>Yetenekler:</b> Excel (ileri), sunum hazırlama, İngilizce B2, sosyal medya yönetimi</p></div>'
+    secs = [("ne-yazilir","Deneyim yoksa CV'ye ne yazılır?", "<p>“Deneyimim yok” çoğu zaman doğru değildir; yalnızca maaşlı iş deneyimin yoktur. Staj, bitirme projesi, kulüp, gönüllülük, yarı zamanlı iş ve aldığın eğitimler deneyimdir. Önemli olan bunları iş diliyle yazmak: ne yaptın, nasıl yaptın, ne değişti.</p>"),
+            ("sira","Yeni mezun CV'sinde bölüm sırası", _ol(["İletişim bilgileri","Profil özeti (2–3 cümle)","Eğitim: deneyim azken eğitimi üste al","Staj ve iş deneyimi","Projeler, kulüpler ve gönüllülük","Yetenekler, diller ve sertifikalar"])),
+            ("staj","Staj, proje ve kulüpleri deneyim gibi yazmak", _ul(["Her maddeye bir fiille başla: hazırladım, yürüttüm, geliştirdim, sundum.","Mümkünse rakam ver: kişi sayısı, süre, artış oranı.","Bitirme projeni tek satırda anlat: konu, kullandığın araç, sonuç.","Yarı zamanlı işleri küçümseme; kasiyerlik ve garsonluk sorumluluk ve müşteri iletişimi gösterir."])),
+            ("ornek","Dolu bir yeni mezun CV örneği", sample + '<p>Farklı meslekler için <a href="cv-ornekleri.html">CV örnekleri</a> sayfasına bak.</p>'),
+            ("ats","ATS için anahtar kelimeler", '<p>Başvurduğun ilanda geçen unvanı ve becerileri CV\'nde aynı kelimelerle yaz. İlan “Excel” diyorsa “tablo programı” yazma. Tek sütunlu, sade bir düzen kullan; ayrıntılar <a href="ats-uyumlu-cv.html">ATS uyumlu CV</a> rehberinde.</p>'),
+            ("hatalar","Sık yapılan hatalar", _ul(["Kimlik numarası, doğum yeri, medeni durum gibi gereksiz kişisel bilgiler.","İki sayfayı aşan CV: yeni mezun için tek sayfa yeter.","“Öğrenmeye açık, takım oyuncusu” gibi kanıtsız sıfatlar.","Her ilana aynı CV'yi göndermek.","Ciddi olmayan e-posta adresi."]))]
+    faq = [("Yeni mezun CV'sine not ortalaması yazılır mı?","Ortalaman 3,0/4 ve üzerindeyse yazmak avantajdır. Düşükse yazmak zorunda değilsin; proje ve stajlarını öne çıkar."),
+           ("Yeni mezun CV'si kaç sayfa olmalı?","Tek sayfa. İşe alımcı ilk bakışta eğitimini, stajını ve becerilerini görebilmeli."),
+           ("CV'ye fotoğraf konur mu?","Zorunlu değil. Türkiye'de hâlâ yaygın; koyacaksan sade, güncel ve profesyonel bir fotoğraf seç. Yurt dışı başvurularında genellikle konmaz."),
+           ("Hiç stajım yoksa ne yazarım?","Ders projelerini, bitirme tezini, kulüp ve gönüllü çalışmalarını, çevrimiçi sertifikalarını ve yarı zamanlı işlerini yaz.")]
+    return cvg_page("yeni-mezun-cv.html","Yeni mezun CV","Yeni mezun|CV örneği",
+        "İş deneyimi olmadan da güçlü bir CV yazılır. Bölüm sırası, staj ve projeleri deneyim gibi yazma, dolu bir örnek ve sık yapılan hatalar.","6 dakika",
+        "Yeni Mezun CV Örneği: Deneyimsiz CV Nasıl Hazırlanır?",
+        "İş deneyimi olmadan güçlü CV yazılır. Yeni mezun ve öğrenci CV örneği, staj ve projeleri öne çıkarma, deneyimsiz CV'de sık yapılan hatalar.",
+        secs, faq, ["cv-hazirlama.html","cv-hakkimda-yazisi.html","cv-ornekleri.html","on-yazi-ornegi.html"])
+
+def page_cv_intro():
+    secs = [("neyi-olcer","İK bu soruyla neyi ölçer?", "<p>“Bize kendinizden bahseder misiniz?” çoğu mülakatın ilk sorusudur. Karşındaki kişi hayat hikâyeni değil; kendini derli toplu anlatıp anlatamadığını, pozisyonla bağ kurup kuramadığını ve iletişim tarzını görmek ister.</p>"),
+            ("formul","Geçmiş, bugün, gelecek formülü", _ol(["<b>Bugün:</b> şu an ne yapıyorsun, en güçlü yanın ne?","<b>Geçmiş:</b> buraya nasıl geldin; bir ya da iki somut başarı.","<b>Gelecek:</b> neden bu pozisyon, neden bu şirket?"]) + "<p>Toplam süre 60–90 saniye olsun. Cevabını yaz, sesli prova et; ama ezberleme, ana başlıkları aklında tut.</p>"),
+            ("yeni-mezun","Yeni mezun için örnek cevap", _ex("Örnek","Bu yıl işletme bölümünden mezun oldum. Okul boyunca pazarlamaya ilgi duydum; kariyer kulübünde etkinlik ekibindeydim, kulübün sosyal medya hesabını yönettim ve takipçi sayısını üç katına yakın artırdım. Geçen yaz bir dağıtım şirketinde satış stajı yaptım, haftalık raporları ben hazırlıyordum. Sizin ilanınızda içerik ve raporlama birlikte geçtiği için başvurdum; ikisini de severek yapıyorum ve bu alanda kendimi geliştirmek istiyorum.")),
+            ("deneyimli","Deneyimli aday için örnek cevap", _ex("Örnek","Yedi yıldır B2B satış alanında çalışıyorum; şu an 40 kurumsal müşteriden oluşan bir portföyü yönetiyorum. Son iki yılda bu portföyde satışı yüzde 18 büyüttüm ve ekibe yeni katılan dört arkadaşın işbaşı eğitimini verdim. Bir sonraki adımda ekip yönetmek istiyorum; sizin bölge satış yöneticisi pozisyonunuz hem sektör hem de sorumluluk açısından tam aradığım yer.")),
+            ("kariyer","Kariyer değiştiren için örnek cevap", _ex("Örnek","Sekiz yıl İngilizce öğretmenliği yaptım. Bu süreçte en çok keyif aldığım iş, yeni öğretmenlere verdiğim eğitimleri tasarlamaktı. Geçen yıl insan kaynakları sertifika programını tamamladım ve bir derneğin gönüllü oryantasyon programını hazırladım. Eğitim ve gelişim alanına geçmek istiyorum; öğretmenlikteki deneyimim bu rolde doğrudan işime yarayacak.")),
+            ("ingilizce","İngilizce örnek: “Tell me about yourself”", _ex("Sample answer","I’m a sales professional with seven years of B2B experience. I currently manage a portfolio of 40 corporate accounts and grew it by 18 percent over the last two years. I also onboarded four new team members. I’m now looking for a role where I can lead a team, which is why this regional sales manager position caught my attention.")),
+            ("hatalar","Kaçınılacak hatalar", _ul(["Doğum yerinden başlayıp bütün hayatını anlatmak.","CV'yi satır satır okumak.","Üç dakikayı aşmak.","Önceki işyeri ya da yönetici hakkında olumsuz konuşmak.","Pozisyonla hiç bağ kurmadan bitirmek."]) + '<p>Mülakattan önce <a href="maas-beklentisi.html">maaş beklentisi</a> sorusuna da hazırlan; çoğu zaman aynı görüşmede gelir.</p>')]
+    faq = [("“Kendinizden bahseder misiniz?” cevabı kaç dakika sürmeli?","60–90 saniye idealdir. İki dakikayı aşarsan dinleyicinin dikkati dağılır."),
+           ("Mülakatta özel hayattan bahsedilir mi?","Gerek yok. Yaş, medeni durum ya da aile bilgisi yerine işle ilgili deneyimini ve hedefini anlat."),
+           ("Cevabı ezberlemeli miyim?","Ezber robotik durur. Üç ana başlığı aklında tut, birkaç kez sesli prova et."),
+           ("Online mülakatta ne değişir?","İçerik aynı kalır. Kameraya bak, sessiz ve aydınlık bir ortam seç, notlarını ekranın yanında anahtar kelimeler halinde tut.")]
+    return cvg_page("mulakatta-kendini-tanitma.html","Mülakatta kendini tanıtma","Mülakatta|kendini tanıtma",
+        "“Bize kendinizden bahseder misiniz?” sorusuna 60 saniyelik cevap formülü; yeni mezun, deneyimli ve kariyer değiştirenler için örnek metinler.","5 dakika",
+        "Mülakatta Kendini Tanıtma Örnekleri ve Hazır Cevaplar",
+        "“Bize kendinizden bahseder misiniz?” sorusuna 60 saniyelik cevap formülü, yeni mezun ve deneyimli için örnek metinler, kaçınılacak hatalar.",
+        secs, faq, ["cv-hazirlama.html","maas-beklentisi.html","cv-hakkimda-yazisi.html","on-yazi-ornegi.html"])
+
+_NEW = {"cv-hazirlama-fiyatlari.html":(page_cv_prices,"CV hazırlama fiyatları","CV Hazırlama Fiyatları"),
+        "cv-hakkimda-yazisi.html":(page_cv_about,"CV hakkımda yazısı","CV Hakkımda Yazısı"),
+        "yeni-mezun-cv.html":(page_cv_grad,"Yeni mezun CV","Yeni Mezun CV"),
+        "mulakatta-kendini-tanitma.html":(page_cv_intro,"Mülakatta kendini tanıtma","Mülakatta Kendini Tanıtma")}
+for _s,(_f,_n,_pt) in _NEW.items():
+    PAGES[_s] = (_f, "cv"); CV_NAMES[_s] = _n
+    PAGE_META[_s] = dict(crumb=[("CV hazırlama","/cv-hazirlama"),(_n,"/"+_s.replace(".html",""))], article=True)
+    PT_NAMES[_s.replace(".html","")] = _pt

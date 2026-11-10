@@ -351,7 +351,8 @@ sizeWorks(); onScroll();
   var host=document.querySelector('.cv3d'); if(!host) return;
   var ok=false; try{var c=document.createElement('canvas'); ok=!!(window.WebGLRenderingContext&&(c.getContext('webgl2')||c.getContext('webgl')));}catch(e){}
   var sd=navigator.connection&&navigator.connection.saveData;
-  if(!ok||sd) return;
+  var hero=host.closest('.chero'); function off(){ hero&&hero.classList.add('cv3d-off'); }
+  if(!ok||sd){ off(); return; }
   var wait=document.documentElement.classList.contains('intro')?4600:150;
-  setTimeout(function(){ import('/assets/cv3d.js?v=__CV3DV__').catch(function(){}); }, wait);
+  setTimeout(function(){ import('/assets/cv3d.js?v=__CV3DV__').catch(off); }, wait);
 })();
