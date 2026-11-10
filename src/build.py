@@ -16,6 +16,7 @@ EMAIL = "merhaba@laurusdijital.com"
 
 # ---------- icons ----------
 I = {
+ "doc": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>',
  "web": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8"/></svg>',
  "ig": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
  "ads": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5M4 19h16M8 15l4-4 3 3 5-6"/></svg>',
@@ -47,6 +48,7 @@ SERVICES = [
   ("reklam-yonetimi.html", "ads", "Google ve Meta reklamları", "Semtindeki doğru kişilere görün"),
   ("google-isletme.html", "pin", "Google İşletme ve yerel SEO", "Haritalarda bul, yorum topla"),
   ("mobil-uygulama.html", "app", "Mobil uygulama ve yazılım", "iOS, Android ve web uygulamaları"),
+  ("cv-hazirlama.html", "doc", "CV hazırlama ve kariyer", "ATS uyumlu CV, ön yazı, danışmanlık"),
 ]
 
 # ---------- layout ----------
@@ -147,7 +149,7 @@ def title_case_html(h):
     return h
 
 def footer():
-    FSHORT = {"Sosyal medya ve içerik":"Sosyal medya","Google ve Meta reklamları":"Google ve Meta reklamı","Google İşletme ve yerel SEO":"Google profili ve SEO","Mobil uygulama ve yazılım":"Mobil uygulama","Güzellik salonu ve nail bar":"Güzellik ve nail bar","Avukat ve danışmanlık":"Avukat ve danışman"}
+    FSHORT = {"Sosyal medya ve içerik":"Sosyal medya","Google ve Meta reklamları":"Google ve Meta reklamı","Google İşletme ve yerel SEO":"Google profili ve SEO","Mobil uygulama ve yazılım":"Mobil uygulama","CV hazırlama ve kariyer":"CV hazırlama","Güzellik salonu ve nail bar":"Güzellik ve nail bar","Avukat ve danışmanlık":"Avukat ve danışman"}
     svc = "".join(f'<li><a href="{h}">{tr_title(FSHORT.get(t,t))}</a></li>' for h,_,t,_ in SERVICES)
     sec = "".join(f'<li><a href="{x["slug"]}">{tr_title(FSHORT.get(x["short"],x["short"]))}</a></li>' for x in SECTORS)
     lau = [("hizmetler.html","Hizmetler"),("calismalar.html","Çalışmalar"),("surec.html","Süreç"),("fiyatlar.html","Fiyatlar"),("hakkimizda.html","Hakkımızda"),("iletisim.html","İletişim"),("surec.html#sss","Sık Sorulanlar"),("rehber.html","Rehber"),("web-sitesi-yaptirmak.html","Web Sitesi Yaptırmak"),("sosyal-medya-yonetimi-fiyatlari.html","Sosyal Medya Fiyatları")]
@@ -191,6 +193,9 @@ def schemas(slug, url, title, desc):
         g = GMAP[slug]
         graph.append({"@type":"Article","headline":g["h1"],"description":g["desc"],"inLanguage":"tr-TR","datePublished":GUIDE_DATE,"dateModified":GUIDE_DATE,
                       "author":{"@id":BASE+"/#org"},"publisher":{"@id":BASE+"/#org"},"mainEntityOfPage":url,"image":BASE+"/img/"+g["photo"]+".webp","about":g["kw"]})
+    if m.get("article"):
+        graph.append({"@type":"Article","headline":title.split(" | ")[0],"description":desc,"inLanguage":"tr-TR","datePublished":"2026-11-10","dateModified":"2026-11-10",
+                      "author":{"@id":BASE+"/#org"},"publisher":{"@id":BASE+"/#org"},"mainEntityOfPage":url,"image":BASE+"/og.png"})
     if FAQ_SINK:
         graph.append({"@type":"FAQPage","mainEntity":[{"@type":"Question","name":_strip(q),"acceptedAnswer":{"@type":"Answer","text":_strip(a)}} for q,a in FAQ_SINK]})
     return json.dumps({"@context":"https://schema.org","@graph":graph},ensure_ascii=False)
@@ -1296,6 +1301,8 @@ for _g in GUIDES:
     PAGE_META[_g["slug"]] = dict(crumb=[("Rehber","/rehber"),(_g["kw"].capitalize().replace("Seo","SEO"),"/"+_g["slug"].replace(".html",""))])
 for _sec in SECTORS:
     PAGE_META[_sec["slug"]] = dict(crumb=[(_sec["short"], "/"+_sec["slug"].replace(".html",""))])
+
+exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"cv.py")).read())
 
 def build():
     keep = {"fonts","og.png","favicon.svg","_headers","robots.txt"}
