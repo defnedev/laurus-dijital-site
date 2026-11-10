@@ -4,7 +4,8 @@ Her işin sonunda buraya en fazla üç satır eklenir: ne oldu, neden oldu, bund
 Aynı ders ikinci kez yazılıyorsa satır eklenmez; skill'in "Kalıcı kurallar" bölümüne taşınması önerilir.
 
 ## 10 Kasım 2026
-- Yuvarlak çerçeveli ok düğmeleri "yapay" bulundu. Kartlarda çerçeveli ikon düğmesi yok; ince çizgili ok + küçük harf aralıklı etiket ("Keşfet") kullanılır.
+- Yuvarlak çerçeveli ok düğmeleri "yapay" bulundu; yerine konan "KEŞFET →" etiketi de hiç beğenilmedi. Kartlarda ok ve etiket yok: kartın tamamı tıklanır, üstüne gelince başlık altına döner ve altta altın çizgi uzar.
+- Bir kusuru düzeltirken ikinci bir şeyi (görsel karartma) abartıp yeni kusur üretildi. Düzeltme, şikâyet edilen şeyle sınırlı tutulur; yan değişiklik ayrı gösterilir.
 - Küçük, kalabalık 3D cihazlar "dandik" bulundu. Az sayıda, büyük, ayrıntılı cihaz: metal çerçeve, kenardan kenara cam, kamera adası, arka kamera, cam yansıması. Marka logosu yok.
 - Sayfa açılışında fotoğraftan 3D'ye geçiş "bir anda değişti" diye fark edildi. 3D sahnesi olan girişte ilk karede koyu zemin gösterilir; fotoğraf yalnızca WebGL yoksa görünür.
 - Ajans ve Kariyer menüleri farklı görününce rahatsız etti. Bir tarafta yapılan gezinme değişikliği aynı turda diğer tarafa da uygulanır.

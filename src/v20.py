@@ -35,7 +35,7 @@ def stats_strip():
     st = [("8+","yıllık deneyim"),("5","kendi uygulamamız"),("19 bin+","takipçi: Little Paws"),("7 gün","ilk taslaktan yayına")]
     return '<section class="stats" aria-label="Rakamlarla Laurus"><div class="wrap stats-in">' + "".join(f'<div data-rv style="--d:{i*90}ms"><b>{a}</b><span>{b}</span></div>' for i,(a,b) in enumerate(st)) + '</div></section>'
 
-POS={"app/os-world":"50% 38%",'real/nil-galeri':'50% 75%'}
+POS={"app/os-world":"50% 0%",'real/nil-galeri':'50% 75%'}
 def explore():
     T = [("hizmetler.html","tasarim-laptop","Hizmetler","Web sitesi, sosyal medya, reklam, SEO ve uygulama.","xbig"),
          ("calismalar.html","real/nil-galeri","Çalışmalar","Gerçek müşteriler, gerçek işler.","xbig"),
