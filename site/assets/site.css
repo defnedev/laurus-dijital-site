@@ -1879,3 +1879,4 @@ html:not(.scrolled) body:has(.chero) header.nav{background:linear-gradient(180de
 .cvc-l:hover{border-color:#D9B24C;background:rgba(217,178,76,.08)}
 .cvscan{transform:scale(1.06);transform-origin:center}
 @media (max-width:560px){.cvscan{transform:none}}
+@media (max-width:560px){.gtbl table{min-width:0}.gtbl th,.gtbl td{padding:9px 8px;font-size:14px}}
