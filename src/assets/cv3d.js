@@ -180,6 +180,8 @@ function start() {
     if (W >= 1100) { ox = 4.4; oy = -0.05; sc = 0.95; camZ = 15; }
     else if (W >= 760) { ox = 3.6; oy = 0; sc = 0.7; camZ = 15.5; }
     else { ox = 0.1; oy = 3.15; sc = 0.64; camZ = 17; }
+    if (W >= 760) { const vh = Math.min(H, innerHeight), f = vh / H, units = 2 * camZ * Math.tan(15 * Math.PI / 180);
+      sc *= Math.min(1, Math.max(0.68, f * 1.12)); oy += (1 - f) * units / 2 * 0.95; }
     stage.position.set(ox, oy, 0); stage.scale.setScalar(sc);
     card.position.set(W >= 760 ? 0.2 : 1.0, W >= 760 ? -1.55 : -1.15, 1.25); card.userData.y = card.position.y; card.rotation.set(0.04, W >= 760 ? 0.12 : -0.2, 0.03);
     if (W < 760) card.scale.setScalar(0.85); else card.scale.setScalar(1.15);

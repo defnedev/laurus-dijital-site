@@ -353,5 +353,5 @@ sizeWorks(); onScroll();
   var sd=navigator.connection&&navigator.connection.saveData;
   if(!ok||sd) return;
   var wait=document.documentElement.classList.contains('intro')?4600:150;
-  setTimeout(function(){ import('/assets/cv3d.js?v=286ea8a0').catch(function(){}); }, wait);
+  setTimeout(function(){ import('/assets/cv3d.js?v=2ef15c8d').catch(function(){}); }, wait);
 })();
