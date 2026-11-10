@@ -207,6 +207,7 @@ function start() {
     const r = host.getBoundingClientRect(); W = r.width || innerWidth; H = r.height || innerHeight;
     renderer.setSize(W, H, false); camera.aspect = W / H; camera.updateProjectionMatrix();
     if (W >= 1000) { ox = 3.9; oy = 1.5; sc = 1.0; } else if (W >= 760) { ox = 2.75; oy = 0.9; sc = 0.58; } else { ox = -0.8; oy = 5.3; sc = 0.68; }
+    if (W >= 1000) { const vh = Math.min(H, innerHeight); sc *= Math.min(1.08, Math.max(0.68, vh / 900)); oy -= Math.max(0, 900 - vh) * 0.0085; }
     stage.position.set(ox, oy, 0); stage.scale.setScalar(sc);
   }
   size(); addEventListener('resize', size);

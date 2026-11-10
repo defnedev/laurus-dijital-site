@@ -336,7 +336,7 @@ sizeWorks(); onScroll();
   var h3=host.closest('.hero3'); function off(){ h3&&h3.classList.add('h3d-off'); }
   if(!ok||sd){ off(); return; }
   var wait=document.documentElement.classList.contains('intro')?3400:150;
-  setTimeout(function(){ import('/assets/hero3d.js?v=6d539c0d').catch(off); }, wait);
+  setTimeout(function(){ import('/assets/hero3d.js?v=a1f3c2f0').catch(off); }, wait);
 })();
 (function(){
   if(matchMedia('(hover: none)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
