@@ -55,9 +55,9 @@ def page_cv():
              ("Kamu portalı","Meslek kodu seçimi ve beceri beyanı"),
              ("Şirket panelleri","Maaş beklentisi, ön yazı kutusu, “neden bu pozisyon” sorusu")]
     wh = "".join(f'<li data-rv style="--d:{i*80}ms"><b>{a}</b><span>{b}</span></li>' for i,(a,b) in enumerate(where))
-    plans = [("CV","790 ₺","tek seferlik","Hızlıca okunur bir CV isteyenler",["Kısa CV, Türkçe ve İngilizce","Detaylı özgeçmiş, Türkçe","ATS okunabilirlik raporu","PDF ve Word","2 düzeltme turu"],"","CV paketi"),
-             ("CV + Başvuru Kiti","1.490 ₺","tek seferlik","Aktif başvuru yapanlar",["CV paketinin tamamı","Detaylı özgeçmiş, İngilizce","5 ilana özel ön yazı","Her ilan için maaş rakamı ve gerekçesi","Profil alanları için hazır metinler"],"hot","CV + Başvuru Kiti"),
-             ("Birebir Danışmanlık","Görüşmede netleşir","ihtiyacına göre","Süreci biriyle birlikte yürütmek isteyenler",["Başvuru Kiti'nin tamamı","60 dakika birebir görüşme","Profil kurulumu ve alan doldurma desteği","Başvurduğun sitelerde ön yazı yazımı","10 gün WhatsApp desteği ve süreç takibi"],"","Birebir danışmanlık")]
+    plans = [("CV Oluşturma","250 ₺","tek seferlik","Hızlıca okunur bir CV isteyenler",["Kısa CV, Türkçe ve İngilizce","Detaylı özgeçmiş, Türkçe","ATS okunabilirlik raporu","PDF ve Word","2 düzeltme turu"],"","CV paketi"),
+             ("CV Oluşturma + Başvuru Kiti","650 ₺","tek seferlik","Aktif başvuru yapanlar",["CV paketinin tamamı","Detaylı özgeçmiş, İngilizce","5 ilana özel ön yazı","Her ilan için maaş rakamı ve gerekçesi","Profil alanları için hazır metinler"],"hot","CV + Başvuru Kiti"),
+             ("Birebir Danışmanlık","Görüşmede netleşir","ihtiyacına göre","Süreci biriyle birlikte yürütmek isteyenler",["Başvuru Kiti'nin tamamı","60 dakika birebir görüşme","Şirkete özel İK ön görüşme provası ve mülakat hazırlığı","Profil kurulumu ve alan doldurma desteği","Başvurduğun sitelerde ön yazı yazımı","10 gün WhatsApp desteği ve süreç takibi"],"","Birebir danışmanlık")]
     ph = ""
     for n,p,u,f,l,h,key in plans:
         tag = '<span class="tag">En çok seçilen</span>' if h else ''
@@ -99,7 +99,7 @@ def page_cv():
 <section id="paketler" class="light ksec" aria-labelledby="h-pk"><div class="wrap">
 <div class="khead" data-rv><div><span class="eyebrow">Paketler</span><h2 id="h-pk">Fiyatlar açık.</h2></div><p>Deneme süresi, sepet ve otomatik yenileme yok. Danışmanlığın kapsamını ihtiyacına göre görüşmede birlikte belirliyoruz.</p></div>
 <div class="kplans">{ph}</div>
-<div class="cvjet" data-rv><span><b>Sadece bir ön yazı mı lazım?</b> Jeton al: 1 jeton = 1 ilana özel ön yazı ve o ilan için maaş rakamı. 1 jeton 149 ₺, 5 jeton 590 ₺. Jetonların süresi dolmaz.</span><a class="btn btn-ink js-wa" href="https://wa.me/905434309702?text=Merhaba%2C%20%C3%B6n%20yaz%C4%B1%20jetonu%20almak%20istiyorum.">Jeton al</a></div>
+<div class="cvjet" data-rv><span><b>Sadece bir ön yazı mı lazım?</b> Jeton al: 1 jeton = 1 ilana özel ön yazı ve o ilan için maaş rakamı. 1 jeton 49 ₺, 5 jeton 199 ₺. Jetonların süresi dolmaz.</span><a class="btn btn-ink js-wa" href="https://wa.me/905434309702?text=Merhaba%2C%20%C3%B6n%20yaz%C4%B1%20jetonu%20almak%20istiyorum.">Jeton al</a></div>
 </div></section>
 <section class="ksec" aria-labelledby="h-hum"><div class="wrap cvh-g">
 <div data-rv><span class="eyebrow">İnsan desteği</span><h2 id="h-hum">{_words("Karşında konuşabileceğin|biri var.")}</h2>
@@ -120,7 +120,7 @@ def page_cv():
 {cv_cta()}
 '''
     return ("CV Hazırlama Hizmeti: ATS Uyumlu Profesyonel CV | Laurus",
-            "Profesyonel CV hazırlama hizmeti: ATS uyumlu Türkçe ve İngilizce özgeçmiş, ön yazı ve kariyer danışmanlığı. 790 ₺'den, ücretsiz CV taraması, abonelik yok.", body)
+            "Profesyonel CV hazırlama hizmeti: ATS uyumlu Türkçe ve İngilizce özgeçmiş, ön yazı ve kariyer danışmanlığı. 250 ₺'den, ücretsiz CV taraması, abonelik yok.", body)
 
 # ---------- SEO rehberleri ----------
 def _ul(items): return "<ul>" + "".join(f"<li>{x}</li>" for x in items) + "</ul>"
@@ -278,7 +278,7 @@ CV_NAMES = {"cv-ornekleri.html":"CV örnekleri","ats-uyumlu-cv.html":"ATS uyumlu
 for _s,_f in CV_PAGES.items():
     PAGES[_s] = (_f, "cv")
     if _s == "cv-hazirlama.html":
-        PAGE_META[_s] = dict(crumb=[("CV hazırlama","/cv-hazirlama")], service=("CV hazırlama ve kariyer danışmanlığı","790","ATS uyumlu Türkçe ve İngilizce CV, ilana özel ön yazı ve kariyer danışmanlığı."), offers=[("CV Hazırlama","790"),("CV + Başvuru Kiti","1490"),("Ön yazı jetonu","149")])
+        PAGE_META[_s] = dict(crumb=[("CV hazırlama","/cv-hazirlama")], service=("CV hazırlama ve kariyer danışmanlığı","250","ATS uyumlu Türkçe ve İngilizce CV, ilana özel ön yazı ve kariyer danışmanlığı."), offers=[("CV Oluşturma","250"),("CV Oluşturma + Başvuru Kiti","650"),("Ön yazı jetonu","49")])
     else:
         PAGE_META[_s] = dict(crumb=[("CV hazırlama","/cv-hazirlama"),(CV_NAMES[_s],"/"+_s.replace(".html",""))], article=True)
 PT_NAMES.update({"cv-hazirlama":"CV Hazırlama","cv-ornekleri":"CV Örnekleri","ats-uyumlu-cv":"ATS Uyumlu CV","ingilizce-cv":"İngilizce CV","on-yazi-ornegi":"Ön Yazı","maas-beklentisi":"Maaş Beklentisi"})
@@ -287,13 +287,13 @@ PT_NAMES.update({"cv-hazirlama":"CV Hazırlama","cv-ornekleri":"CV Örnekleri","
 def _exs(items): return "".join(_ex(t, x) for t, x in items)
 
 def page_cv_prices():
-    tbl = '<div class="gtbl"><table><thead><tr><th>Paket</th><th>İçerik</th><th>Fiyat</th></tr></thead><tbody><tr><td>CV</td><td>Kısa CV (Türkçe ve İngilizce), detaylı Türkçe özgeçmiş, ATS okunabilirlik raporu, PDF ve Word, 2 düzeltme turu</td><td><b>790 ₺</b></td></tr><tr><td>CV + Başvuru Kiti</td><td>CV paketi, İngilizce detaylı özgeçmiş, 5 ilana özel ön yazı, maaş rakamı ve gerekçesi, profil metinleri</td><td><b>1.490 ₺</b></td></tr><tr><td>Ön yazı jetonu</td><td>1 ilana özel ön yazı ve o ilan için maaş rakamı</td><td><b>149 ₺</b> (5\'li 590 ₺)</td></tr><tr><td>Birebir danışmanlık</td><td>60 dakika görüşme, profil kurulumu, başvuru desteği</td><td>Görüşmede netleşir</td></tr></tbody></table></div>'
+    tbl = '<div class="gtbl"><table><thead><tr><th>Paket</th><th>İçerik</th><th>Fiyat</th></tr></thead><tbody><tr><td>CV Oluşturma</td><td>Kısa CV (Türkçe ve İngilizce), detaylı Türkçe özgeçmiş, ATS okunabilirlik raporu, PDF ve Word, 2 düzeltme turu</td><td><b>250 ₺</b></td></tr><tr><td>CV Oluşturma + Başvuru Kiti</td><td>CV paketi, İngilizce detaylı özgeçmiş, 5 ilana özel ön yazı, maaş rakamı ve gerekçesi, profil metinleri</td><td><b>650 ₺</b></td></tr><tr><td>Ön yazı jetonu</td><td>1 ilana özel ön yazı ve o ilan için maaş rakamı</td><td><b>49 ₺</b> (5\'li 199 ₺)</td></tr><tr><td>Birebir danışmanlık</td><td>60 dakika görüşme, şirkete özel İK ön görüşme provası ve mülakat hazırlığı, profil kurulumu, başvuru desteği</td><td>Görüşmede netleşir</td></tr></tbody></table></div>'
     secs = [("etkenler","CV hazırlama fiyatını belirleyen 5 etken", _ol(["<b>Deneyim seviyesi:</b> yeni mezun CV'si ile 15 yıllık yönetici özgeçmişi aynı emek değildir.","<b>Dil:</b> yalnızca Türkçe mi, İngilizce de isteniyor mu?","<b>Kapsam:</b> sadece CV mi; ön yazı, profil metni ve maaş araştırması da var mı?","<b>Düzeltme hakkı:</b> kaç tur revizyon dahil?","<b>Teslim süresi:</b> acil işler genelde daha pahalıdır."]) + "<p>Türkiye'de profesyonel CV hazırlama hizmeti, kapsamına göre birkaç yüz liradan birkaç bin liraya kadar değişiyor. Fiyatı karşılaştırırken rakama değil, pakete ne girdiğine bak.</p>"),
             ("paketler","Laurus Kariyer paketleri ve fiyatları", tbl + '<p>Tüm ödemeler tek seferliktir; abonelik yoktur. Ayrıntılar için <a href="cv-hazirlama.html#paketler">CV hazırlama hizmeti</a> sayfasına bak.</p>'),
             ("ucretsiz","Ücretsiz araçlar ne zaman yeter?", "<p>Deneyimin azsa, başvurduğun ilan sayısı sınırlıysa ve yazı yazmakta rahatsan ücretsiz bir şablonla iyi bir CV çıkarabilirsin; <a href=\"cv-ornekleri.html\">CV örnekleri</a> ve <a href=\"ats-uyumlu-cv.html\">ATS uyumlu CV</a> rehberlerimiz bunun için var.</p><p>Şu durumlarda profesyonel destek almak mantıklıdır: çok başvurup dönüş alamıyorsan, sektör ya da kariyer değiştiriyorsan, yurt dışına başvuruyorsan ya da deneyimini kâğıda dökmekte zorlanıyorsan.</p>"),
             ("ucuz","Çok ucuz hizmetlerde nelere dikkat etmeli?", _ul(["Hazır şablona yalnızca bilgilerini yapıştıran işler; içerik aynı kalır.","Tablo ve grafik dolu, yazılımların okuyamadığı tasarımlar.","Düzeltme hakkı olmayan ya da Word dosyası vermeyen teslimler.","Kişisel verinin ne olacağını söylemeyen satıcılar."])),
             ("sure","Süreç ve teslim süresi", "<p>CV'ni WhatsApp'tan ya da e-postayla gönderirsin; aynı gün ücretsiz okunabilirlik raporunu alırsın. Onay verirsen dosyaların 2 iş günü içinde hazır olur. İki düzeltme turu fiyata dahildir.</p>")]
-    faq = [("CV hazırlatmak ne kadar tutar?","Laurus Kariyer'de CV paketi 790 ₺, CV + Başvuru Kiti 1.490 ₺'dir. Ödeme tek seferliktir. Piyasada fiyatlar kapsama göre birkaç yüz liradan birkaç bin liraya kadar değişir."),
+    faq = [("CV hazırlatmak ne kadar tutar?","Laurus Kariyer'de CV Oluşturma paketi 250 ₺, CV Oluşturma + Başvuru Kiti 650 ₺'dir. Ödeme tek seferliktir. Piyasada fiyatlar kapsama göre birkaç yüz liradan birkaç bin liraya kadar değişir."),
            ("CV'yi profesyonele yazdırmak işe yarar mı?","CV tek başına iş buldurmaz; ama okunmayan bir CV hiç değerlendirilmez. Profesyonel destek, deneyimini doğru kelimelerle ve yazılımların okuyabildiği bir düzende sunmanı sağlar."),
            ("CV kaç günde teslim edilir?","Ücretsiz rapor aynı gün, CV dosyaları onayından sonra 2 iş günü içinde teslim edilir."),
            ("İngilizce CV ayrıca ücretli mi?","Kısa İngilizce CV, CV paketine dahildir. Detaylı İngilizce özgeçmiş Başvuru Kiti'nde yer alır.")]

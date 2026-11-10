@@ -68,7 +68,7 @@ def header(active, slug=''):
 <a href="fiyatlar.html"{cur("fiyatlar")}>Fiyatlar</a>
 <a href="hakkimizda.html"{cur("hakkimizda")}>Hakkımızda</a>
 '''
-    NAVCV = '<a class="nav-cv" href="cv-hazirlama.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>CV Hazırlama</a>'
+    NAVCV = '<span class="bsw" role="group" aria-label="Laurus markaları"><b aria-current="true">Ajans</b><a href="cv-hazirlama.html" title="CV Hazırlama ve Kariyer">Kariyer</a></span>'
     sub = "KARİYER" if cv else "DİJİTAL AJANS"
     cta = f'<a class="btn btn-gold js-wa" href="{WA_CV}">CV\'mi gönder</a>' if cv else '<a class="btn btn-gold" href="iletisim.html">Teklif al</a>'
     return f'''<a class="skip" href="#main">İçeriğe geç</a>
@@ -166,7 +166,7 @@ def footer(active=""):
         kar = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in KBAR + [("cv-hakkimda-yazisi.html","CV Hakkımda Yazısı"),("yeni-mezun-cv.html","Yeni Mezun CV"),("mulakatta-kendini-tanitma.html","Mülakatta Kendini Tanıtma")])
         ajs = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in [("index.html","Laurus Dijital ana sayfa"),("hizmetler.html","Ajans hizmetleri"),("hakkimizda.html","Hakkımızda"),("iletisim.html","İletişim")])
         lau = f'''<div><h4>Laurus Kariyer</h4><ul>{kar}</ul></div>
-<div><h4>Paketler</h4><ul><li><a href="cv-hazirlama.html#paketler">CV Hazırlama · 790 ₺</a></li><li><a href="cv-hazirlama.html#paketler">CV + Başvuru Kiti · 1.490 ₺</a></li><li><a href="cv-hazirlama.html#paketler">Birebir Danışmanlık</a></li><li><a class="js-wa" href="{WA_CV}">Ücretsiz CV taraması</a></li><li><a href="cv-hazirlama-fiyatlari.html">CV hazırlama fiyatları</a></li></ul></div>
+<div><h4>Paketler</h4><ul><li><a href="cv-hazirlama.html#paketler">CV Oluşturma · 250 ₺</a></li><li><a href="cv-hazirlama.html#paketler">CV Oluşturma + Başvuru Kiti · 650 ₺</a></li><li><a href="cv-hazirlama.html#paketler">Birebir Danışmanlık</a></li><li><a class="js-wa" href="{WA_CV}">Ücretsiz CV taraması</a></li><li><a href="cv-hazirlama-fiyatlari.html">CV hazırlama fiyatları</a></li></ul></div>
 <div><h4>Laurus Dijital</h4><ul>{ajs}</ul></div>'''
     up = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>'
     FB_AG = '<div class="fbrand"><a class="brand" href="index.html" aria-label="Laurus Dijital"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#logo"/></svg><span><b>Laurus</b><small>DİJİTAL AJANS</small></span></a><p class="about">İstanbul merkezli dijital ajans. Web tasarım, mobil uygulama, sosyal medya yönetimi, Google Ads ve SEO; Türkiye geneline online hizmet.</p></div>'
