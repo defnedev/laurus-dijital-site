@@ -117,7 +117,7 @@ document.querySelectorAll("[data-showcase]").forEach(sc => {
   sc.addEventListener("mouseenter", stop); sc.addEventListener("mouseleave", start);
   // preload next set's images shortly after load
   setTimeout(() => sets.forEach(s => s.querySelectorAll("img[loading=lazy]").forEach(im => im.loading = "eager")), 4000);
-  setTimeout(start, document.documentElement.classList.contains("intro") ? 5600 : 0);
+  setTimeout(start, document.documentElement.classList.contains("intro") ? 4300 : 0);
 });
 
 // works filter
@@ -333,9 +333,10 @@ sizeWorks(); onScroll();
   var host=document.querySelector('.h3d'); if(!host) return;
   var ok=false; try{var c=document.createElement('canvas'); ok=!!(window.WebGLRenderingContext&&(c.getContext('webgl2')||c.getContext('webgl')));}catch(e){}
   var sd=navigator.connection&&navigator.connection.saveData;
-  if(!ok||sd) return;
-  var wait=document.documentElement.classList.contains('intro')?4600:150;
-  setTimeout(function(){ import('/assets/hero3d.js?v=__H3DV__').catch(function(){}); }, wait);
+  var h3=host.closest('.hero3'); function off(){ h3&&h3.classList.add('h3d-off'); }
+  if(!ok||sd){ off(); return; }
+  var wait=document.documentElement.classList.contains('intro')?3400:150;
+  setTimeout(function(){ import('/assets/hero3d.js?v=__H3DV__').catch(off); }, wait);
 })();
 (function(){
   if(matchMedia('(hover: none)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -353,6 +354,6 @@ sizeWorks(); onScroll();
   var sd=navigator.connection&&navigator.connection.saveData;
   var hero=host.closest('.chero'); function off(){ hero&&hero.classList.add('cv3d-off'); }
   if(!ok||sd){ off(); return; }
-  var wait=document.documentElement.classList.contains('intro')?4600:150;
+  var wait=document.documentElement.classList.contains('intro')?3400:150;
   setTimeout(function(){ import('/assets/cv3d.js?v=__CV3DV__').catch(off); }, wait);
 })();
