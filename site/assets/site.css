@@ -1991,3 +1991,30 @@ html:not(.scrolled) body:has(.chero) header.nav{background:linear-gradient(180de
 .intro .chero{--hd:3.75s}
 .hero3:not(.h3d-off) .reel{opacity:0!important;visibility:hidden}
 .h3d{transition:opacity 2s cubic-bezier(.2,.7,.2,1)}
+/* v27: portal cards without circle arrows */
+.xt-sh{background:linear-gradient(180deg,rgba(6,9,7,0) 22%,rgba(6,9,7,.72) 60%,rgba(6,9,7,.96) 100%)}
+.xt-tx{max-width:100%;width:100%;padding:28px 28px 26px;gap:8px}
+.xt-tx small{font-size:15.5px;line-height:1.4;max-width:34ch;color:#D5DED7}
+.xt-go{display:inline-flex;align-items:center;gap:10px;margin-top:10px;font:600 12.5px/1 var(--body);font-style:normal;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);opacity:.85;transition:opacity .3s,gap .45s cubic-bezier(.2,.8,.2,1)}
+.xt-go svg{width:28px;height:12px;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.xt:hover .xt-go,.xt:focus-visible .xt-go{opacity:1;gap:14px}
+.xt:hover .xt-go svg,.xt:focus-visible .xt-go svg{transform:translateX(6px)}
+.xt-ln{position:absolute;left:28px;right:28px;bottom:0;height:2px;background:linear-gradient(90deg,var(--gold),rgba(217,178,76,0));transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.xt:hover .xt-ln,.xt:focus-visible .xt-ln{transform:scaleX(1)}
+@media (max-width:700px){.xt-tx{padding:22px 20px 20px}.xt-ln{left:20px;right:20px}}
+/* v28: Laurus Builder sweep (mobile) */
+.xt img{filter:brightness(.58) saturate(.85)}
+.xt-sh{background:linear-gradient(180deg,rgba(6,9,7,.1) 0%,rgba(6,9,7,.55) 42%,rgba(6,9,7,.94) 72%,rgba(6,9,7,.98) 100%)}
+.ch-act{margin-top:28px}
+.chero .ch-lead{margin-bottom:0}
+select{appearance:none;-webkit-appearance:none;min-height:50px;padding-right:44px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23152019' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:18px}
+@media (max-width:900px){.kplans .kplan.hot{margin-top:14px}.flinks a{display:inline-block;padding:7px 0}.filters{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-right:-16px;padding-right:76px;-webkit-mask-image:linear-gradient(90deg,#000 80%,transparent);mask-image:linear-gradient(90deg,#000 80%,transparent)}.filters::-webkit-scrollbar{display:none}.filters > *{flex:none}}
+.chero.cvh .ch-lead,.chero.cvgh .ch-lead{margin-bottom:0}
+/* v28b: Laurus Builder sweep (desktop) */
+.chero:not(.cvh):not(.cvgh) .ch-shade{background:linear-gradient(180deg,rgba(6,9,7,.72) 0%,rgba(6,9,7,.4) 30%,rgba(6,9,7,.55) 55%,rgba(6,9,7,.96) 100%),linear-gradient(90deg,rgba(6,9,7,.82) 0%,rgba(6,9,7,.5) 45%,rgba(6,9,7,.12) 100%)}
+.chero:not(.cvh) .ch-s img{filter:saturate(.85) brightness(.8)}
+.kplan.hot .checks svg{color:var(--gold);stroke:var(--gold)}
+.h3-scroll{width:1px;height:54px;margin-left:0;border:0;border-radius:0;background:rgba(238,243,236,.18);overflow:hidden}
+.h3-scroll i{left:0;top:0;width:1px;height:22px;margin:0;border-radius:0;background:var(--gold);animation:h3line 2.2s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes h3line{0%{transform:translateY(-22px)}100%{transform:translateY(54px)}}
+@media (max-width:560px){.chero:not(.cvh) .ch-h br{display:none}.ch-h{text-wrap:balance}}

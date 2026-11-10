@@ -43,7 +43,7 @@ def explore():
          ("surec.html","planlama","Süreç","İlk görüşmeden yayına yedi gün.",""),
          ("fiyatlar.html","is-sahibi","Fiyatlar","Açık fiyat, sürpriz yok.",""),
          ("hakkimizda.html","cekim","Hakkımızda","8 yılı aşkın deneyim, tek ekip.","")]
-    tiles = "".join(f'<a class="xt {c}" href="{h}" data-pt="{t}" data-tilt data-rv style="--d:{i*80}ms"><img src="img/{p}.webp" alt="" loading="lazy" decoding="async"{(" style=\"object-position:"+POS[p]+"\"") if p in POS else ""}><span class="xt-sh" aria-hidden="true"></span><span class="xt-gl" aria-hidden="true"></span><span class="xt-tx"><b>{t}</b><small>{d}</small></span><span class="xt-ar" aria-hidden="true">{I["arrow"]}</span></a>' for i,(h,p,t,d,c) in enumerate(T))
+    tiles = "".join(f'<a class="xt {c}" href="{h}" data-pt="{t}" data-tilt data-rv style="--d:{i*80}ms"><img src="img/{p}.webp" alt="" loading="lazy" decoding="async"{(" style=\"object-position:"+POS[p]+"\"") if p in POS else ""}><span class="xt-sh" aria-hidden="true"></span><span class="xt-gl" aria-hidden="true"></span><span class="xt-tx"><b>{t}</b><small>{d}</small><i class="xt-go" aria-hidden="true">Keşfet<svg viewBox="0 0 28 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h25M21 1.5 26 6l-5 4.5"/></svg></i></span><span class="xt-ln" aria-hidden="true"></span></a>' for i,(h,p,t,d,c) in enumerate(T))
     return f'''<section class="xpl" id="kesfet" aria-labelledby="h-xpl"><div class="wrap">
 <div class="khead" data-rv><div><span class="eyebrow">Keşfet</span><h2 id="h-xpl">Laurus'u yakından tanı.</h2></div><p>Her kapı ayrı bir sayfaya açılıyor. Birini seç, içeri gir.</p></div>
 <div class="xgrid">{tiles}</div></div></section>'''
