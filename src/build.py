@@ -91,7 +91,7 @@ def contact(title="İşletmeni anlat, taslağını gör.", need="Web sitesi"):
 <p class="lead">Formu doldur ya da doğrudan yaz. İşletmeni inceleyip sana ne yapabileceğimizi aynı gün gösterelim. İlk görüşme ücretsiz.</p>
 <div class="direct">
 <a class="js-wa" href="https://wa.me/905434309702"><span class="ic">{I['wa']}</span><span><small>WhatsApp</small><b>{PHONE_TXT}</b></span></a>
-<a href="mailto:{EMAIL}"><span class="ic">{I['mail']}</span><span><small>E-posta</small><b>{EMAIL}</b></span></a>
+<!--email_off--><a href="mailto:{EMAIL}"><span class="ic">{I['mail']}</span><span><small>E-posta</small><b>{EMAIL}</b></span></a><!--/email_off-->
 </div></div>
 <form class="quick" id="quick" novalidate>
 <h3>Ücretsiz ön görüşme</h3><p>Üç alanı doldur, mesajın WhatsApp'ta hazır açılsın.</p>
@@ -235,8 +235,20 @@ META_FIX = {
  "butik-e-ticaret-dijital-pazarlama.html": ("Butik için E-ticaret Sitesi ve Instagram | Laurus","Butik ve mağazalar için satış sitesi, online ödeme, Instagram yönetimi ve Meta reklamları. Açık fiyatlar."),
  "otel-turizm-dijital-pazarlama.html": ("Otel için Google Reklamı ve SEO | Laurus Dijital","Oteller ve turizm işletmeleri için Google reklamı ve SEO; rezervasyonu kendi sitene çeken arama reklamları. Reklamlar ilk hafta yayında."),
 }
+TITLE_FIX = {
+ "hizmetler.html": "Hizmetler: Web Tasarım, Sosyal Medya, Reklam ve SEO | Laurus",
+ "fiyatlar.html": "Web Sitesi ve Sosyal Medya Fiyatları 2026 | Laurus Dijital",
+ "sosyal-medya.html": "Sosyal Medya ve Instagram Hesap Yönetimi | Laurus Dijital",
+ "reklam-yonetimi.html": "Google Ads ve Instagram Reklam Yönetimi | Laurus Dijital",
+ "pet-kuafor-dijital-pazarlama.html": "Pet Kuaför için Web Sitesi ve Instagram | Laurus",
+ "maas-beklentisi.html": "Maaş Beklentisi Ne Yazılmalı? Form ve Mülakat Cevabı | Laurus",
+ "cv-ornekleri.html": "CV Örnekleri 2026: Mesleğe Göre Özgeçmiş Örnekleri | Laurus",
+ "ingilizce-cv.html": "İngilizce CV Nasıl Yazılır? Örnek ve Başlıklar | Laurus",
+ "on-yazi-ornegi.html": "Ön Yazı Örnekleri 2026: İş Başvurusu için Şablon | Laurus",
+}
 def layout(slug, title, desc, body, active=""):
     title, desc = META_FIX.get(slug, (title, desc))
+    title = TITLE_FIX.get(slug, title)
     url = BASE + ("/" if slug == "index.html" else "/" + slug.replace(".html",""))
     sch = schemas(slug, url, title, desc); FAQ_SINK.clear()
     return f'''<!doctype html>
