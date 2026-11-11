@@ -357,3 +357,5 @@ sizeWorks(); onScroll();
   var wait=document.documentElement.classList.contains('intro')?3400:150;
   setTimeout(function(){ import('/assets/cv3d.js?v=647a6f42').catch(off); }, wait);
 })();
+// v30: CV analyzer (loads only on the page that has it)
+(function(){ if(!document.getElementById('cvscan')) return; import('/assets/cvscan.js?v=f2d21345').catch(function(){ var e=document.querySelector('.cva-err'); if(e){ e.hidden=false; e.textContent='Analiz aracı yüklenemedi. Sayfayı yenileyip tekrar dene.'; } }); })();

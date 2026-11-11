@@ -1,6 +1,6 @@
 # ===== v22: CV hazırlama ve kariyer danışmanlığı sayfaları =====
 CV_DATE = "2026-11-10"
-KBAR = [("cv-hazirlama.html","CV Hazırlama"),("cv-ornekleri.html","CV Örnekleri"),("ats-uyumlu-cv.html","ATS Uyumlu CV"),("ingilizce-cv.html","İngilizce CV"),("on-yazi-ornegi.html","Ön Yazı"),("maas-beklentisi.html","Maaş Beklentisi")]
+KBAR = [("cv-hazirlama.html","CV Hazırlama"),("cv-analiz.html","CV Analizi"),("cv-ornekleri.html","CV Örnekleri"),("ats-uyumlu-cv.html","ATS Uyumlu CV"),("ingilizce-cv.html","İngilizce CV"),("on-yazi-ornegi.html","Ön Yazı")]
 def KMENU(slug):
     return "\n".join(f'<a href="{h}"{" aria-current=\"page\"" if h==slug else ""}>{t}</a>' for h,t in KBAR)
 def kbar(slug):
@@ -27,7 +27,7 @@ def cv_scanner():
 def cv_cta(title="CV'n okunuyor mu?|Ücretsiz öğren.", sub="CV'ni WhatsApp'tan gönder, okunabilirlik raporunu aynı gün yollayalım. Ödeme adımı yok."):
     return f'''<section class="ctab cvcta" aria-label="Ücretsiz CV taraması"><div class="ctab-bg cvcta-bg" aria-hidden="true"><i class="cvcta-p p1"></i><i class="cvcta-p p2"></i><i class="cvcta-p p3"></i><i class="cvcta-beam"></i></div>
 <div class="wrap ctab-in" data-rv><span class="eyebrow">Ücretsiz CV taraması</span><h2>{_words(title)}</h2><p class="lead">{sub}</p>
-<div class="actions"><a class="btn btn-gold js-wa" href="{WA_CV}">CV'mi ücretsiz tarat</a><a class="btn btn-line" href="cv-hazirlama.html#paketler">Paketleri gör</a></div></div></section>'''
+<div class="actions"><a class="btn btn-gold" href="cv-analiz.html">CV'mi ücretsiz tarat</a><a class="btn btn-line" href="cv-hazirlama.html#paketler">Paketleri gör</a></div></div></section>'''
 
 CV_FAQ = [
  ("Gerçekten abonelik yok mu?","Yok. Her paket tek seferlik ödenir; otomatik yenilenen hiçbir ödeme kurmuyoruz ve kart bilgini istemiyoruz."),
@@ -77,13 +77,13 @@ def page_cv():
               ("mulakatta-kendini-tanitma.html","Mülakatta kendini tanıtma","“Kendinizden bahseder misiniz?” için 60 saniyelik cevap.")]
     gh = "".join(f'<a class="cvg" href="{h}" data-rv style="--d:{i*70}ms"><b>{t}</b><span>{d}</span><i aria-hidden="true">{I["arrow"]}</i></a>' for i,(h,t,d) in enumerate(guides))
     body = f'''
-{cine_hero("CV hazırlama","CV hazırlama ve kariyer danışmanlığı","CV'n işverene|ulaşmıyor olabilir.","Başvurular artık önce yazılıma düşüyor. Güzel görünen bir CV, yazılım onu okuyamıyorsa hiç gönderilmemiş sayılır. CV'ni okunur hale getiriyor, nereye nasıl yükleyeceğini gösteriyor, istersen telefonda birlikte oturuyoruz.",["planlama","tasarim-laptop","kadin-telefon"],f'<a class="btn btn-gold js-wa" href="{WA_CV}">CV\'mi ücretsiz tarat</a><a class="btn btn-line" href="#paketler">Paketleri gör</a>','',
+{cine_hero("CV hazırlama","CV hazırlama ve kariyer danışmanlığı","CV'n işverene|ulaşmıyor olabilir.","Başvurular artık önce yazılıma düşüyor. Güzel görünen bir CV, yazılım onu okuyamıyorsa hiç gönderilmemiş sayılır. CV'ni okunur hale getiriyor, nereye nasıl yükleyeceğini gösteriyor, istersen telefonda birlikte oturuyoruz.",["planlama","tasarim-laptop","kadin-telefon"],f'<a class="btn btn-gold" href="cv-analiz.html">CV\'mi ücretsiz tarat</a><a class="btn btn-line" href="#paketler">Paketleri gör</a>','',
   '<ul class="cv-pills"><li>Abonelik yok</li><li>Kart bilgisi istemiyoruz</li><li>Tek seferlik ödeme</li></ul>').replace('<section class="chero ','<section class="chero cvh ',1).replace('<div class="ch-shade"','<div class="cv3d" aria-hidden="true"></div><div class="ch-shade"',1)}
 {kbar("cv-hazirlama.html")}
 <section class="cvx" aria-labelledby="h-cvx"><div class="wrap cvx-g">
-<div class="cvx-tx" data-rv><span class="eyebrow">Ücretsiz okunabilirlik raporu</span><h2 id="h-cvx">{_words("Yazılım senin CV'ni|nasıl okuyor?")}</h2>
-<p class="lead">Başvurduğun şirketlerin çoğu CV'ni önce bir yazılıma okutur. Tablo içindeki yetenekler, ikonla birleşmiş unvanlar ve iki kolonlu düzenler bu yazılımda kaybolur. Raporumuz hangi alanın okunmadığını ve nasıl düzeltileceğini satır satır gösterir.</p>
-<div class="actions"><a class="btn btn-gold js-wa" href="{WA_CV}">CV'mi gönder</a><a class="btn btn-line" href="ats-uyumlu-cv.html" data-pt="ATS uyumlu CV">ATS nedir?</a></div></div>
+<div class="cvx-tx" data-rv><span class="eyebrow">Ücretsiz CV analizi</span><h2 id="h-cvx">{_words("Yazılım senin CV'ni|nasıl okuyor?")}</h2>
+<p class="lead">Başvurduğun şirketlerin çoğu CV'ni önce bir yazılıma okutur. Tablo içindeki yetenekler, ikonla birleşmiş unvanlar ve iki kolonlu düzenler bu yazılımda kaybolur. CV'ni yükle; hangi alanın okunmadığını ve nasıl düzeltileceğini birkaç saniyede gör.</p>
+<div class="actions"><a class="btn btn-gold" href="cv-analiz.html">CV'mi şimdi tara</a><a class="btn btn-line" href="ats-uyumlu-cv.html" data-pt="ATS uyumlu CV">ATS nedir?</a></div></div>
 <div data-rv>{cv_scanner()}</div></div></section>
 <section class="light ksec" aria-labelledby="h-prom"><div class="wrap">
 <div class="khead" data-rv><div><span class="eyebrow">Önce şunu netleştirelim</span><h2 id="h-prom">Üç yazılı söz.</h2></div><p>CV sitelerinden en çok duyulan şikayet ürünle değil ödemeyle ilgili: “tek seferlik” diye alınan hizmet aylık kesintiye dönüşüyor. Bizde böyle bir şey yok.</p></div>
@@ -156,12 +156,12 @@ def cvg_page(slug, kw, h1, lead, read, title, desc, sections, faq, related):
     names = {"cv-hazirlama.html":"CV hazırlama hizmeti","cv-ornekleri.html":"CV örnekleri","ats-uyumlu-cv.html":"ATS uyumlu CV","ingilizce-cv.html":"İngilizce CV","on-yazi-ornegi.html":"Ön yazı örnekleri","maas-beklentisi.html":"Maaş beklentisi"}
     names.update({"cv-hazirlama-fiyatlari.html":"CV hazırlama fiyatları","cv-hakkimda-yazisi.html":"CV hakkımda yazısı örnekleri","yeni-mezun-cv.html":"Yeni mezun CV örneği","mulakatta-kendini-tanitma.html":"Mülakatta kendini tanıtma"})
     rel = "".join(f'<a class="grel" href="{r}">{names.get(r,r)}</a>' for r in related)
-    mid = f'<aside class="gnote cvnote"><b>CV\'ni biz hazırlayalım</b><p>ATS uyumlu Türkçe ve İngilizce CV, ilana özel ön yazı ve profil metinleri. Önce ücretsiz okunabilirlik raporunu al, sonra karar ver.</p><a class="btn btn-gold js-wa" href="{WA_CV}">Ücretsiz CV taraması</a></aside>'
+    mid = f'<aside class="gnote cvnote"><b>CV\'ni biz hazırlayalım</b><p>ATS uyumlu Türkçe ve İngilizce CV, ilana özel ön yazı ve profil metinleri. Önce ücretsiz okunabilirlik raporunu al, sonra karar ver.</p><a class="btn btn-gold" href="cv-analiz.html">Ücretsiz CV analizi</a></aside>'
     body = f'''
-{cine_hero('<a href="cv-hazirlama.html">CV hazırlama</a> / ' + kw, "CV rehberi", h1, lead, ["planlama"], f'<a class="btn btn-gold js-wa" href="{WA_CV}">CV\'mi ücretsiz tarat</a><a class="btn btn-line" href="cv-hazirlama.html#paketler">Paketler</a>', "sm cvgh", f'<p class="gmeta">Güncelleme: 10 Kasım 2026 · Okuma: {read} · Laurus Kariyer</p>')}
+{cine_hero('<a href="cv-hazirlama.html">CV hazırlama</a> / ' + kw, "CV rehberi", h1, lead, ["planlama"], f'<a class="btn btn-gold" href="cv-analiz.html">CV\'mi ücretsiz tarat</a><a class="btn btn-line" href="cv-hazirlama.html#paketler">Paketler</a>', "sm cvgh", f'<p class="gmeta">Güncelleme: 10 Kasım 2026 · Okuma: {read} · Laurus Kariyer</p>')}
 {kbar(slug)}
 <section class="light gbody"><div class="wrap ggrid">
-<aside class="gtoc"><b>Bu rehberde</b><ol>{toc}</ol><a class="btn btn-gold js-wa" href="{WA_CV}">Ücretsiz CV taraması</a></aside>
+<aside class="gtoc"><b>Bu rehberde</b><ol>{toc}</ol><a class="btn btn-gold" href="cv-analiz.html">Ücretsiz CV analizi</a></aside>
 <article class="gart">{secs}{mid}
 <section id="sss" class="gsec"><h2>Sık sorulan sorular</h2>{faq_list(faq)}</section>
 <div class="grels"><b>İlgili sayfalar</b>{rel}</div></article>
@@ -365,3 +365,58 @@ for _s,(_f,_n,_pt) in _NEW.items():
     PAGES[_s] = (_f, "cv"); CV_NAMES[_s] = _n
     PAGE_META[_s] = dict(crumb=[("CV hazırlama","/cv-hazirlama"),(_n,"/"+_s.replace(".html",""))], article=True)
     PT_NAMES[_s.replace(".html","")] = _pt
+
+# ---------- v30: real CV analyzer (runs in the browser) ----------
+def cv_tool():
+    return f'''<div id="cvscan" class="cva" data-v="1">
+<div class="cva-in">
+<label class="cva-drop" for="cva-file"><input id="cva-file" type="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+<span class="cva-ico" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M28 6H14a4 4 0 0 0-4 4v28a4 4 0 0 0 4 4h20a4 4 0 0 0 4-4V16z"/><path d="M28 6v10h10M24 34V22M19 27l5-5 5 5"/></svg></span>
+<b>CV'ni buraya bırak ya da seç</b><small>PDF veya Word (.docx) · en fazla 12 MB</small>
+<span class="btn btn-gold" aria-hidden="true">Dosya seç</span></label>
+<div class="cva-side">
+<label for="cva-job"><b>Başvurduğun ilan</b> <small>isteğe bağlı</small></label>
+<textarea id="cva-job" rows="6" placeholder="İlan metnini buraya yapıştırırsan, ilandaki anahtar kelimelerin CV'nde geçip geçmediğine de bakarız."></textarea>
+<ul class="cva-safe"><li>Dosyan tarayıcında incelenir, hiçbir sunucuya gönderilmez.</li><li>Kayıt, e-posta ya da kart bilgisi istenmez.</li><li>Sonuç birkaç saniyede çıkar.</li></ul>
+</div></div>
+<p class="cva-err" role="alert" hidden></p>
+<div class="cva-stage" hidden aria-live="polite"><div class="cva-doc"><canvas class="cva-page" width="520" height="735"></canvas><i class="cva-beam"></i></div>
+<div class="cva-st"><b>CV'n taranıyor</b><span class="cva-fn"></span><ol><li>Metin katmanı okunuyor</li><li>Bölümler ve başlıklar aranıyor</li><li>İletişim bilgileri kontrol ediliyor</li><li>İçerik ve rakamlar değerlendiriliyor</li></ol></div></div>
+<div class="cva-out" hidden></div>
+</div>'''
+
+CVA_FAQ = [("CV analizi ücretli mi?","Hayır. Analiz ücretsizdir; kayıt, e-posta ya da kart bilgisi istenmez."),
+           ("CV'm bir yere yükleniyor mu?","Hayır. Dosya yalnızca kendi tarayıcında açılıp incelenir. Sunucularımıza gönderilmez, saklanmaz. Sayfayı kapattığında hiçbir iz kalmaz."),
+           ("Puan neye göre hesaplanıyor?","Beş başlığa bakılır: yazılım okunabilirliği (30 puan), bölümler ve başlıklar (20), iletişim bilgileri (15), içerik gücü (25), uzunluk ve dosya (10). Her başlığın altında neyin eksik olduğunu ve nasıl düzelteceğini görürsün."),
+           ("Bu, şirketlerin kullandığı ATS ile aynı sonucu verir mi?","Birebir aynı değil. Her başvuru sistemi farklı çalışır. Bu araç, sistemlerin ortak olarak zorlandığı noktaları (resim olarak kaydedilmiş CV, sütunlar, tablolar, eksik başlıklar) ve işe alımcının aradığı içeriği kontrol eden bir ön kontroldür."),
+           ("Hangi dosya türleri destekleniyor?","PDF ve Word (.docx). Eski .doc dosyasını Word'de açıp .docx ya da PDF olarak yeniden kaydedebilirsin."),
+           ("Puanım düşük çıktı, ne yapmalıyım?","Önce kırmızı maddeleri düzelt; çoğu on dakikalık iştir. Uğraşmak istemiyorsan raporu WhatsApp'tan bize gönder, CV'ni biz düzeltelim.")]
+
+def page_cv_scan():
+    how = [("Yazılım okunabilirliği","30","Dosyandan metin çıkıyor mu, sütun, tablo ya da metin kutusu var mı, yazı tipleri okunuyor mu?"),
+           ("Bölümler ve başlıklar","20","Profil, deneyim, eğitim ve yetenek bölümleri standart başlıklarla ayrılmış mı?"),
+           ("İletişim bilgileri","15","E-posta, telefon ve LinkedIn düz metin olarak okunuyor mu, gereksiz kişisel bilgi var mı?"),
+           ("İçerik gücü","25","Başarılar rakamla yazılmış mı, maddeler eylem fiiliyle başlıyor mu, tarihler tam mı?"),
+           ("Uzunluk ve dosya","10","Kelime sayısı, sayfa sayısı ve dosya boyutu başvuru formlarına uygun mu?")]
+    hw = "".join(f'<article class="cvah" data-rv style="--d:{i*70}ms"><b class="n">{p}<i>puan</i></b><h3>{t}</h3><p>{d}</p></article>' for i,(t,p,d) in enumerate(how))
+    body = f'''
+{cine_hero('<a href="cv-hazirlama.html">CV hazırlama</a> / CV analizi', "Ücretsiz CV analizi", "CV'ni yükle,|puanını gör.", "CV'ni yükle; başvuru yazılımlarının onu okuyup okuyamadığını, hangi bölümün eksik olduğunu ve nasıl düzelteceğini birkaç saniyede gör. Dosyan tarayıcından çıkmaz.", ["planlama"], "<a class=\"btn btn-gold\" href=\"#analiz\">CV'mi tara</a><a class=\"btn btn-line\" href=\"#nasil\">Nasıl puanlanıyor?</a>", "sm cvgh")}
+<section class="light ksec cva-sec" id="analiz" aria-labelledby="h-cva"><div class="wrap">
+<div class="khead" data-rv><div><span class="eyebrow">CV analiz aracı</span><h2 id="h-cva">CV'n 100 üzerinden kaç?</h2></div><p>Dosyanı seç, raporun hemen altında açılsın. İlan metnini de eklersen anahtar kelime uyumunu ayrıca gösteririz.</p></div>
+{cv_tool()}
+</div></section>
+<section class="ksec" id="nasil" aria-labelledby="h-cvah"><div class="wrap">
+<div class="khead" data-rv><div><span class="eyebrow">Puanlama</span><h2 id="h-cvah">Nasıl puanlanıyor?</h2></div><p>Beş başlık, toplam 100 puan. Her başlığın altında neyin eksik olduğunu ve nasıl düzelteceğini yazıyoruz.</p></div>
+<div class="cvahs">{hw}</div>
+<p class="cva-disc" data-rv>Bu araç otomatik bir ön kontroldür; belirli bir şirketin başvuru sistemini birebir taklit etmez. Sistemlerin ortak olarak zorlandığı noktaları ve işe alımcının aradığı içeriği kontrol eder.</p>
+</div></section>
+<section class="light ksec" aria-labelledby="h-cvaf"><div class="wrap"><div class="khead" data-rv><div><span class="eyebrow">Merak edilenler</span><h2 id="h-cvaf">Sık sorulan sorular</h2></div></div>{faq_list(CVA_FAQ)}</div></section>
+{cv_cta()}
+'''
+    return ("Ücretsiz CV Analizi: CV Puanını ve ATS Uyumunu Gör | Laurus",
+            "CV'ni yükle, 100 üzerinden puanını gör: ATS okunabilirliği, eksik bölümler, içerik gücü ve ilan uyumu. Ücretsiz, kayıt yok, dosyan tarayıcından çıkmaz.", body)
+
+PAGES["cv-analiz.html"] = (page_cv_scan, "cv")
+CV_NAMES["cv-analiz.html"] = "CV analizi"
+PAGE_META["cv-analiz.html"] = dict(crumb=[("CV hazırlama","/cv-hazirlama"),("CV analizi","/cv-analiz")])
+PT_NAMES["cv-analiz"] = "CV Analizi"

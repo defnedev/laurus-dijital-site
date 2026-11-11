@@ -163,10 +163,10 @@ def footer(active=""):
     lau = [("hizmetler.html","Hizmetler"),("calismalar.html","Çalışmalar"),("surec.html","Süreç"),("fiyatlar.html","Fiyatlar"),("hakkimizda.html","Hakkımızda"),("iletisim.html","İletişim"),("surec.html#sss","Sık Sorulanlar"),("rehber.html","Rehber"),("web-sitesi-yaptirmak.html","Web Sitesi Yaptırmak"),("sosyal-medya-yonetimi-fiyatlari.html","Sosyal Medya Fiyatları")]
     lau = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in lau)
     if active == "cv":
-        kar = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in KBAR + [("cv-hakkimda-yazisi.html","CV Hakkımda Yazısı"),("yeni-mezun-cv.html","Yeni Mezun CV"),("mulakatta-kendini-tanitma.html","Mülakatta Kendini Tanıtma")])
+        kar = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in KBAR + [("maas-beklentisi.html","Maaş Beklentisi"),("cv-hakkimda-yazisi.html","CV Hakkımda Yazısı"),("yeni-mezun-cv.html","Yeni Mezun CV"),("mulakatta-kendini-tanitma.html","Mülakatta Kendini Tanıtma")])
         ajs = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in [("index.html","Laurus Dijital ana sayfa"),("hizmetler.html","Ajans hizmetleri"),("hakkimizda.html","Hakkımızda"),("iletisim.html","İletişim")])
         lau = f'''<div><h4>Laurus Kariyer</h4><ul>{kar}</ul></div>
-<div><h4>Paketler</h4><ul><li><a href="cv-hazirlama.html#paketler">CV Oluşturma · 250 ₺</a></li><li><a href="cv-hazirlama.html#paketler">CV Oluşturma + Başvuru Kiti · 650 ₺</a></li><li><a href="cv-hazirlama.html#paketler">Birebir Danışmanlık</a></li><li><a class="js-wa" href="{WA_CV}">Ücretsiz CV taraması</a></li><li><a href="cv-hazirlama-fiyatlari.html">CV hazırlama fiyatları</a></li></ul></div>
+<div><h4>Paketler</h4><ul><li><a href="cv-hazirlama.html#paketler">CV Oluşturma · 250 ₺</a></li><li><a href="cv-hazirlama.html#paketler">CV Oluşturma + Başvuru Kiti · 650 ₺</a></li><li><a href="cv-hazirlama.html#paketler">Birebir Danışmanlık</a></li><li><a href="cv-analiz.html">Ücretsiz CV analizi</a></li><li><a href="cv-hazirlama-fiyatlari.html">CV hazırlama fiyatları</a></li></ul></div>
 <div><h4>Laurus Dijital</h4><ul>{ajs}</ul></div>'''
     up = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>'
     FB_AG = '<div class="fbrand"><a class="brand" href="index.html" aria-label="Laurus Dijital"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#logo"/></svg><span><b>Laurus</b><small>DİJİTAL AJANS</small></span></a><p class="about">İstanbul merkezli dijital ajans. Web tasarım, mobil uygulama, sosyal medya yönetimi, Google Ads ve SEO; Türkiye geneline online hizmet.</p></div>'
@@ -1360,7 +1360,7 @@ def build():
     live = open(os.path.join(LV,"d3g.min.js")).read() + "\nwindow.LAUR_LAND=" + open(os.path.join(LV,"land.json")).read() + ";\n" + open(os.path.join(LV,"live-src.js")).read()
     open(os.path.join(OUT,"assets","live.js"),"w").write(live)
     lver = hashlib.md5(live.encode()).hexdigest()[:10]
-    sj = os.path.join(OUT,"assets","site.js"); h3v = hashlib.md5(open(os.path.join(OUT,"assets","hero3d.js"),"rb").read()).hexdigest()[:8]; sjt = open(sj).read().replace("__LIVEV__", lver).replace("__H3DV__", h3v).replace("__CV3DV__", hashlib.md5(open(os.path.join(OUT,"assets","cv3d.js"),"rb").read()).hexdigest()[:8]); open(sj,"w").write(sjt)
+    sj = os.path.join(OUT,"assets","site.js"); h3v = hashlib.md5(open(os.path.join(OUT,"assets","hero3d.js"),"rb").read()).hexdigest()[:8]; sjt = open(sj).read().replace("__LIVEV__", lver).replace("__H3DV__", h3v).replace("__CVSV__", hashlib.md5(open(os.path.join(OUT,"assets","cvscan.js"),"rb").read()).hexdigest()[:8]).replace("__CV3DV__", hashlib.md5(open(os.path.join(OUT,"assets","cv3d.js"),"rb").read()).hexdigest()[:8]); open(sj,"w").write(sjt)
     ver = hashlib.md5((c + open(os.path.join(OUT,"assets","site.js")).read()).encode()).hexdigest()[:10]
     _ih = {}
     def _imgv(m):
