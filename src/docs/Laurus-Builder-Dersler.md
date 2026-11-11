@@ -14,3 +14,8 @@ Aynı ders ikinci kez yazılıyorsa satır eklenmez; skill'in "Kalıcı kurallar
 - Fiyatlar üç kez indirildi (1.290 → 790 → 250). Fiyat önerirken pazarın alt bandı da gösterilir, karar Defne'nindir.
 - Canlıya gönderme, Defne açıkça "canlıya al" yazmadan yapılamıyor; önizleme dalına gönderilir ve link mesajda verilir.
 - Tarama betiğinde olmayan bir adres (/uygulamalar) denendi; sayfa adları sitemap.xml'den okunur, ezberden yazılmaz.
+
+## 11 Kasım 2026 — CV Analizi aracı ve canlı tarama
+- Tarayıcıda çalışan araç (cvscan.js) onaylandı: dosya sunucuya gitmez, pdf.js yalnız dosya seçilince yüklenir. İyi, kötü, taranmış ve docx örnek dosyalarıyla puan ayarı yapılmadan teslim edilmez.
+- Cloudflare e-posta gizleme, sayfadaki her e-postayı `/cdn-cgi/l/email-protection` bağlantısına çeviriyor; Google bunu 404 sayıyor. E-posta geçen her yer `<!--email_off-->` ile sarılır, robots.txt `/cdn-cgi/` yolunu kapatır.
+- Başlık uzunluğu derlemeden sonra ölçülür (62 karakter üstü kalmaz); kaynak koddaki başlığa bakmak yetmez, META_FIX/TITLE_FIX son sözü söyler.

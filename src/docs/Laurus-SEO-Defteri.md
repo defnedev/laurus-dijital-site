@@ -16,6 +16,7 @@ Hacimler kesin veri değildir; Search Console verisi geldikçe "Ölçüm" bölü
 | /maas-beklentisi | maaş beklentisi ne yazılır | maaş beklentisi cevap | bilgi |
 | /cv-hakkimda-yazisi | cv hakkımda yazısı örnekleri | cv özet, profil yazısı | bilgi |
 | /yeni-mezun-cv | yeni mezun cv örneği | deneyimsiz cv, öğrenci cv | bilgi |
+| /cv-analiz | cv analizi | cv puanlama, ats cv kontrol | araç |
 | /mulakatta-kendini-tanitma | mülakatta kendini tanıtma | kendinizden bahseder misiniz cevap | bilgi |
 
 Ajans sayfalarının haritası henüz çıkarılmadı (web tasarım, sosyal medya yönetimi, Google reklamları, yerel SEO, mobil uygulama, sektör sayfaları). Sıradaki iş.
@@ -35,7 +36,8 @@ Ajans sayfalarının haritası henüz çıkarılmadı (web tasarım, sosyal medy
 ## Bekleyenler
 
 - Search Console'da dizine eklenmeyen 20 sayfa var (16 alternatif/canonical, 2 bulunamadı, 2 yönlendirme). 404 veren iki adres bulunup yönlendirilecek ya da iç bağlantısı düzeltilecek.
-- /cv-analiz yayına girince: sitemap'te olduğunu doğrula, Search Console'da dizin isteği gönder.
+- /cv-analiz yayında, sitemap'te; 11 Kasım 2026'da dizin isteği gönderildi.
+- 2 adet 404'ün ikisi de /cdn-cgi/l/email-protection (Cloudflare e-posta gizleme); düzeltme canlıya girince Search Console'da "Düzeltmeyi doğrula" denecek.
 - Google İşletme Profili: Laurus Dijital için durum bilinmiyor.
 - Ajans sayfaları için kelime haritası.
 - Rehberlerde yazar bilgisi (gerçek kişi, gerçek deneyim) yok; eklenirse güven artar. Uydurma yazar yazılmaz.
@@ -44,7 +46,7 @@ Ajans sayfalarının haritası henüz çıkarılmadı (web tasarım, sosyal medy
 
 | Tarih | Dizindeki sayfa | Gösterim | Tıklama | En çok gösterim alan sorgu | Not |
 |---|---|---|---|---|---|
-| 11 Kas 2026 | 26 (20 eklenmedi) | bakılmadı | son 3 haftada 1 | bakılmadı | Search Console alan adı olarak doğrulanmış. Sitemap yeniden gönderildi: 36 sayfa keşfedildi (önceki okuma 26). |
+| 11 Kas 2026 | 26 (20 eklenmedi) | 148 (22 Eki–9 Kas), ort. konum 78 | 1 | sosyal medya yönetimi fiyatları (38), sosyal medya yönetimi fiyat (37), sosyal medya ajansı fiyatları (15) | Search Console alan adı olarak doğrulanmış. Sitemap yeniden gönderildi: 36 sayfa keşfedildi (önceki okuma 26). |
 
 ## Dersler
 
