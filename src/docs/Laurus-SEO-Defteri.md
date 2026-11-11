@@ -28,11 +28,14 @@ Ajans sayfalarının haritası henüz çıkarılmadı (web tasarım, sosyal medy
 
 ## Yapılanlar
 
+- 11 Kasım 2026: Search Console'da sitemap yeniden gönderildi (36 sayfa). Haftalık SEO kontrolü zamanlandı (pazartesi 10:42).
+- 11 Kasım 2026: /cv-analiz aracı önizlemede ("cv analizi", "cv puanlama", "ats cv kontrol" aramaları için). Haritaya yayına girince eklenecek.
 - 10 Kasım 2026: Kariyer tarafı 10 sayfa yayında. Her sayfada tek h1, başlık ve açıklama, BreadcrumbList; hizmet sayfasında fiyatlı Service, rehberlerde Article ve FAQPage. sitemap.xml 36 adres, robots.txt sitemap'i gösteriyor.
 
 ## Bekleyenler
 
-- Google Search Console: site doğrulanmış mı bilinmiyor. Doğrulama, sitemap gönderimi ve yeni sayfalar için dizin isteği yapılacak (Defne'nin Google hesabı gerekir).
+- Search Console'da dizine eklenmeyen 20 sayfa var (16 alternatif/canonical, 2 bulunamadı, 2 yönlendirme). 404 veren iki adres bulunup yönlendirilecek ya da iç bağlantısı düzeltilecek.
+- /cv-analiz yayına girince: sitemap'te olduğunu doğrula, Search Console'da dizin isteği gönder.
 - Google İşletme Profili: Laurus Dijital için durum bilinmiyor.
 - Ajans sayfaları için kelime haritası.
 - Rehberlerde yazar bilgisi (gerçek kişi, gerçek deneyim) yok; eklenirse güven artar. Uydurma yazar yazılmaz.
@@ -41,6 +44,7 @@ Ajans sayfalarının haritası henüz çıkarılmadı (web tasarım, sosyal medy
 
 | Tarih | Dizindeki sayfa | Gösterim | Tıklama | En çok gösterim alan sorgu | Not |
 |---|---|---|---|---|---|
+| 11 Kas 2026 | 26 (20 eklenmedi) | bakılmadı | son 3 haftada 1 | bakılmadı | Search Console alan adı olarak doğrulanmış. Sitemap yeniden gönderildi: 36 sayfa keşfedildi (önceki okuma 26). |
 
 ## Dersler
 
