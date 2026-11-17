@@ -52,3 +52,4 @@ Ajans sayfalarının haritası henüz çıkarılmadı (web tasarım, sosyal medy
 
 - 10 Kasım 2026: Arama hacmi için güvenilir ücretsiz kaynak bulunamadı; hacimler "tahmin" diye yazılır, kesinmiş gibi sunulmaz.
 - 10 Kasım 2026: Başlıkta verilen sayı içerikte tutulur ("10 örnek" yazıyorsa 10 örnek sayılır).
+| 17 Kas 2026 | 37 (20 eklenmedi) | 207 (22 Eki–15 Kas), ort. konum 70,5 | 2 | sosyal medya yönetimi fiyatları (46), sosyal medya yönetimi fiyat (42), sosyal medya ajansı fiyatları (16) | 37 sayfanın hepsi 200; e-posta 404 bağlantısı canlıda yok. İlk 10 sorguda CV araması yok (31 sorgunun ilk 10'una bakıldı). |
