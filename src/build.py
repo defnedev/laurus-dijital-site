@@ -163,7 +163,7 @@ def footer(active=""):
     lau = [("hizmetler.html","Hizmetler"),("calismalar.html","Çalışmalar"),("surec.html","Süreç"),("fiyatlar.html","Fiyatlar"),("hakkimizda.html","Hakkımızda"),("iletisim.html","İletişim"),("surec.html#sss","Sık Sorulanlar"),("rehber.html","Rehber"),("web-sitesi-yaptirmak.html","Web Sitesi Yaptırmak"),("sosyal-medya-yonetimi-fiyatlari.html","Sosyal Medya Fiyatları")]
     lau = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in lau)
     if active == "cv":
-        kar = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in KBAR + [("maas-beklentisi.html","Maaş Beklentisi"),("cv-hakkimda-yazisi.html","CV Hakkımda Yazısı"),("yeni-mezun-cv.html","Yeni Mezun CV"),("mulakatta-kendini-tanitma.html","Mülakatta Kendini Tanıtma")])
+        kar = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in KBAR + [("maas-beklentisi.html","Maaş Beklentisi"),("cv-hakkimda-yazisi.html","CV Hakkımda Yazısı"),("yeni-mezun-cv.html","Yeni Mezun CV"),("mulakatta-kendini-tanitma.html","Mülakatta Kendini Tanıtma"),("cv-nasil-hazirlanir.html","CV Nasıl Hazırlanır"),("is-basvuru-maili-ornegi.html","İş Başvuru Maili"),("linkedin-profili.html","LinkedIn Profili")])
         ajs = "".join(f'<li><a href="{h}">{t}</a></li>' for h,t in [("index.html","Laurus Dijital ana sayfa"),("hizmetler.html","Ajans hizmetleri"),("hakkimizda.html","Hakkımızda"),("iletisim.html","İletişim")])
         lau = f'''<div><h4>Laurus Kariyer</h4><ul>{kar}</ul></div>
 <div><h4>Paketler</h4><ul><li><a href="cv-hazirlama.html#paketler">CV Oluşturma · 250 ₺</a></li><li><a href="cv-hazirlama.html#paketler">CV Oluşturma + Başvuru Kiti · 650 ₺</a></li><li><a href="cv-hazirlama.html#paketler">Birebir Danışmanlık</a></li><li><a href="cv-analiz.html">Ücretsiz CV analizi</a></li><li><a href="cv-hazirlama-fiyatlari.html">CV hazırlama fiyatları</a></li></ul></div>
@@ -237,7 +237,10 @@ META_FIX = {
 }
 TITLE_FIX = {
  "hizmetler.html": "Hizmetler: Web Tasarım, Sosyal Medya, Reklam ve SEO | Laurus",
- "fiyatlar.html": "Web Sitesi ve Sosyal Medya Fiyatları 2026 | Laurus Dijital",
+ "fiyatlar.html": "Dijital Ajans Fiyatları 2026: Web Sitesi, Sosyal Medya, Reklam",
+ "sosyal-medya-yonetimi-fiyatlari.html": "Sosyal Medya Yönetimi Fiyatları 2026: Aylık Ajans Ücretleri",
+ "google-reklam-yonetimi.html": "Google Reklam Yönetimi Fiyatları 2026: Bütçe ve Ücret",
+ "kuafor-dijital-pazarlama.html": "Kuaför ve Berber Web Sitesi Yaptırmak, Instagram | Laurus",
  "sosyal-medya.html": "Sosyal Medya ve Instagram Hesap Yönetimi | Laurus Dijital",
  "reklam-yonetimi.html": "Google Ads ve Instagram Reklam Yönetimi | Laurus Dijital",
  "pet-kuafor-dijital-pazarlama.html": "Pet Kuaför için Web Sitesi ve Instagram | Laurus",
@@ -1155,7 +1158,7 @@ GUIDES = [
   title="Sosyal Medya Yönetimi Fiyatları 2026: Instagram Hesap Yönetimi Ne Kadar? | Laurus Dijital",
   desc="Sosyal medya yönetimi ve Instagram hesap yönetimi 2026 fiyatları: freelancer ve ajans farkı, pakete neler dahil, reklam bütçesi ayrı mı? Açık fiyat tablosu ve kontrol listesi.",
   h1="Sosyal medya yönetimi fiyatları 2026",
-  lead="Instagram hesabını birine devretmeden önce bilmen gerekenler: aylık ne kadar ödenir, pakete neler girer, hangi kalemler ayrıdır. Rakamlarla, sade bir dille.",
+  lead="Sosyal medya yönetimi ücretleri 2026'da ne kadar? Instagram hesabını bir ajansa ya da freelancer'a devretmeden önce bilmen gerekenler: aylık ne kadar ödenir, pakete neler girer, hangi kalemler ayrıdır. Rakamlarla, sade bir dille.",
   photo="telefon-instagram", read="8 dk",
   related=["sosyal-medya.html","reklam-yonetimi.html","web-sitesi-yaptirmak.html"],
   sections=[
@@ -1164,10 +1167,18 @@ GUIDES = [
 <p>Laurus'ta iki paket var: <b>Başlangıç 12.000 ₺/ay</b> (Instagram, ayda 8 gönderi ve 8 hikâye, aylık rapor) ve <b>Büyüme 20.000 ₺/ay</b> (Instagram + TikTok ya da Google profili, ayda 12 gönderi ve 4 Reels, yorum ve mesaj yönetimi).</p>"""),
    ("dahil","Pakete neler dahil olmalı?", """<ul class="gc"><li><b>Aylık içerik planı:</b> hangi gün ne paylaşılacağını ayın başında görmelisin.</li><li><b>Tasarım ve metin:</b> gönderi, hikâye ve kapak tasarımları, açıklamalar.</li><li><b>Reels:</b> kısa videolar bugün en çok erişim alan içerik türü; kaç adet olduğu yazmalı.</li><li><b>Yorum ve mesaj yönetimi:</b> gelen soruların yanıtlanması, randevu taleplerinin sana iletilmesi.</li><li><b>Aylık rapor:</b> kaç kişi gördü, kaç mesaj geldi, hangi içerik işe yaradı.</li></ul>"""),
    ("ayri","Fiyata dahil olmayanlar", f"""{gtable(["Kalem","Yaklaşık maliyet","Not"],[["Reklam bütçesi","Aylık 3.000 ₺'den başlar","Google ve Meta'ya doğrudan senin kartından ödenir"],["Reklam yönetimi","Aylık 5.000 – 20.000 ₺ ya da bütçenin %15–25'i","Bizde sosyal medya paketine eklenirse 7.500 ₺/ay"],["Profesyonel çekim günü","8.000 – 25.000 ₺","Çoğu küçük işletmede telefon çekimi yeter"]])}"""),
+   ("ajans","Sosyal medya ajansı fiyatları neye göre değişir?", f"""<p>Aynı “sosyal medya yönetimi” başlığı altında 10.000 ₺ ile 60.000 ₺ arasında teklif alabilirsin. Farkı yaratan beş kalem var:</p>
+{gtable(["Kalem","Fiyatı nasıl etkiler"],[["Platform sayısı","Yalnız Instagram en düşük fiyattır; TikTok, LinkedIn ya da Google profili eklendikçe artar"],["Aylık içerik adedi","8 gönderi ile 20 gönderi arasında iş yükü iki katından fazladır"],["Reels ve çekim","Video kurgusu ve yerinde çekim, tasarım gönderisinden pahalıdır"],["Yorum ve mesaj yönetimi","Her gün hesaba bakılması demektir; pakette yoksa sana kalır"],["Reklam yönetimi","Çoğu ajansta ayrı ücrettir; teklifte ayrı satırda görmelisin"]])}
+<p>Teklifleri karşılaştırırken toplam rakama değil, <b>ayda kaç içerik, kaç video ve hangi platformlar</b> olduğuna bak.</p>"""),
+   ("danismanlik","Sosyal medya danışmanlık ücretleri", """<p>Danışmanlık, hesabı senin yönettiğin ama yol haritasını bir uzmanın çizdiği modeldir: hesap incelemesi, içerik planı, aylık bir iki görüşme. Yönetim hizmetinden ucuzdur çünkü üretimi sen yaparsın. Piyasada saatlik ya da aylık sabit ücretle çalışılır; içeriği kendin üretebiliyor ama ne paylaşacağını bilmiyorsan mantıklı bir başlangıçtır. Zamanın yoksa yönetim paketi daha doğru olur.</p>"""),
+   ("sektor","İşletme türüne göre hangi paket yeter?", f"""{gtable(["İşletme","Genelde yeten kapsam","Laurus'ta karşılığı"],[["Kuaför, berber, güzellik salonu","Instagram, ayda 8 gönderi, hikâyeler","Başlangıç · 12.000&nbsp;₺/ay"],["Kafe, restoran","Instagram + Google profili, Reels ağırlıklı","Büyüme · 20.000&nbsp;₺/ay"],["Klinik, avukat, danışman","Instagram ya da LinkedIn, bilgilendirici içerik","Başlangıç · 12.000&nbsp;₺/ay"],["Butik, e-ticaret","Instagram + TikTok, ürün videoları, mesaj yönetimi","Büyüme · 20.000&nbsp;₺/ay"]])}
+<p>Bunlar başlangıç önerisidir; ilk görüşmede mevcut hesabına bakıp net öneri veririz.</p>"""),
    ("secim","Freelancer mı, ajans mı?", """<p>Freelancer daha ucuzdur ama tek kişiye bağlı kalırsın; hastalık, tatil ya da iş yükü hesabının boş kalmasına yol açabilir. Ajans daha pahalıdır ama süreklilik ve ekip sağlar. Karar verirken şu soruya bak: <b>hesabım hiçbir hafta boş kalmayacak mı ve sonuçları her ay görebilecek miyim?</b></p>"""),
    ("kontrol","Sözleşmeden önce sor", """<ul class="gc"><li>Instagram şifremi vermem gerekiyor mu? (Gerekmez; Meta İşletme Hesabı üzerinden yetki verilir.)</li><li>Paylaşımları onaylamadan yayınlıyor musunuz?</li><li>Takipçi satın alıyor musunuz? (Almamalı; hesabına zarar verir.)</li><li>Sözleşme kaç ay, erken bırakırsam ne olur?</li><li>Reklam bütçesi ve yönetim ücreti ayrı ayrı yazıyor mu?</li></ul>"""),
   ],
-  faq=[("Aylık 10.000 ₺ ile sosyal medya yönetimi olur mu?","Tek platformda, ayda 8 civarı paylaşım ve temel raporla olabilir. Reels ve mesaj yönetimi istiyorsan bütçe genelde 15.000 – 20.000 ₺ bandına çıkar."),
+  faq=[("Sosyal medya yönetimi aylık ne kadar?","2026'da Türkiye'de freelancer için aylık 5.000 – 25.000 ₺, ajans için 20.000 ₺ ve üzeri sık görülen aralıklardır. Laurus'ta paketler aylık 12.000 ₺ ve 20.000 ₺'dir."),
+       ("Sosyal medya ajansı ile freelancer arasındaki fiyat farkı neden?","Ajans fiyatına strateji, tasarım, video, mesaj yönetimi ve raporlama için ayrı kişilerin emeği ve süreklilik girer. Freelancer tek kişidir; daha ucuzdur ama kapsam genelde daha dardır."),
+       ("Aylık 10.000 ₺ ile sosyal medya yönetimi olur mu?","Tek platformda, ayda 8 civarı paylaşım ve temel raporla olabilir. Reels ve mesaj yönetimi istiyorsan bütçe genelde 15.000 – 20.000 ₺ bandına çıkar."),
        ("Reklam bütçesi sosyal medya ücretine dahil mi?","Hayır. Reklam bütçesi Meta ve Google'a doğrudan ödenir. Ajans yalnızca yönetim ücreti alır; harcanan her kuruşu reklam panelinde görmelisin."),
        ("Sonuçlar ne zaman görülür?","Düzenli paylaşımın etkisi genelde 2–3 ayda belirginleşir. Reklam eklenirse ilk mesajlar ilk haftada gelebilir. Garanti veren ajanslara dikkat et."),
        ("Kaç ay sözleşme yapmalıyım?","Bizde aylık paketlerde ilk 3 ay sabit, sonra istediğin ay bırakabilirsin. Daha uzun bağlayıcı sözleşmelerde çıkış koşullarını mutlaka oku.")]),

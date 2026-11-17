@@ -264,7 +264,7 @@ sizeWorks(); onScroll();
     var hold = h.closest("[data-rv]"); if (!hold) mark(h, "head");
   });
   // 2. staggered card groups
-  var GROUPS = ".kpains,.do-grid,.kplans,.faq-list,.month,.ab-vals,.rgrid,.ggrid,.checks,.cuts,.apps,.kcards,.ksteps,.ktiles,.proc3 ol,.gc,.grels,.ab-links,.direct";
+  var GROUPS = ".kpains,.do-grid,.kplans,.faq-list,.month,.ab-vals,.rgrid,.checks,.cuts,.apps,.kcards,.ksteps,.ktiles,.proc3 ol,.gc,.grels,.ab-links,.direct";
   document.querySelectorAll(GROUPS).forEach(function(g){
     if (skip(g)) return;
     [].slice.call(g.children).forEach(function(c, k){ mark(c, "card", Math.min(k, 8) * 90); });

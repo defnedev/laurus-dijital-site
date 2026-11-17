@@ -17,6 +17,13 @@ Hacimler kesin veri değildir; Search Console verisi geldikçe "Ölçüm" bölü
 | /cv-hakkimda-yazisi | cv hakkımda yazısı örnekleri | cv özet, profil yazısı | bilgi |
 | /yeni-mezun-cv | yeni mezun cv örneği | deneyimsiz cv, öğrenci cv | bilgi |
 | /cv-analiz | cv analizi | cv puanlama, ats cv kontrol | araç |
+| /cv-nasil-hazirlanir | cv nasıl hazırlanır | cv nasıl yazılır, özgeçmiş nasıl hazırlanır | bilgi |
+| /is-basvuru-maili-ornegi | iş başvuru maili örneği | cv gönderme maili, başvuru maili nasıl yazılır | bilgi |
+| /linkedin-profili | linkedin profili nasıl hazırlanır | linkedin başlık örnekleri, linkedin hakkında yazısı | bilgi / satın alma |
+| /sosyal-medya-yonetimi-fiyatlari | sosyal medya yönetimi fiyatları | ücretleri, ajans fiyatları, aylık fiyat, danışmanlık ücretleri | satın alma |
+| /fiyatlar | dijital ajans fiyatları | web sitesi fiyatları | satın alma |
+| /google-reklam-yonetimi | google reklam yönetimi fiyatları | google ads ücret, bütçe | satın alma |
+| /kuafor-dijital-pazarlama | kuaför sitesi yaptırmak | berber web sitesi | satın alma |
 | /mulakatta-kendini-tanitma | mülakatta kendini tanıtma | kendinizden bahseder misiniz cevap | bilgi |
 
 Ajans sayfalarının haritası henüz çıkarılmadı (web tasarım, sosyal medya yönetimi, Google reklamları, yerel SEO, mobil uygulama, sektör sayfaları). Sıradaki iş.
@@ -28,6 +35,8 @@ Ajans sayfalarının haritası henüz çıkarılmadı (web tasarım, sosyal medy
 - Sıradaki sayfa adayları: LinkedIn profili nasıl hazırlanır, CV'de boşluk nasıl açıklanır, kariyer değişikliği CV'si, CV'de referans nasıl yazılır.
 
 ## Yapılanlar
+
+- 17 Kasım 2026: Search Console'daki 31 gerçek sorguya göre çalışma. Bulgular: sosyal medya fiyat kümesi en çok gösterim alan (130+) ama sıra ~80; CV uzun kuyruk aramaları çok daha iyi sırada (cv hakkımda kısmı 14–32, cv yazma örnekleri 6). Yapılan: 3 yeni rehber (CV nasıl hazırlanır, iş başvuru maili, LinkedIn profili); sosyal medya fiyat rehberine ajans fiyatları, danışmanlık ücretleri, işletme türüne göre paket bölümleri ve 2 SSS; başlıklar gerçek sorgulara göre düzenlendi (fiyatlar, google reklam, kuaför, hakkımda, maaş). Masaüstünde rehber gövdesini geç gösteren animasyon hatası (.ggrid kart grubu) giderildi.
 
 - 11 Kasım 2026: Search Console'da sitemap yeniden gönderildi (36 sayfa). Haftalık SEO kontrolü zamanlandı (pazartesi 10:42).
 - 11 Kasım 2026: /cv-analiz aracı önizlemede ("cv analizi", "cv puanlama", "ats cv kontrol" aramaları için). Haritaya yayına girince eklenecek.

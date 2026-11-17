@@ -19,3 +19,8 @@ Aynı ders ikinci kez yazılıyorsa satır eklenmez; skill'in "Kalıcı kurallar
 - Tarayıcıda çalışan araç (cvscan.js) onaylandı: dosya sunucuya gitmez, pdf.js yalnız dosya seçilince yüklenir. İyi, kötü, taranmış ve docx örnek dosyalarıyla puan ayarı yapılmadan teslim edilmez.
 - Cloudflare e-posta gizleme, sayfadaki her e-postayı `/cdn-cgi/l/email-protection` bağlantısına çeviriyor; Google bunu 404 sayıyor. E-posta geçen her yer `<!--email_off-->` ile sarılır, robots.txt `/cdn-cgi/` yolunu kapatır.
 - Başlık uzunluğu derlemeden sonra ölçülür (62 karakter üstü kalmaz); kaynak koddaki başlığa bakmak yetmez, META_FIX/TITLE_FIX son sözü söyler.
+
+## 17 Kasım 2026 — Rehber gövdesi masaüstünde görünmüyordu
+- `.ggrid` kart animasyonu grubundaydı; 2000 px'lik makale döndürülmüş kart sayılınca tarayıcı onu ekranın çok altında sanıp göstermiyordu. Uzun içerik kutuları kart animasyonuna sokulmaz.
+- Tam sayfa görüntüsü yetmez: her şablonda masaüstünde 1000 px aşağı kaydırıp ekran görüntüsü alınır. `getBoundingClientRect` dönüşümden etkilenir; yer kontrolü `offsetTop` ile yapılır.
+- SEO işine başlamadan önce Search Console'daki tüm sorgular sıra sütunuyla okunur; ilk 10 satır yanıltır.
